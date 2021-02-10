@@ -6,13 +6,13 @@
 #    By: ehelmine <ehelmine@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/01/19 13:31:46 by ehelmine          #+#    #+#              #
-#    Updated: 2021/01/21 18:51:57 by ehelmine         ###   ########.fr        #
+#    Updated: 2021/02/10 17:54:39 by ehelmine         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = ft_printf
 
-SRCS = main.c handle_input.c
+SRCS = main.c handle_input.c write.c
 
 OBJECT = $(SRCS:.c=.o)
 
