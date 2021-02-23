@@ -6,7 +6,7 @@
 /*   By: ehelmine <ehelmine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/09 10:13:02 by ehelmine          #+#    #+#             */
-/*   Updated: 2020/10/14 15:09:36 by ehelmine         ###   ########.fr       */
+/*   Updated: 2021/02/11 00:04:46 by ehelmine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,7 +118,7 @@ char				*ft_strmap(char const *s, char (*f)(char));
 
 char				*ft_strmapi(char const *s, char (*f)(unsigned int, char));
 
-char				*ft_itoa(int n);
+char				*ft_itoa(long n);
 
 void				ft_putchar_fd(char c, int fd);
 
@@ -128,7 +128,7 @@ void				ft_putendl_fd(char const *s, int fd);
 
 void				ft_putnbr_fd(int n, int fd);
 
-int					ft_check_int(int n);
+int					ft_check_int_len(long n);
 
 t_list				*ft_lstnew(void const *content, size_t content_size);
 

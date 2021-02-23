@@ -6,15 +6,15 @@
 #    By: ehelmine <ehelmine@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/01/19 13:31:46 by ehelmine          #+#    #+#              #
-#    Updated: 2021/02/10 17:54:39 by ehelmine         ###   ########.fr        #
+#    Updated: 2021/02/21 05:39:00 by ehelmine         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = ft_printf
+NAME = libftprintf.a
 
-SRCS = main.c handle_input.c write.c
+SRCS = handle_input.c check_flags.c write.c help_functions.c
 
-OBJECT = $(SRCS:.c=.o)
+OBJS = $(SRCS:.c=.o)
 
 INCLUDE = libft/includes/libft.h
 
@@ -26,17 +26,19 @@ all: $(NAME)
 
 $(NAME):
 	make -C libft
-#	make -C libftprintf
 	@gcc $(CFLAGS) -c $(SRCS)
-	@echo "Sources to objects"
-	@gcc $(CFLAGS) -o $(NAME) $(OBJECT) $(LIB)
-	@echo "Compiling fdf"
+	@echo "Sources to objects done"
+#	@gcc -Wall -Wextra -Werror -c -I libft/includes
+	@ar rc libftprintf.a $(OBJS) libft/*.o
+	@ranlib libftprintf.a
+	@echo "Compiling libftprintf.a done"
+#	@gcc $(CFLAGS) -o $(NAME) $(OBJECT) $(LIB)
 
 clean:
 	make -C libft clean
 #	make -C libftprintf clean
 	@echo "Removing .o files"
-	@rm -f $(OBJECT)
+	@rm -f $(OBJS)
 
 fclean: clean
 	make -C libft fclean

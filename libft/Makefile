@@ -6,7 +6,7 @@
 #    By: ehelmine <ehelmine@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/06/09 13:01:03 by ehelmine          #+#    #+#              #
-#    Updated: 2020/10/30 15:41:25 by ehelmine         ###   ########.fr        #
+#    Updated: 2021/02/11 00:06:02 by ehelmine         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,7 +22,7 @@ SRCS = ft_putchar.c ft_putstr.c ft_atoi.c ft_strlen.c ft_strcmp.c ft_putnbr.c \
 	ft_striteri.c ft_strsplit.c ft_strsub.c ft_strmap.c ft_strmapi.c ft_itoa.c \
 	ft_putchar_fd.c ft_putstr_fd.c ft_putendl_fd.c ft_putnbr_fd.c ft_lstnew.c \
 	ft_lstadd.c ft_lstdelone.c ft_lstdel.c ft_lstiter.c ft_lstmap.c \
-	ft_check_int.c ft_islower.c ft_isupper.c ft_isspace.c ft_strndup.c \
+	ft_check_int_len.c ft_islower.c ft_isupper.c ft_isspace.c ft_strndup.c \
 	get_next_line.c
 
 OBJS = $(SRCS:.c=.o)

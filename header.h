@@ -6,7 +6,7 @@
 /*   By: ehelmine <ehelmine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/21 18:31:32 by ehelmine          #+#    #+#             */
-/*   Updated: 2021/02/10 20:25:59 by ehelmine         ###   ########.fr       */
+/*   Updated: 2021/02/23 18:53:28 by ehelmine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ typedef struct		s_val
 					int minus_flag;
 					int space_flag;
 					int hash_flag;
-					int width;
+					long width;
 					int real_width;
 					size_t precision;
 					char c;
@@ -40,10 +40,21 @@ typedef struct		s_val
 					int hh;
 					int l;
 					int ll;
+					int num;
+					size_t len;
+					size_t output_len;
 }					t_val;
 
 
 int		ft_printf(const char *begin, ...);
+
+char	*trim_string(char *flags);
+
+int		check_flags_s(t_val *all, char *flags);
+
+int		check_flags_percentage(t_val *all, char *flags);
+
+int		check_flags_c(t_val *all, char *flags);
 
 void	write_c(t_val *all);
 
