@@ -6,7 +6,7 @@
 /*   By: ehelmine <ehelmine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/10 17:53:58 by ehelmine          #+#    #+#             */
-/*   Updated: 2021/02/23 21:20:38 by ehelmine         ###   ########.fr       */
+/*   Updated: 2021/02/24 15:31:49 by ehelmine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ void	write_s(t_val *all)
 	if (all->str)
 		all->len = ft_strlen(all->str);
 	all->real_width = all->width - all->len;
-	if (all->len > all->precision && all->precision > 0)
+	if (all->len > all->precision && all->precision >= 0)
 	{
 		all->str_cpy = ft_strndup(all->str, all->precision);
 		all->real_width = all->width - ft_strlen(all->str_cpy);

@@ -6,7 +6,7 @@
 /*   By: ehelmine <ehelmine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/07 11:25:56 by ehelmine          #+#    #+#             */
-/*   Updated: 2021/02/11 00:11:11 by ehelmine         ###   ########.fr       */
+/*   Updated: 2021/02/24 22:16:30 by ehelmine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,13 @@ int		ft_check_int_len(long n)
 	int i;
 
 	i = 0;
+	if (n == 0)
+		return (1);
+	if (n < 0)
+	{
+		n = n * -1;
+		i++;
+	}
 	while (n > 0)
 	{
 		n = n / 10;

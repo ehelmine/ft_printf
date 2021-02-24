@@ -6,7 +6,7 @@
 /*   By: ehelmine <ehelmine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/21 18:31:32 by ehelmine          #+#    #+#             */
-/*   Updated: 2021/02/23 18:53:28 by ehelmine         ###   ########.fr       */
+/*   Updated: 2021/02/24 22:13:06 by ehelmine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ typedef struct		s_val
 					int hh;
 					int l;
 					int ll;
-					int num;
+					long num;
 					size_t len;
 					size_t output_len;
 }					t_val;
