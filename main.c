@@ -6,7 +6,7 @@
 /*   By: ehelmine <ehelmine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/19 13:31:36 by ehelmine          #+#    #+#             */
-/*   Updated: 2021/03/15 17:21:12 by ehelmine         ###   ########.fr       */
+/*   Updated: 2021/03/16 01:07:31 by ehelmine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,18 +20,177 @@ int		main(void)
 	// The plus takes priority over the space!!
 	
 	char *str = "this is a string";
-	char *ptr = "hello";
-	char cha;
-	cha = 'k';
-	char *p;
-	p = "no";
-	char *pp;
-	pp = "where";
+	char *ptr = "";
 	int i;
-//	char *nulli = NULL;
-//	char ha;
-//	ha = '4';
-//	printf("%-15s", str);
+	i = 1;
+	int my_print;
+	int real_print;
+	
+// sentence in a string
+	printf("test num %d only s\n", i++);
+	my_print = ft_printf("%s", str);
+	printf("\n");
+	real_print = printf("%s", str);
+	printf("\n");
+	if (my_print != real_print)	
+		printf("\n!!\nFAIL\n!!\n");
+	printf("\n");
+
+	printf("\ntest num %d 10s\n", i++);
+	my_print = ft_printf("%10s", str);
+	printf("\n");
+	real_print = printf("%10s", str);
+	printf("\n");
+	if (my_print != real_print)	
+		printf("\n!!\nFAIL\n!!\n");
+	printf("\n");	
+
+	printf("\ntest num %d -6s\n", i++);
+	my_print = ft_printf("%-6s", str);
+	printf("\n");
+	real_print = printf("%-6s", str);
+	printf("\n");
+	if (my_print != real_print)	
+		printf("\n!!\nFAIL\n!!\n");
+	printf("\n");
+
+	printf("\ntest num %d 15.2s\n", i++);
+	my_print = ft_printf("%15.2s", str);
+	printf("\n");
+	real_print = printf("%15.2s", str);
+	printf("\n");
+	if (my_print != real_print)	
+		printf("\n!!\nFAIL\n!!\n");
+	printf("\n");	
+
+	printf("\ntest num %d -5.2s\n", i++);
+	my_print = ft_printf("%-5.2s", str);
+	printf("\n");
+	real_print = printf("%-5.2s", str);
+	printf("\n");
+	if (my_print != real_print)	
+		printf("\n!!\nFAIL\n!!\n");
+	printf("\n");	
+
+	printf("\ntest num %d .2s\n", i++);
+	my_print = ft_printf("%.2s", str);
+	printf("\n");
+	real_print = printf("%.2s", str);
+	printf("\n");
+	if (my_print != real_print)	
+		printf("\n!!\nFAIL\n!!\n");
+	printf("\n");
+
+	printf("\ntest num %d 1.5s\n", i++);
+	my_print = ft_printf("%1.5s", str);
+	printf("\n");
+	real_print = printf("%1.5s", str);
+	printf("\n");
+	if (my_print != real_print)	
+		printf("\n!!\nFAIL\n!!\n");
+	printf("\n");
+
+	printf("\ntest num %d 25s\n", i++);
+	my_print = ft_printf("%25s", str);
+	printf("\n");
+	real_print = printf("%25s", str);
+	printf("\n");
+	if (my_print != real_print)	
+		printf("\n!!\nFAIL\n!!\n");
+	printf("\n");
+
+	printf("\ntest num %d -.3s\n", i++);
+	my_print = ft_printf("%-.3s", str);
+	printf("\n");
+	real_print = printf("%-.3s", str);
+	printf("\n");
+	if (my_print != real_print)	
+		printf("\n!!\nFAIL\n!!\n");
+	printf("\n");
+
+	// empty string
+	printf("\ntest num %d empty str\n", i++);
+	my_print = ft_printf("%s", ptr);
+	printf("\n");
+	real_print = printf("%s", ptr);
+	printf("\n");
+	if (my_print != real_print)	
+		printf("\n!!\nFAIL\n!!\n");
+	printf("\n");
+
+	printf("\ntest num %d null str\n", i++);
+	my_print = ft_printf("%s", NULL);
+	printf("\n");
+	real_print = printf("%s", NULL);
+	printf("\n");
+	if (my_print != real_print)	
+		printf("\n!!\nFAIL\n!!\n");
+	printf("\n");
+
+	printf("\ntest num %d str and text after it\n", i++);
+	my_print = ft_printf("%shaha", "first");
+	printf("\n");
+	real_print = printf("%shaha", "first");
+	printf("\n");
+	if (my_print != real_print)	
+		printf("\n!!\nFAIL\n!!\n");
+	printf("\n");
+
+	printf("\ntest num %d str and text before to it\n", i++);
+	my_print = ft_printf("haha%s", "last");
+	printf("\n");
+	real_print = printf("haha%s", "last");
+	printf("\n");
+	if (my_print != real_print)	
+		printf("\n!!\nFAIL\n!!\n");
+	printf("\n");
+
+	// %c
+	printf("\ntest num %d char\n", i++);
+	my_print = ft_printf("%c", 'h');
+	printf("\n");
+	real_print = printf("%c", 'h');
+	printf("\n");
+	if (my_print != real_print)	
+		printf("\n!!\nFAIL\n!!\n");
+	printf("\n");
+
+	printf("\ntest num %d char num\n", i++);
+	my_print = ft_printf("%c", 42);
+	printf("\n");
+	real_print = printf("%c", 42);
+	printf("\n");
+	if (my_print != real_print)	
+		printf("\n!!\nFAIL\n!!\n");
+	printf("\n");	
+
+	printf("\ntest num %d 5c\n", i++);
+	my_print = ft_printf("%5c", 42);
+	printf("\n");
+	real_print = printf("%5c", 42);
+	printf("\n");
+	if (my_print != real_print)	
+		printf("\n!!\nFAIL\n!!\n");
+	printf("\n");		
+
+	printf("\ntest num %d -5c\n", i++);
+	my_print = ft_printf("%-5c", 42);
+	printf("\n");
+	real_print = printf("%-5c", 42);
+	printf("\n");
+	if (my_print != real_print)	
+		printf("\n!!\nFAIL\n!!\n");
+	printf("\n");	
+
+	printf("\ntest num %d 5c with 0\n", i++);
+	my_print = ft_printf("%c", 0);
+	printf("\n");
+	real_print = printf("%c", 0);
+	printf("\n");
+	if (my_print != real_print)	
+		printf("\n!!\nFAIL\n!!\n");
+	printf("\n");		
+	
 //	ft_printf("%15%");
 //	ft_printf("%c", cha);
 //	ft_printf("%3s%-6s", p, pp);
@@ -49,7 +208,7 @@ int		main(void)
 //	ft_printf("%d", -4242);
 //printf("%010s is a string", "this");
 //	ft_printf("@moulitest: %.d %.0d", 42, 43);
-	printf("@moulitest: %.d %.0d", 0, 0);
+//	printf("@moulitest: %.d %.0d", 0, 0);
 	// 000000000000042
 	return (0);
 }
