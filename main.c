@@ -6,7 +6,7 @@
 /*   By: ehelmine <ehelmine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/19 13:31:36 by ehelmine          #+#    #+#             */
-/*   Updated: 2021/03/16 01:07:31 by ehelmine         ###   ########.fr       */
+/*   Updated: 2021/03/16 01:26:35 by ehelmine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -191,6 +191,205 @@ int		main(void)
 		printf("\n!!\nFAIL\n!!\n");
 	printf("\n");		
 	
+// %d and %i
+
+	printf("\ntest num %d d 0\n", i++);
+	my_print = ft_printf("%d", 0);
+	printf("\n");
+	real_print = printf("%d", 0);
+	printf("\n");
+	if (my_print != real_print)	
+		printf("\n!!\nFAIL\n!!\n");
+	printf("\n");		
+
+	printf("\ntest num %d d 2147483647\n", i++);
+	my_print = ft_printf("%d", 2147483647);
+	printf("\n");
+	real_print = printf("%d", 2147483647);
+	printf("\n");
+	if (my_print != real_print)	
+		printf("\n!!\nFAIL\n!!\n");
+	printf("\n");	
+
+	printf("\ntest num %d d -2147483648\n", i++);
+	my_print = ft_printf("%d", -2147483648);
+	printf("\n");
+	real_print = printf("%d", -2147483648);
+	printf("\n");
+	if (my_print != real_print)	
+		printf("\n!!\nFAIL\n!!\n");
+	printf("\n");
+
+	printf("\ntest num %d d 2147483648 changes to minus\n", i++);
+	my_print = ft_printf("%d", 2147483648);
+	printf("\n");
+	real_print = printf("%d", 2147483648);
+	printf("\n");
+	if (my_print != real_print)	
+		printf("\n!!\nFAIL\n!!\n");
+	printf("\n");	
+////
+	printf("\ntest num %d hd 0\n", i++);
+	my_print = ft_printf("%hd", 0);
+	printf("\n");
+	real_print = printf("%hd", 0);
+	printf("\n");
+	if (my_print != real_print)	
+		printf("\n!!\nFAIL\n!!\n");
+	printf("\n");		
+
+	printf("\ntest num %d hd 32767\n", i++);
+	my_print = ft_printf("%hd", 32767);
+	printf("\n");
+	real_print = printf("%hd", 32767);
+	printf("\n");
+	if (my_print != real_print)	
+		printf("\n!!\nFAIL\n!!\n");
+	printf("\n");	
+
+	printf("\ntest num %d hd -32767\n", i++);
+	my_print = ft_printf("%hd", -32767);
+	printf("\n");
+	real_print = printf("%hd", -32767);
+	printf("\n");
+	if (my_print != real_print)	
+		printf("\n!!\nFAIL\n!!\n");
+	printf("\n");
+
+	printf("\ntest num %d d -32768\n", i++);
+	my_print = ft_printf("%hd", -32768);
+	printf("\n");
+	real_print = printf("%hd", -32768);
+	printf("\n");
+	if (my_print != real_print)	
+		printf("\n!!\nFAIL\n!!\n");
+	printf("\n");	
+
+	printf("\ntest num %d d 32768 changes to minus\n", i++);
+	my_print = ft_printf("%hd", 32768);
+	printf("\n");
+	real_print = printf("%hd", 32768);
+	printf("\n");
+	if (my_print != real_print)	
+		printf("\n!!\nFAIL\n!!\n");
+	printf("\n");
+
+
+	printf("\ntest num %d ld 0\n", i++);
+	my_print = ft_printf("%ld", 0);
+	printf("\n");
+	real_print = printf("%ld", 0);
+	printf("\n");
+	if (my_print != real_print)	
+		printf("\n!!\nFAIL\n!!\n");
+	printf("\n");
+
+	printf("\ntest num %d ld 2147483647\n", i++);
+	my_print = ft_printf("%ld", 2147483647);
+	printf("\n");
+	real_print = printf("%ld", 2147483647);
+	printf("\n");
+	if (my_print != real_print)	
+		printf("\n!!\nFAIL\n!!\n");
+	printf("\n");	
+
+	printf("\ntest num %d ld -2147483648\n", i++);
+	my_print = ft_printf("%ld", -2147483648);
+	printf("\n");
+	real_print = printf("%ld", -2147483648);
+	printf("\n");
+	if (my_print != real_print)	
+		printf("\n!!\nFAIL\n!!\n");
+	printf("\n");
+
+	printf("\ntest num %d ld 2147483648\n", i++);
+	my_print = ft_printf("%ld", 2147483648);
+	printf("\n");
+	real_print = printf("%ld", 2147483648);
+	printf("\n");
+	if (my_print != real_print)	
+		printf("\n!!\nFAIL\n!!\n");
+	printf("\n");	
+
+	printf("\ntest num %d lld 0\n", i++);
+	my_print = ft_printf("%lld", 0);
+	printf("\n");
+	real_print = printf("%lld", 0);
+	printf("\n");
+	if (my_print != real_print)	
+		printf("\n!!\nFAIL\n!!\n");
+	printf("\n");
+
+	printf("\ntest num %d lld 9223372036854775807\n", i++);
+	my_print = ft_printf("%lld", 9223372036854775807);
+	printf("\n");
+	real_print = printf("%lld", 9223372036854775807);
+	printf("\n");
+	if (my_print != real_print)	
+		printf("\n!!\nFAIL\n!!\n");
+	printf("\n");	
+
+	printf("\ntest num %d lld -9223372036854775807\n", i++);
+	my_print = ft_printf("%lld", -9223372036854775807);
+	printf("\n");
+	real_print = printf("%lld", -9223372036854775807);
+	printf("\n");
+	if (my_print != real_print)	
+		printf("\n!!\nFAIL\n!!\n");
+	printf("\n");
+
+	printf("\ntest num %d lld -9223372036854775808\n", i++);
+	my_print = ft_printf("%lld", -9223372036854775808);
+	printf("\n");
+	real_print = printf("%lld", -9223372036854775808);
+	printf("\n");
+	if (my_print != real_print)	
+		printf("\n!!\nFAIL\n!!\n");
+	printf("\n");
+
+
+
+
+	printf("\ntest num %i i 0\n", i++);
+	my_print = ft_printf("%i", 0);
+	printf("\n");
+	real_print = printf("%i", 0);
+	printf("\n");
+	if (my_print != real_print)	
+		printf("\n!!\nFAIL\n!!\n");
+	printf("\n");		
+
+	printf("\ntest num %i i 2147483647\n", i++);
+	my_print = ft_printf("%i", 2147483647);
+	printf("\n");
+	real_print = printf("%i", 2147483647);
+	printf("\n");
+	if (my_print != real_print)	
+		printf("\n!!\nFAIL\n!!\n");
+	printf("\n");	
+
+	printf("\ntest num %i i -2147483648\n", i++);
+	my_print = ft_printf("%i", -2147483648);
+	printf("\n");
+	real_print = printf("%i", -2147483648);
+	printf("\n");
+	if (my_print != real_print)	
+		printf("\n!!\nFAIL\n!!\n");
+	printf("\n");
+
+	printf("\ntest num %i i 2147483648\n", i++);
+	my_print = ft_printf("%i", 2147483648);
+	printf("\n");
+	real_print = printf("%i", 2147483648);
+	printf("\n");
+	if (my_print != real_print)	
+		printf("\n!!\nFAIL\n!!\n");
+	printf("\n");
+
+	// add hhd, hi, hhi, li, lli..
+
+	// then u 
+
 //	ft_printf("%15%");
 //	ft_printf("%c", cha);
 //	ft_printf("%3s%-6s", p, pp);
