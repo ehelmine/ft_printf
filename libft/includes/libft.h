@@ -6,7 +6,7 @@
 /*   By: ehelmine <ehelmine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/09 10:13:02 by ehelmine          #+#    #+#             */
-/*   Updated: 2021/02/11 00:04:46 by ehelmine         ###   ########.fr       */
+/*   Updated: 2021/03/15 17:06:35 by ehelmine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void				ft_putchar(char c);
 
 void				ft_putstr(char const *s);
 
-void				ft_putnbr(int n);
+void				ft_putnbr(long long n);
 
 int					ft_atoi(const char *str);
 

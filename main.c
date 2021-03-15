@@ -6,7 +6,7 @@
 /*   By: ehelmine <ehelmine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/19 13:31:36 by ehelmine          #+#    #+#             */
-/*   Updated: 2021/02/24 22:14:03 by ehelmine         ###   ########.fr       */
+/*   Updated: 2021/03/15 17:21:12 by ehelmine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,10 @@ int		main(void)
 //	i = ft_printf("%%");
 //	ft_putnbr(i);
 //	ft_printf("%.0%");
-	ft_printf("%d", -4242);
+//	ft_printf("%d", -4242);
+//printf("%010s is a string", "this");
+//	ft_printf("@moulitest: %.d %.0d", 42, 43);
+	printf("@moulitest: %.d %.0d", 0, 0);
+	// 000000000000042
 	return (0);
 }
