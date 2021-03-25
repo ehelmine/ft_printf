@@ -6,7 +6,7 @@
 /*   By: ehelmine <ehelmine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/21 17:36:02 by ehelmine          #+#    #+#             */
-/*   Updated: 2021/03/25 12:17:06 by ehelmine         ###   ########.fr       */
+/*   Updated: 2021/03/25 15:31:40 by ehelmine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,18 @@ int		check_correct_flags2(char *flags, va_list args, t_val *all, int i)
 		else
 			return (0);
 	}
+	else if (flags[i] == 'p')
+	{
+		if (all->check)
+		{
+			write(1, "0x", 2);
+			all->vd_ptr = va_arg(args, void *);
+			all->num = (intmax_t)all->vd_ptr;
+			write_p(all);
+			return (1);
+		}
+		return (1);
+	}
 	return (0);
 }
 int		check_correct_flags(char *flags, va_list args, t_val *all)
@@ -105,10 +117,6 @@ int		check_correct_flags(char *flags, va_list args, t_val *all)
 		}
 		else
 			return (0);
-	}
-	else if (flags[i] == 'p')
-	{
-		ft_putstr(va_arg(args, void*));
 	}
 	else if (flags[i] == '%')
 	{
@@ -200,11 +208,9 @@ int		ft_printf(const char *begin, ...)
 	int len;
 	
 	all.check = 0;
-	all.precision = -1;
 	va_start(args, begin);
 	loop_parameters(begin, args, &all);
 	all.check = 1;
-	all.precision = -1;
 	loop_parameters(begin, args, &all);
 	va_end(args);
 	len = all.output_len;

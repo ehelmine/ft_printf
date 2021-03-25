@@ -6,7 +6,7 @@
 /*   By: ehelmine <ehelmine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/10 17:53:58 by ehelmine          #+#    #+#             */
-/*   Updated: 2021/03/25 14:56:36 by ehelmine         ###   ########.fr       */
+/*   Updated: 2021/03/25 16:12:20 by ehelmine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,21 @@ int		real_width(int num_len, int input_width, int precision)
 	else if (precision >= input_width && num_len <= precision)
 		return (precision);
 	return (-1);
+}
+
+void	write_p(t_val *all)
+{
+	char *abc;
+	int i;
+
+	abc = "0123456789abcdef";
+	while (all->num != 0)
+	{
+		i = all->num % 16;
+		write(1, &abc[i], 1);
+		all->num /= 16;
+	}
+	return ;
 }
 
 void	write_zero(t_val *all)
@@ -165,6 +180,8 @@ void	write_d_and_i(t_val *all)
 	all->fill_char = '0';
 	if (all->space_flag && all->plus_flag)
 		all->space_flag = 0;
+	if (all->plus_flag && all->num < 0)
+		all->plus_flag = 0;
 	all->len = ft_check_int_len(all->num);
 	if (all->num < 0)
 		all->len -= 1;
@@ -200,8 +217,8 @@ void	write_d_and_i(t_val *all)
 				all->precision--;
 			}
 			ft_putnbr(all->num);		
-			all->output_len += all->len + 1;
-			all->real_len -= all->len + 1;
+			all->output_len += ft_check_int_len(all->num);
+			all->real_len -= ft_check_int_len(all->num);
 			while (all->real_len > 0)
 			{
 				write(1, " ", 1);
@@ -213,7 +230,7 @@ void	write_d_and_i(t_val *all)
 		{
 			if (!(output = (char*)malloc(sizeof(char) * 1000)))
 				return ;
-			if ((all->space_flag && all->num >= 0) || (all->precision > all->len && all->width > all->precision))
+			if (all->space_flag && all->num >= 0)
 			{
 	//			write(1, " ", 1);
 				output[x++] = ' ';
@@ -233,11 +250,12 @@ void	write_d_and_i(t_val *all)
 				}
 				if (all->num < 0)
 				{
-					if (all->zero_flag && all->num >= 0)
+					if (all->zero_flag)
 						write(1, "-", 1);
 					else
 						output[x++] = '-';
 					all->real_len--;
+					all->output_len++;
 				}
 			}
 			while (all->precision > all->len)
@@ -247,24 +265,15 @@ void	write_d_and_i(t_val *all)
 				all->real_len--;
 				all->precision--;
 			}
-			if (all->precision == all->len && all->num < 0 && all->width == -1)
-			{
-				output[x++] = all->fill_char;
-				all->output_len++;
-			}
-//			ft_putnbr(all->num);	
 			output[x] = '\0';	
 			num_str = ft_itoa(all->num);
 			all->output_len += all->len;
-//			ft_putnbr(all->real_len);
-//			ft_putstr("\n");
 			all->real_len -= all->len;
-//			ft_putnbr(all->real_len);
 			while (all->real_len > 0)
 			{
 				if (all->zero_flag && all->precision < all->len && all->precision >= 1)
 					write(1, "0", 1);
-				else if (all->zero_flag)
+				else
 					write(1, " ", 1);
 				all->real_len--;
 				all->output_len++;

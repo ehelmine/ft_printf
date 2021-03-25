@@ -6,7 +6,7 @@
 /*   By: ehelmine <ehelmine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/19 13:31:36 by ehelmine          #+#    #+#             */
-/*   Updated: 2021/03/25 14:56:50 by ehelmine         ###   ########.fr       */
+/*   Updated: 2021/03/25 16:00:45 by ehelmine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -414,6 +414,6 @@ int		main(void)
 	char *p;
 	p = "";
 //	printf("%p", p);
-	ft_printf("%-05.0i", -2);
+	printf("%0+5d", -42);
 	return (0);
 }

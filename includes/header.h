@@ -6,7 +6,7 @@
 /*   By: ehelmine <ehelmine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/21 18:31:32 by ehelmine          #+#    #+#             */
-/*   Updated: 2021/03/25 14:22:48 by ehelmine         ###   ########.fr       */
+/*   Updated: 2021/03/25 15:31:01 by ehelmine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ typedef struct		s_val
 					int i;
 					int no_flags;
 					int zero_num;
+					void *vd_ptr;
 }					t_val;
 
 
@@ -80,5 +81,7 @@ void	write_c(t_val *all);
 void	write_s(t_val *all);
 
 void	write_d_and_i(t_val *all);
+
+void	write_p(t_val *all);
 
 #endif
