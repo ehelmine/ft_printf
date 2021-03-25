@@ -6,7 +6,7 @@
 /*   By: ehelmine <ehelmine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/21 18:31:32 by ehelmine          #+#    #+#             */
-/*   Updated: 2021/03/25 15:31:01 by ehelmine         ###   ########.fr       */
+/*   Updated: 2021/03/25 23:50:44 by ehelmine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,8 @@ int		check_flags_percentage(t_val *all, char *flags);
 int		check_flags_c(t_val *all, char *flags);
 
 int		check_flags_int(t_val *all, char *flags);
+
+int		check_flags_p(t_val *all, char *flags);
 
 int		real_width(int num_len, int input_width, int precision);
 

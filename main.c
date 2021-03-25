@@ -6,7 +6,7 @@
 /*   By: ehelmine <ehelmine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/19 13:31:36 by ehelmine          #+#    #+#             */
-/*   Updated: 2021/03/25 16:00:45 by ehelmine         ###   ########.fr       */
+/*   Updated: 2021/03/26 00:09:45 by ehelmine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -413,7 +413,7 @@ int		main(void)
 	//printf("%-015.8d", 1000000);
 	char *p;
 	p = "";
-//	printf("%p", p);
-	printf("%0+5d", -42);
+	printf("%5p", 0);
+//	printf("%0+5d", -42);
 	return (0);
 }

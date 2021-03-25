@@ -6,7 +6,7 @@
 /*   By: ehelmine <ehelmine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/21 17:36:02 by ehelmine          #+#    #+#             */
-/*   Updated: 2021/03/25 15:31:40 by ehelmine         ###   ########.fr       */
+/*   Updated: 2021/03/26 00:00:35 by ehelmine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,15 +79,18 @@ int		check_correct_flags2(char *flags, va_list args, t_val *all, int i)
 	}
 	else if (flags[i] == 'p')
 	{
-		if (all->check)
+		if (check_flags_p(all, flags))
 		{
-			write(1, "0x", 2);
-			all->vd_ptr = va_arg(args, void *);
-			all->num = (intmax_t)all->vd_ptr;
-			write_p(all);
+			if (all->check)
+			{
+				all->vd_ptr = va_arg(args, void *);
+				all->num = (intmax_t)all->vd_ptr;
+				write_p(all);
+				return (1);
+			}
 			return (1);
 		}
-		return (1);
+		return (0);
 	}
 	return (0);
 }

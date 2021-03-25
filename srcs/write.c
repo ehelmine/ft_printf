@@ -6,7 +6,7 @@
 /*   By: ehelmine <ehelmine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/10 17:53:58 by ehelmine          #+#    #+#             */
-/*   Updated: 2021/03/25 16:12:20 by ehelmine         ###   ########.fr       */
+/*   Updated: 2021/03/26 00:09:20 by ehelmine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,14 +28,41 @@ void	write_p(t_val *all)
 {
 	char *abc;
 	int i;
+	int x;
+	char *output;
 
 	abc = "0123456789abcdef";
+	all->len = ft_check_int_len(all->num);
+	all->real_len = all->len + 2;
+	if (all->width > all->len + 2)
+		all->real_len = all->width;
+	if (!(output = (char*)malloc(sizeof(char) * (all->real_len + 1))))
+		return ;
+	i = 0;
+	if (!all->minus_flag)
+	{
+		while (i < all->real_len - (all->len + 2))
+			output[i++] = ' ';
+	}
+	output[i++] = '0';
+	output[i++] = 'x';
+	all->output_len += 2;
+	if (all->num == 0)
+		output[i++] = '0';
 	while (all->num != 0)
 	{
-		i = all->num % 16;
-		write(1, &abc[i], 1);
+		x = all->num % 16;
+		output[i++] = abc[x];
+		all->output_len++;
 		all->num /= 16;
 	}
+	if (all->minus_flag)
+	{
+		while (i < all->real_len)
+			output[i++] = ' ';
+	}
+	output[i] = '\0';
+	ft_putstr(output);
 	return ;
 }
 

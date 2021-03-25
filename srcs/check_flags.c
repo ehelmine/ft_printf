@@ -6,7 +6,7 @@
 /*   By: ehelmine <ehelmine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/16 17:07:01 by ehelmine          #+#    #+#             */
-/*   Updated: 2021/03/25 12:17:04 by ehelmine         ###   ########.fr       */
+/*   Updated: 2021/03/26 00:03:27 by ehelmine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,31 @@
 // %[flags in any order:#+-0 ]
 // [min field width][.precision][conversion specifier]
 
+int		check_flags_p(t_val *all, char *flags)
+{
+	int i;
+
+	all->width = -1;
+	all->minus_flag = 0;
+	i = 0;
+
+	if (flags[i + 1] == '\0')
+		return (1);
+	if (flags[i] == '-')
+	{
+		all->minus_flag = 1;
+		i++;
+	}
+	if (flags[i] >= '1' && flags[i] <= '9')
+	{
+		all->width = ft_atoi(flags + i);
+		i += ft_check_int_len(all->width);
+	}
+	if (flags[i] == 'p')
+		return (1);
+	else
+		return (0);
+}
 int		check_flags_int(t_val *all, char *flags)
 {
 	int i;
