@@ -6,12 +6,12 @@
 /*   By: ehelmine <ehelmine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/19 13:31:36 by ehelmine          #+#    #+#             */
-/*   Updated: 2021/03/16 01:26:35 by ehelmine         ###   ########.fr       */
+/*   Updated: 2021/03/25 14:56:50 by ehelmine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
-#include "header.h"
+#include "includes/header.h"
 
 int		main(void)
 {
@@ -25,7 +25,7 @@ int		main(void)
 	i = 1;
 	int my_print;
 	int real_print;
-	
+	/*
 // sentence in a string
 	printf("test num %d only s\n", i++);
 	my_print = ft_printf("%s", str);
@@ -389,7 +389,7 @@ int		main(void)
 	// add hhd, hi, hhi, li, lli..
 
 	// then u 
-
+*/
 //	ft_printf("%15%");
 //	ft_printf("%c", cha);
 //	ft_printf("%3s%-6s", p, pp);
@@ -409,5 +409,11 @@ int		main(void)
 //	ft_printf("@moulitest: %.d %.0d", 42, 43);
 //	printf("@moulitest: %.d %.0d", 0, 0);
 	// 000000000000042
+//	ft_printf("@moulitest: % 04.d % 04.d", 0, 0);	
+	//printf("%-015.8d", 1000000);
+	char *p;
+	p = "";
+//	printf("%p", p);
+	ft_printf("%-05.0i", -2);
 	return (0);
 }

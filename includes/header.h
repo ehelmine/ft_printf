@@ -6,7 +6,7 @@
 /*   By: ehelmine <ehelmine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/21 18:31:32 by ehelmine          #+#    #+#             */
-/*   Updated: 2021/03/15 16:27:46 by ehelmine         ###   ########.fr       */
+/*   Updated: 2021/03/25 14:22:48 by ehelmine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@
 # include <stdio.h>
 # include <string.h>
 # include <stdlib.h>
-# include "libft/includes/libft.h"
+# include "../libft/includes/libft.h"
 
 typedef struct		s_val
 {
@@ -55,6 +55,7 @@ typedef struct		s_val
 					int real_len;
 					int i;
 					int no_flags;
+					int zero_num;
 }					t_val;
 
 
@@ -62,11 +63,15 @@ int		ft_printf(const char *begin, ...);
 
 char	*trim_string(char *flags);
 
+int		check_num_type(t_val *all);
+
 int		check_flags_s(t_val *all, char *flags);
 
 int		check_flags_percentage(t_val *all, char *flags);
 
 int		check_flags_c(t_val *all, char *flags);
+
+int		check_flags_int(t_val *all, char *flags);
 
 int		real_width(int num_len, int input_width, int precision);
 

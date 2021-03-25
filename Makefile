@@ -6,15 +6,15 @@
 #    By: ehelmine <ehelmine@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/01/19 13:31:46 by ehelmine          #+#    #+#              #
-#    Updated: 2021/02/21 05:39:00 by ehelmine         ###   ########.fr        #
+#    Updated: 2021/03/17 16:50:55 by ehelmine         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = libftprintf.a
 
-SRCS = handle_input.c check_flags.c write.c help_functions.c
+SRCS = srcs/handle_input.c srcs/check_flags.c srcs/write.c srcs/help_functions.c
 
-OBJS = $(SRCS:.c=.o)
+OBJS = handle_input.o check_flags.o write.o help_functions.o
 
 INCLUDE = libft/includes/libft.h
 

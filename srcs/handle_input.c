@@ -6,137 +6,11 @@
 /*   By: ehelmine <ehelmine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/21 17:36:02 by ehelmine          #+#    #+#             */
-/*   Updated: 2021/03/15 17:18:39 by ehelmine         ###   ########.fr       */
+/*   Updated: 2021/03/25 12:17:06 by ehelmine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "header.h"
-
-// %[flags in any order:#+-0 ]
-// [min field width][.precision][conversion specifier]
-
-int		check_flags_int(t_val *all, char *flags)
-{
-	int i;
-
-	all->plus_flag = 0;
-	all->minus_flag = 0;
-	all->space_flag = 0;
-	all->hash_flag = 0;
-	all->zero_flag = 0;
-	all->minimum_width = 0;
-	all->precision = -1;
-	all->h = 0;
-	all->hh = 0;
-	all->l = 0;
-	all->ll = 0;
-	all->width = -1;
-	all->no_flags = 0;
-	i = 0;
-	if (flags[i + 1] == '\0')
-	{
-		all->no_flags = 1;
-		return (1);
-	}
-	while (flags[i] == '+' || flags[i] == '-' || 
-	flags[i] == ' ' || flags[i] == '#' || flags[i] == '0')
-	{
-		if (flags[i] == '+')
-			all->plus_flag = 1;
-		else if (flags[i] == '-')
-			all->minus_flag = 1;
-		else if (flags[i] == ' ')
-			all->space_flag = 1;
-		else if (flags[i] == '0')
-			all->zero_flag = 1;
-		else if (flags[i] == '#')
-			all->hash_flag = 1;
-		i++;
-	}
-	if (flags[i] >= '1' && flags[i] <= '9')
-	{
-		all->width = ft_atoi(flags + i);
-		i += ft_check_int_len(all->width);
-	}
-	if (flags[i] == '.')
-	{
-		if (!(ft_isdigit((int)flags[i + 1])))
-		{
-			if (flags[i + 1] == 'i' || flags[i + 1] == 'd' || flags[i + 1] == 'u')
-				return (1);
-			else
-				return (0);
-		}
-		all->precision = ft_atoi(flags + i + 1);
-		if (all->precision >= 0)
-			i += ft_check_int_len(all->precision) + 1;
-		else
-			return (0);
-	}
-	if (flags[i] == 'h')
-	{
-		if (flags[i + 1] == 'h')
-		{
-			all->hh = 1;
-			i += 2;
-		}
-		else
-		{
-			all->h = 1;
-			i++;
-		}
-	}
-	if (flags[i] == 'l')
-	{
-		if (flags[i + 1] == 'l')
-		{
-			all->ll = 1;
-			i += 2;
-		}
-		else
-		{
-			all->l = 1;
-			i++;
-		}
-	}
-	if (flags[i] == 'i' || flags[i] == 'd' || flags[i] == 'u')
-		return (1);
-	else
-		return (0);
-}
-
-int		check_num_type(t_val *all)
-{
-	if (all->h)
-	{
-		if (all->num >= -32768 && all->num <= 32767)
-			return(1);
-		else if (all->num < -32768)
-			all->num = 0;
-		else if (all->num > 32767)
-			all->num = -32768;
-		return (1);
-	}
-	else if (all->l)
-		return (1);
-	else if (all->ll)
-	{
-		return (1);
-	}
-	else if (all->hh)
-	{
-		if (all->num >= -128 && all->num <= 127)	
-			return (1);
-		else if (all->num < -128)
-			all->num = 127;
-		else if (all->num > 127)
-			all->num = -128;
-		return (1);
-	}
-	else
-		return (1);
-	
-}
+#include "../includes/header.h"
 
 /*
 **	Conversion spesifier %u doesn't recognise space or plus flags.
@@ -164,6 +38,8 @@ int		check_correct_flags2(char *flags, va_list args, t_val *all, int i)
 						all->num = (unsigned char)va_arg(args, unsigned int);
 					else
 						all->num = va_arg(args, unsigned int);
+					if (all->num == 0)
+						all->zero_num = 1;
 					write_d_and_i(all);
 					return (1);
 				}
@@ -185,6 +61,8 @@ int		check_correct_flags2(char *flags, va_list args, t_val *all, int i)
 					all->num = (signed char)va_arg(args, int);
 				else
 					all->num = va_arg(args, signed int);
+				if (all->num == 0)
+					all->zero_num = 1;
 				if (check_num_type(all))
 				{
 					write_d_and_i(all);
