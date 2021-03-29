@@ -6,7 +6,7 @@
 /*   By: ehelmine <ehelmine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/21 17:36:02 by ehelmine          #+#    #+#             */
-/*   Updated: 2021/03/29 14:33:32 by ehelmine         ###   ########.fr       */
+/*   Updated: 2021/03/29 19:43:54 by ehelmine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,6 +98,7 @@ int		check_correct_flags2(char *flags, va_list args, t_val *all, int i)
 		{
 			if (all->check)
 			{
+				all->zero_num = 0;
 				if (flags[i] == 'o')
 				{
 					all->base = 8;
@@ -232,8 +233,8 @@ int		loop_parameters(const char *input, va_list args, t_val *all)
 		flags[x] = '\0';
 		if (!(check_correct_flags(flags, args, all)))
 			exit(0);
-//		free(all->new_flags);
-//		free(flags);
+/*		if (*flags)
+			free((void*)flags);*/
 		x = 0;
 		if (*input == '\0')
 			break ;

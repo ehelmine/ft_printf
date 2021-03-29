@@ -6,7 +6,7 @@
 /*   By: ehelmine <ehelmine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/10 17:53:58 by ehelmine          #+#    #+#             */
-/*   Updated: 2021/03/29 19:20:04 by ehelmine         ###   ########.fr       */
+/*   Updated: 2021/03/29 19:44:52 by ehelmine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ char	*convert_num(t_val *all)
 	if (all->num == 0)
 	{
 		number[a++] = '0';
+		all->len = a;
 		return (number);
 	}
 	while (all->num != 0)
@@ -78,7 +79,7 @@ void	write_unsigned(t_val *all)
 
 	abc = "0123456789abcdef";
 	number = convert_num(all);
-	if (!all->zero_x && all->hash_flag)
+	if (!all->zero_x && all->hash_flag && !all->zero_num)
 		all->len += 2;
 	all->real_len = all->len;
 	all->fill_char = ' ';
@@ -122,6 +123,8 @@ void	write_unsigned(t_val *all)
 	}
 	output[i] = '\0';
 	ft_putstr(output);
+/*	free((void*)number);
+	free((void*)output);*/
 	return ;
 }
 
@@ -183,6 +186,10 @@ void	write_p(t_val *all)
 	}
 	output[i] = '\0';
 	ft_putstr(output);
+/*	if (*number)
+		free((void*)number);
+	if (*output)
+		free((void*)output);*/
 	return ;
 }
 
@@ -193,9 +200,6 @@ void	write_zero(t_val *all)
 	int x;
 	
 	x = 0;
-//	ft_putstr("\n");
-//	ft_putnbr(all->real_len);
-//	ft_putstr("\n");
 	while (all->real_len > 0)
 	{
 		if (all->precision == 0)
@@ -437,7 +441,11 @@ void	write_d_and_i(t_val *all)
 				return ;
 			}
 			ft_putstr(num_str);
-		}
+/*			if (*output)
+				free((void*)output);
+			if (*num_str)
+				free((void*)num_str);
+*/		}
 	}
 }
 
