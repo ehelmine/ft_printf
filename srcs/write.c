@@ -6,7 +6,7 @@
 /*   By: ehelmine <ehelmine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/10 17:53:58 by ehelmine          #+#    #+#             */
-/*   Updated: 2021/03/26 00:09:20 by ehelmine         ###   ########.fr       */
+/*   Updated: 2021/03/29 15:45:29 by ehelmine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,12 +24,107 @@ int		real_width(int num_len, int input_width, int precision)
 	return (-1);
 }
 
+char	*convert_num(t_val *all)
+{
+	char *number;
+	char *abc;
+	int a;
+	int x;
+	
+	abc = "0123456789abcdef";
+	if (!(number = (char*)malloc(sizeof(char) * 1000)))
+		return NULL;
+	a = 0;
+	if (all->num == 0)
+	{
+		number[a++] = '0';
+		return (number);
+	}
+	while (all->num != 0)
+	{
+		x = all->num % 16;
+		number[a++] = abc[x];
+		all->num /= 16;
+	}
+	all->len = a;
+	return (number);
+}
+
+void	write_unsigned(t_val *all)
+{
+	char *abc;
+	int i;
+	char *output;
+	char *number;
+	int a;
+
+	abc = "0123456789abcdef";
+	number = convert_num(all);
+//	all->len = ft_check_int_len(all->num);
+//	if (all->hash_flag && all->num != 0 && (all->conv == 'x' || all->conv == 'X'))
+//		all->len += 2;
+	all->real_len = all->len;
+	all->fill_char = ' ';
+	if (all->zero_flag)
+		all->fill_char = '0';
+	if (all->width > all->len)
+		all->real_len = all->width;
+	if (!(output = (char*)malloc(sizeof(char) * (all->real_len + 1))))
+		return ;
+	i = 0;
+	if (!all->minus_flag)
+	{
+		while (i < all->real_len - (all->len))
+		{
+			output[i++] = all->fill_char;
+			all->output_len++;
+		}
+	}
+	if (all->hash_flag && all->num != 0 && (all->conv == 'x' || all->conv == 'X'))
+	{
+		output[i++] = '0';
+		output[i++] = 'x';
+		all->output_len += 2;
+	}
+/*	if (!(number = (char*)malloc(sizeof(char) * 1000)))
+		return ;
+	a = 0;
+	while (all->num != 0)
+	{
+		x = all->num % 16;
+		number[a++] = abc[x];
+		all->num /= 16;
+	}
+	a--;*/
+	a = all->len - 1;
+	while (a >= 0)
+	{
+		output[i++] = number[a--];
+		if (output[i - 1] >= 'a' && output[i - 1] <= 'z' && all->big_x)
+			output[i - 1] = output[i - 1] - 32;
+		all->output_len++;
+	}
+	if (all->minus_flag)
+	{
+		while (i < all->real_len)
+		{
+			output[i++] = ' ';
+			all->output_len++;
+		}
+	}
+	output[i] = '\0';
+	ft_putstr(output);
+	return ;
+}
+
 void	write_p(t_val *all)
 {
 	char *abc;
 	int i;
 	int x;
 	char *output;
+	char *number;
+	int a;
 
 	abc = "0123456789abcdef";
 	all->len = ft_check_int_len(all->num);
@@ -42,24 +137,41 @@ void	write_p(t_val *all)
 	if (!all->minus_flag)
 	{
 		while (i < all->real_len - (all->len + 2))
+		{
 			output[i++] = ' ';
+			all->output_len++;
+		}
 	}
 	output[i++] = '0';
 	output[i++] = 'x';
 	all->output_len += 2;
 	if (all->num == 0)
+	{
 		output[i++] = '0';
+		all->output_len++;
+	}
+	if (!(number = (char*)malloc(sizeof(char) * 1000)))
+		return ;
+	a = 0;
 	while (all->num != 0)
 	{
 		x = all->num % 16;
-		output[i++] = abc[x];
-		all->output_len++;
+		number[a++] = abc[x];
 		all->num /= 16;
+	}
+	a--;
+	while (a >= 0)
+	{
+		output[i++] = number[a--];
+		all->output_len++;
 	}
 	if (all->minus_flag)
 	{
 		while (i < all->real_len)
+		{
 			output[i++] = ' ';
+			all->output_len++;
+		}
 	}
 	output[i] = '\0';
 	ft_putstr(output);

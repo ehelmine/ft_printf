@@ -6,7 +6,7 @@
 /*   By: ehelmine <ehelmine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/21 18:31:32 by ehelmine          #+#    #+#             */
-/*   Updated: 2021/03/25 23:50:44 by ehelmine         ###   ########.fr       */
+/*   Updated: 2021/03/29 14:33:54 by ehelmine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,9 @@ typedef struct		s_val
 					int no_flags;
 					int zero_num;
 					void *vd_ptr;
+					int base;
+					char conv;
+					int big_x;
 }					t_val;
 
 
@@ -76,6 +79,8 @@ int		check_flags_int(t_val *all, char *flags);
 
 int		check_flags_p(t_val *all, char *flags);
 
+int		check_flags_unsigned(t_val *all, char *flags);
+
 int		real_width(int num_len, int input_width, int precision);
 
 void	write_c(t_val *all);
@@ -85,5 +90,7 @@ void	write_s(t_val *all);
 void	write_d_and_i(t_val *all);
 
 void	write_p(t_val *all);
+
+void	write_unsigned(t_val *all);
 
 #endif

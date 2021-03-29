@@ -6,7 +6,7 @@
 /*   By: ehelmine <ehelmine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/21 17:36:02 by ehelmine          #+#    #+#             */
-/*   Updated: 2021/03/26 00:00:35 by ehelmine         ###   ########.fr       */
+/*   Updated: 2021/03/29 14:33:32 by ehelmine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,43 @@ int		check_correct_flags2(char *flags, va_list args, t_val *all, int i)
 				all->vd_ptr = va_arg(args, void *);
 				all->num = (intmax_t)all->vd_ptr;
 				write_p(all);
+				return (1);
+			}
+			return (1);
+		}
+		return (0);
+	}
+	else if (flags[i] == 'o' || flags[i] == 'x' || flags[i] == 'X')
+	{
+		if (check_flags_unsigned(all, flags))
+		{
+			if (all->check)
+			{
+				if (flags[i] == 'o')
+				{
+					all->base = 8;
+					all->conv = 'o';
+				}
+				if (flags[i] == 'x' || flags[i] == 'X')
+				{
+					all->base = 16;
+					all->conv = 'x';
+					if (flags[i] == 'X')
+						all->conv = 'X';
+				}
+				if (all->h)
+					all->num = (unsigned short)va_arg(args, unsigned int);
+				else if (all->l)
+					all->num = (unsigned long)va_arg(args, unsigned long);
+				else if (all->ll)
+					all->num = (unsigned long long)va_arg(args, unsigned long long);
+				else if (all->hh)
+					all->num = (unsigned char)va_arg(args, unsigned int);
+				else
+					all->num = va_arg(args, unsigned int);
+				if (all->num == 0)
+					all->zero_num = 1;
+				write_unsigned(all);
 				return (1);
 			}
 			return (1);

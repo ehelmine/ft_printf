@@ -6,7 +6,7 @@
 /*   By: ehelmine <ehelmine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/16 17:07:01 by ehelmine          #+#    #+#             */
-/*   Updated: 2021/03/26 00:03:27 by ehelmine         ###   ########.fr       */
+/*   Updated: 2021/03/29 15:35:31 by ehelmine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,93 @@
 
 // %[flags in any order:#+-0 ]
 // [min field width][.precision][conversion specifier]
+
+int		check_flags_unsigned(t_val *all, char *flags)
+{
+	int i;
+
+	all->width = -1;
+	all->precision = 1;
+	all->zero_flag = 0;
+	all->minus_flag = 0;
+	all->hash_flag = 0;
+	all->big_x = 0;
+	all->h = 0;
+	all->hh = 0;
+	all->l = 0;
+	all->ll = 0;
+	// spacea ja plussaa ei ole
+	i = 0;
+
+	if (flags[i + 1] == '\0')
+		return (1);
+	while (flags[i] == '-' || flags[i] == '#' || flags[i] == '0')
+	{
+		if (flags[i] == '-')
+			all->minus_flag = 1;
+		else if (flags[i] == '#')
+			all->hash_flag = 1;
+		else if (flags[i] == '0')
+			all->zero_flag = 1;
+		i++;
+	}
+	if (flags[i] >= '1' && flags[i] <= '9')
+	{
+		all->width = ft_atoi(flags + i);
+		i += ft_check_int_len(all->width);
+	}
+	if (flags[i] == '.')
+	{
+		if (!(ft_isdigit((int)flags[i + 1])))
+		{
+			if (flags[i + 1] == 'o' || flags[i + 1] == 'X' || flags[i + 1] == 'x')
+			{
+				all->precision = 0;
+				return (1);
+			}
+			else
+				return (0);
+		}
+		all->precision = ft_atoi(flags + i + 1);
+		if (all->precision >= 0)
+			i += ft_check_int_len(all->precision) + 1;
+		else
+			return (0);
+	}
+	if (flags[i] == 'h')
+	{
+		if (flags[i + 1] == 'h')
+		{
+			all->hh = 1;
+			i += 2;
+		}
+		else
+		{
+			all->h = 1;
+			i++;
+		}
+	}
+	if (flags[i] == 'l')
+	{
+		if (flags[i + 1] == 'l')
+		{
+			all->ll = 1;
+			i += 2;
+		}
+		else
+		{
+			all->l = 1;
+			i++;
+		}
+	}
+	if (flags[i] == 'X')
+		all->big_x = 1;
+	if (flags[i] == 'o' || flags[i] == 'X' || flags[i] == 'x')
+		return (1);
+	else
+		return (0);
+	return (1);
+}
 
 int		check_flags_p(t_val *all, char *flags)
 {
