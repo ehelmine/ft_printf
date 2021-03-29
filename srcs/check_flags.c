@@ -6,7 +6,7 @@
 /*   By: ehelmine <ehelmine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/16 17:07:01 by ehelmine          #+#    #+#             */
-/*   Updated: 2021/03/29 15:35:31 by ehelmine         ###   ########.fr       */
+/*   Updated: 2021/03/29 18:44:43 by ehelmine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,11 +29,10 @@ int		check_flags_unsigned(t_val *all, char *flags)
 	all->hh = 0;
 	all->l = 0;
 	all->ll = 0;
+	all->zero_num = 0;
 	// spacea ja plussaa ei ole
 	i = 0;
 
-	if (flags[i + 1] == '\0')
-		return (1);
 	while (flags[i] == '-' || flags[i] == '#' || flags[i] == '0')
 	{
 		if (flags[i] == '-')

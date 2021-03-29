@@ -6,7 +6,7 @@
 /*   By: ehelmine <ehelmine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/10 17:53:58 by ehelmine          #+#    #+#             */
-/*   Updated: 2021/03/29 15:45:29 by ehelmine         ###   ########.fr       */
+/*   Updated: 2021/03/29 19:20:04 by ehelmine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,9 +42,27 @@ char	*convert_num(t_val *all)
 	}
 	while (all->num != 0)
 	{
-		x = all->num % 16;
+		x = all->num % all->base;
 		number[a++] = abc[x];
-		all->num /= 16;
+		all->num /= all->base;
+	}
+	if (all->hash_flag && !all->zero_num && (all->conv == 'x' || all->conv == 'X'))
+	{
+		number[a++] = all->conv;
+		number[a++] = '0';
+		all->zero_x = 1;
+	}
+	if (all->conv == 'o' && all->hash_flag)
+		number[a++] = '0';
+	number[a] = '\0';
+	if (all->precision && all->conv == 'o')
+	{
+		x = all->precision;
+		while ((int)ft_strlen(number) < x)
+		{
+			number[a] = '0';
+			number[++a] = '\0';
+		}
 	}
 	all->len = a;
 	return (number);
@@ -60,9 +78,8 @@ void	write_unsigned(t_val *all)
 
 	abc = "0123456789abcdef";
 	number = convert_num(all);
-//	all->len = ft_check_int_len(all->num);
-//	if (all->hash_flag && all->num != 0 && (all->conv == 'x' || all->conv == 'X'))
-//		all->len += 2;
+	if (!all->zero_x && all->hash_flag)
+		all->len += 2;
 	all->real_len = all->len;
 	all->fill_char = ' ';
 	if (all->zero_flag)
@@ -80,22 +97,13 @@ void	write_unsigned(t_val *all)
 			all->output_len++;
 		}
 	}
-	if (all->hash_flag && all->num != 0 && (all->conv == 'x' || all->conv == 'X'))
+	if (!all->zero_x && all->hash_flag)
 	{
 		output[i++] = '0';
-		output[i++] = 'x';
+		output[i++] = all->conv;
 		all->output_len += 2;
+		all->real_len -= 2;
 	}
-/*	if (!(number = (char*)malloc(sizeof(char) * 1000)))
-		return ;
-	a = 0;
-	while (all->num != 0)
-	{
-		x = all->num % 16;
-		number[a++] = abc[x];
-		all->num /= 16;
-	}
-	a--;*/
 	a = all->len - 1;
 	while (a >= 0)
 	{

@@ -6,7 +6,7 @@
 /*   By: ehelmine <ehelmine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/21 18:31:32 by ehelmine          #+#    #+#             */
-/*   Updated: 2021/03/29 14:33:54 by ehelmine         ###   ########.fr       */
+/*   Updated: 2021/03/29 19:03:35 by ehelmine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,7 @@ typedef struct		s_val
 					int base;
 					char conv;
 					int big_x;
+					int zero_x;
 }					t_val;
 
 
