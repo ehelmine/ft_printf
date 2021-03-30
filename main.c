@@ -6,7 +6,7 @@
 /*   By: ehelmine <ehelmine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/19 13:31:36 by ehelmine          #+#    #+#             */
-/*   Updated: 2021/03/29 19:39:50 by ehelmine         ###   ########.fr       */
+/*   Updated: 2021/03/30 14:00:51 by ehelmine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -413,7 +413,7 @@ int		main(void)
 	//printf("%-015.8d", 1000000);
 	char *p;
 	p = "haha";
-	ft_printf("%#x", 0);
+	printf("@moulitest: %#.o %#.0o", 0, 0);
 //	printf("%0+5d", -42);
 	return (0);
 }

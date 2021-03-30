@@ -6,7 +6,7 @@
 /*   By: ehelmine <ehelmine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/10 17:53:58 by ehelmine          #+#    #+#             */
-/*   Updated: 2021/03/29 19:44:52 by ehelmine         ###   ########.fr       */
+/*   Updated: 2021/03/30 13:59:23 by ehelmine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,146 @@ int		real_width(int num_len, int input_width, int precision)
 	else if (precision >= input_width && num_len <= precision)
 		return (precision);
 	return (-1);
+}
+
+
+void	write_zero(t_val *all)
+{
+//	char *num_str;
+//	char *output;
+	int x;
+	
+	x = 0;
+	if (all->width == -1 && ((all->conv == 'o' && !all->hash_flag) ||
+		(all->conv == 'x' || all->conv == 'X')))
+		all->real_len -= 1;
+	while (all->real_len > 0)
+	{
+		if (all->precision == 0)
+		{
+			if (all->plus_flag && all->minus_flag)
+			{
+				write(1, "+", 1);
+				all->output_len++;
+				all->real_len--;
+			}
+			if (all->space_flag)
+			{
+				write(1, " ", 1);
+				all->output_len++;
+				all->real_len--;
+			}
+			while (all->real_len > 1)
+			{
+				write(1, " ", 1);
+				all->real_len--;
+				all->output_len++;
+			}
+//			ft_putchar(all->conv);
+//			ft_putstr("\n");
+			if (all->conv == 'o' && all->hash_flag && all->width == -1 && all->real_len == 1)
+			{
+				write(1, "0", 1);
+				all->output_len++;
+				all->real_len--;
+			}
+			if ((all->width != -1 && !all->plus_flag) || (all->width != -1 &&
+				all->plus_flag && all->minus_flag))
+			{
+				write(1, " ", 1);
+				all->output_len++;
+				all->real_len--;
+			}
+			if (all->plus_flag && !all->minus_flag)
+			{
+				write(1, "+", 1);
+				all->output_len++;
+				all->real_len--;
+			}
+			return ;
+		}
+	}
+/*		if (all->minus_flag)
+		{
+			if (all->space_flag)
+			{
+				write(1, " ", 1);
+				all->output_len++;
+				all->real_len--;
+			}
+			if (all->plus_flag)
+			{
+				write(1, "+", 1);
+				all->output_len++;
+				all->real_len--;
+			}
+			while (all->precision > all->len)
+			{
+				write(1, "0", 1);
+				all->output_len++;
+				all->real_len--;
+				all->precision--;
+			}
+			ft_putnbr(all->num);		
+			all->output_len += all->len;
+			all->real_len -= all->len;
+			while (all->real_len > 0)
+			{
+				write(1, " ", 1);
+				all->real_len--;
+				all->output_len++;
+			}
+		}
+		else
+		{
+			if (!(output = (char*)malloc(sizeof(char) * 1000)))
+				return ;
+			if ((all->space_flag) || (all->precision > all->len && all->width > all->precision))
+			{
+				output[x++] = ' ';
+				all->output_len++;
+				all->real_len--;
+			}
+			if (all->plus_flag)
+			{
+				if (all->zero_flag)
+					write(1, "+", 1);
+				if (!(all->zero_flag))
+					output[x++] = '+';
+				all->output_len++;
+				all->real_len--;
+			}
+			while (all->precision > all->len)
+			{
+				output[x++] = all->fill_char;
+				all->output_len++;
+				all->real_len--;
+				all->precision--;
+			}
+			if (all->precision == all->len && all->num < 0 && all->width == -1)
+			{
+				output[x++] = all->fill_char;
+				all->output_len++;
+			}	
+			output[x] = '\0';	
+			num_str = ft_itoa(all->num);
+			all->output_len += all->len;
+			all->real_len -= all->len;
+			while (all->real_len > 0)
+			{
+				if (all->zero_flag)
+					write(1, "0", 1);
+				if (!(all->zero_flag))
+					write(1, " ", 1);
+				all->real_len--;
+				all->output_len++;
+			}
+			ft_putstr(output);
+			if (all->num < 0)
+				num_str++;
+			ft_putstr(num_str);	
+		}
+	}*/
 }
 
 char	*convert_num(t_val *all)
@@ -87,6 +227,11 @@ void	write_unsigned(t_val *all)
 		all->fill_char = '0';
 	if (all->width > all->len)
 		all->real_len = all->width;
+	if (all->zero_num && all->precision == 0)
+	{
+		write_zero(all);
+		return ;
+	}
 	if (!(output = (char*)malloc(sizeof(char) * (all->real_len + 1))))
 		return ;
 	i = 0;
@@ -191,134 +336,6 @@ void	write_p(t_val *all)
 	if (*output)
 		free((void*)output);*/
 	return ;
-}
-
-void	write_zero(t_val *all)
-{
-//	char *num_str;
-//	char *output;
-	int x;
-	
-	x = 0;
-	while (all->real_len > 0)
-	{
-		if (all->precision == 0)
-		{
-			if (all->plus_flag && all->minus_flag)
-			{
-				write(1, "+", 1);
-				all->output_len++;
-				all->real_len--;
-			}
-			if (all->space_flag)
-			{
-				write(1, " ", 1);
-				all->output_len++;
-				all->real_len--;
-			}
-			while (all->real_len > 1)
-			{
-				write(1, " ", 1);
-				all->real_len--;
-				all->output_len++;
-			}
-			if ((all->width != -1 && !all->plus_flag) || (all->width != -1 &&
-				all->plus_flag && all->minus_flag))
-			{
-				write(1, " ", 1);
-				all->output_len++;
-				all->real_len--;
-			}
-			if (all->plus_flag && !all->minus_flag)
-			{
-				write(1, "+", 1);
-				all->output_len++;
-				all->real_len--;
-			}
-			return ;
-		}
-	}
-/*		if (all->minus_flag)
-		{
-			if (all->space_flag)
-			{
-				write(1, " ", 1);
-				all->output_len++;
-				all->real_len--;
-			}
-			if (all->plus_flag)
-			{
-				write(1, "+", 1);
-				all->output_len++;
-				all->real_len--;
-			}
-			while (all->precision > all->len)
-			{
-				write(1, "0", 1);
-				all->output_len++;
-				all->real_len--;
-				all->precision--;
-			}
-			ft_putnbr(all->num);		
-			all->output_len += all->len;
-			all->real_len -= all->len;
-			while (all->real_len > 0)
-			{
-				write(1, " ", 1);
-				all->real_len--;
-				all->output_len++;
-			}
-		}
-		else
-		{
-			if (!(output = (char*)malloc(sizeof(char) * 1000)))
-				return ;
-			if ((all->space_flag) || (all->precision > all->len && all->width > all->precision))
-			{
-				output[x++] = ' ';
-				all->output_len++;
-				all->real_len--;
-			}
-			if (all->plus_flag)
-			{
-				if (all->zero_flag)
-					write(1, "+", 1);
-				if (!(all->zero_flag))
-					output[x++] = '+';
-				all->output_len++;
-				all->real_len--;
-			}
-			while (all->precision > all->len)
-			{
-				output[x++] = all->fill_char;
-				all->output_len++;
-				all->real_len--;
-				all->precision--;
-			}
-			if (all->precision == all->len && all->num < 0 && all->width == -1)
-			{
-				output[x++] = all->fill_char;
-				all->output_len++;
-			}	
-			output[x] = '\0';	
-			num_str = ft_itoa(all->num);
-			all->output_len += all->len;
-			all->real_len -= all->len;
-			while (all->real_len > 0)
-			{
-				if (all->zero_flag)
-					write(1, "0", 1);
-				if (!(all->zero_flag))
-					write(1, " ", 1);
-				all->real_len--;
-				all->output_len++;
-			}
-			ft_putstr(output);
-			if (all->num < 0)
-				num_str++;
-			ft_putstr(num_str);	
-		}
-	}*/
 }
 
 void	write_d_and_i(t_val *all)
