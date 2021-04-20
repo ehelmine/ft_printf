@@ -6,7 +6,7 @@
 /*   By: ehelmine <ehelmine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/10 17:53:58 by ehelmine          #+#    #+#             */
-/*   Updated: 2021/04/20 14:44:08 by ehelmine         ###   ########.fr       */
+/*   Updated: 2021/04/20 17:47:41 by ehelmine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,86 +130,98 @@ void	write_float(t_val *all)
 //	all->end_i = (signed long long int)(all->d_num + 0.5);
 	all->end_i = (signed long long int)all->d_num;
 //	printf("end_i %li\n", all->end_i);
+//	printf("%i\n", precis);
+/*	if (precis == 0)
+	{
+		if (all->begin_i != 0)
+		{
+
+		}
+		else
+		{
+			
+		}
+	}*/
+//	printf("%i\n", precis);
 	if (precis > 0)
 	{
 		out = 0;
-		i = ft_check_int_len(all->end_i);
-		amount_of_decimals = 1;
-		while (i != 0)
-		{
-			amount_of_decimals *= 10;
-			i--;
-		}
 		x = 0;
-		all->d_num *= amount_of_decimals;
-//		printf("d_num %Lf d_num as int %i\n", all->d_num, (int)all->d_num);
-		ii = (int)all->d_num;
-		while (x < 1000)
+//		printf("end_i %li before d_num %Lf d_num as int %i\n", all->end_i, all->d_num, (int)all->d_num);
+		all->d_num = all->d_num - all->end_i;
+		all->d_num *= 10;
+//		printf("after d_num %Lf d_num as int %i\n", all->d_num, (int)all->d_num);
+		if ((int)all->d_num == 5)
 		{
-			if ((int)all->end_i == 5)
+			while (x < 5)
 			{
-				x = 0;
-				while (x < 1000)
+				i = (int)all->d_num;
+				all->d_num -= i;
+				all->d_num *= 10;
+				if ((int)all->d_num != 0)
 				{
-					i = (int)all->d_num;
-					all->d_num -= i;
-					all->d_num *= 10;
-					if ((int)all->d_num != 0)
+					if ((int)all->d_num >= 5)
 					{
-						free(all->begin_str);
-						all->begin_str = ft_itoa(all->begin_i + 1);
-						all->d_num = 0;
+						all->end_i++;
 						out = 1;
 						break ;
 					}
-					x++;
+					if ((int)all->d_num < 5)
+					{
+						out = 1;
+						break ;
+					}
 				}
+				x++;
 			}
-			if (out)
-				break ;
-			if ((int)all->end_i > 5)
+	//		printf("after IFF d_num %Lf d_num as int %i\n", all->d_num, (int)all->d_num);
+		}
+		else if ((int)all->d_num > 5 && !out)
+		{
+			all->end_str = ft_itoa(all->end_i);
+		//	printf("string %s\n", all->end_str);
+			if (all->end_str[0] == '9')
+			{
+				free(all->end_str);
+				free(all->begin_str);
+				all->begin_str = ft_itoa(all->begin_i + 1);
+				all->end_i = 0;
+				out = 1;
+			}
+			else
 			{
 				all->end_i++;
 				out = 1;
-				break ;
 			}
-			if ((int)all->end_i >= 0 && (int)all->end_i < 5)
-			{
-				out = 1;
-				break ;
-			}
-			x++;
 		}
-//		printf("numero %Lf out %i\n", all->d_num, out);
-		if (out != 1)
+		else if ((int)all->d_num >= 0 && (int)all->d_num < 5 && !out)
 		{
-			if (all->end_i % 2 != 0)
-				all->end_i--;
+			out = 1;
+		}
+	//	printf("out %i begin %ld end %ld\n", out, all->begin_i, all->end_i);
+		if (!out)
+		{
+			//outtiin tullaan vain kun d_num on ollut 5000000 eli tasan puolikas
+			// kun end_i on vain yhden numeron pituinen
+			if (all->end_i == 0)
+			{
+				all->end_i++;
+			}
+			else if (all->end_i > 0 && all->end_i < 10)
+			{
+				if (all->end_i % 2 != 0 || all->end_i == 4 || all->end_i == 6)
+					all->end_i++;
+			}
+			else if (all->end_i > 9)
+			{
+				if (all->begin_i != 0)
+				{
+					if (all->end_i % 2 != 0)
+						all->end_i++;
+				}
+			}
 		}
 	}
-//	printf("%Lf %Lf\n", all->d_num, all->d_num - (int)all->d_num);
-/*	if ((all->d_num - (int)all->d_num) * 10 == 5 && all->begin_i != 0 && precis)
-	{
-		if ((int)all->end_i % 2 != 0)
-			all->end_i--;
-	}*/
-/*	if (precis >= 1 && precis != 6)
-	{
-		if ((all->d_num - (int)all->d_num) * 10 > 5)
-		{
-			if ((int)all->end_i % 2 != 0)
-			{
-				free(all->begin_str);
-				all->begin_str = ft_itoa(all->begin_i + 1);
-				all->d_num = 0;
-			}
-		}
-		if ((all->d_num - (int)all->d_num) * 10 == 5)
-		{
-			if ((int)all->end_i % 2 != 0)
-				all->end_i--;
-		}
-	}*/
 	all->end_str = ft_itoa(all->end_i);
 	if (!(all->str = (char*)malloc(sizeof(char) * 10000)))
 		return ;
