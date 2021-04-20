@@ -6,11 +6,11 @@
 /*   By: ehelmine <ehelmine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/21 17:36:02 by ehelmine          #+#    #+#             */
-/*   Updated: 2021/03/29 19:43:54 by ehelmine         ###   ########.fr       */
+/*   Updated: 2021/04/19 12:01:35 by ehelmine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/header.h"
+#include "../includes/ft_printf.h"
 
 /*
 **	Conversion spesifier %u doesn't recognise space or plus flags.
@@ -18,31 +18,12 @@
 
 int		check_correct_flags2(char *flags, va_list args, t_val *all, int i)
 {
-	if (flags[i] == 'i' || flags[i] == 'd' || flags[i] == 'u')
+	if (flags[i] == 'i' || flags[i] == 'd')
 	{
 		if (check_flags_int(all, flags))
 		{
 			if (all->check)
 			{
-				if (flags[i] == 'u')
-				{
-					all->space_flag = 0;
-					all->plus_flag = 0;
-					if (all->h)
-						all->num = (unsigned short int)va_arg(args, unsigned int);
-					else if (all->l)
-						all->num = (unsigned long int)va_arg(args, unsigned long);
-					else if (all->ll)
-						all->num = (unsigned long long int)va_arg(args, unsigned long long int);
-					else if (all->hh)
-						all->num = (unsigned char)va_arg(args, unsigned int);
-					else
-						all->num = va_arg(args, unsigned int);
-					if (all->num == 0)
-						all->zero_num = 1;
-					write_d_and_i(all);
-					return (1);
-				}
 				if (all->h)
 					all->num = (short int)va_arg(args, int);
 				else if (all->l)
@@ -50,7 +31,7 @@ int		check_correct_flags2(char *flags, va_list args, t_val *all, int i)
 				else if (all->ll)
 				{
 					all->num = (long long int)va_arg(args, long long int);
-					if ((long long int)all->num == LLONG_MIN - 1)
+					if ((long long int)all->num == -9223372036854775807 - 1)
 					{
 						write(1, "-9223372036854775808", 20);
 						all->output_len += 20;
@@ -85,6 +66,8 @@ int		check_correct_flags2(char *flags, va_list args, t_val *all, int i)
 			{
 				all->vd_ptr = va_arg(args, void *);
 				all->num = (intmax_t)all->vd_ptr;
+				if (all->num == 0)
+					all->zero_num = 1;
 				write_p(all);
 				return (1);
 			}
@@ -92,38 +75,53 @@ int		check_correct_flags2(char *flags, va_list args, t_val *all, int i)
 		}
 		return (0);
 	}
-	else if (flags[i] == 'o' || flags[i] == 'x' || flags[i] == 'X')
+	else if (flags[i] == 'o' || flags[i] == 'x' || flags[i] == 'X' || flags[i] == 'u')
 	{
 		if (check_flags_unsigned(all, flags))
 		{
 			if (all->check)
 			{
 				all->zero_num = 0;
+				all->conv = flags[i];
+				if (flags[i] == 'u')
+					all->base = 10;
 				if (flags[i] == 'o')
-				{
 					all->base = 8;
-					all->conv = 'o';
-				}
 				if (flags[i] == 'x' || flags[i] == 'X')
 				{
 					all->base = 16;
-					all->conv = 'x';
 					if (flags[i] == 'X')
-						all->conv = 'X';
+						all->big_x = 1;
 				}
 				if (all->h)
-					all->num = (unsigned short)va_arg(args, unsigned int);
+					all->unum = (unsigned short)va_arg(args, unsigned int);
 				else if (all->l)
-					all->num = (unsigned long)va_arg(args, unsigned long);
+					all->unum = (unsigned long)va_arg(args, unsigned long);
 				else if (all->ll)
-					all->num = (unsigned long long)va_arg(args, unsigned long long);
+					all->unum = (unsigned long long)va_arg(args, unsigned long long);
 				else if (all->hh)
-					all->num = (unsigned char)va_arg(args, unsigned int);
+					all->unum = (unsigned char)va_arg(args, unsigned int);
 				else
-					all->num = va_arg(args, unsigned int);
-				if (all->num == 0)
+					all->unum = va_arg(args, unsigned int);
+				if (all->unum == 0)
 					all->zero_num = 1;
 				write_unsigned(all);
+				return (1);
+			}
+			return (1);
+		}
+		return (0);
+	}
+	else if (flags[i] == 'f')
+	{
+		if (check_flags_float(all, flags))
+		{
+			if (all->check)
+			{
+				all->d_num = va_arg(args, double);
+				if (all->L)
+					all->d_num = va_arg(args, long double);
+				write_float(all);
 				return (1);
 			}
 			return (1);
@@ -140,9 +138,8 @@ int		check_correct_flags(char *flags, va_list args, t_val *all)
 	while (flags[i] != '\0')
 		i++;
 	i--;
-//	all->new_flags = trim_string(flags);
 	all->new_flags = flags;
-	all->width = 0;
+	set_values(all, flags[i]);
 	if (flags[i] == 's')
 	{
 		if (check_flags_s(all, all->new_flags))
@@ -159,14 +156,12 @@ int		check_correct_flags(char *flags, va_list args, t_val *all)
 		else
 			return (0);
 	}
-	else if (flags[i] == '%')
+/*	else if (flags[i] == '%')
 	{
 		if (check_flags_percentage(all, all->new_flags))
 		{
 			if (all->check)
 			{
-//				all->c = (char)va_arg(args, int);
-//				if (all->c == '0')
 				all->c = '%';
 				write_c(all);
 				return (1);
@@ -176,14 +171,17 @@ int		check_correct_flags(char *flags, va_list args, t_val *all)
 		}
 		else
 			return (0);
-	}
-	else if (flags[i] == 'c')
+	}*/
+	else if (flags[i] == 'c' || flags[i] == '%')
 	{
-		if (check_flags_c(all, all->new_flags))
+		if (check_flags_c(all, all->new_flags, flags[i]))
 		{
 			if (all->check)
 			{
-				all->c = (char)va_arg(args, int);
+				if (flags[i] == 'c')
+					all->c = (char)va_arg(args, int);
+				else
+					all->c = '%';
 				write_c(all);
 				return (1);
 			}

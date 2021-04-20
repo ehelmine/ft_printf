@@ -6,12 +6,13 @@
 /*   By: ehelmine <ehelmine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/19 13:31:36 by ehelmine          #+#    #+#             */
-/*   Updated: 2021/03/30 14:00:51 by ehelmine         ###   ########.fr       */
+/*   Updated: 2021/04/19 20:48:40 by ehelmine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
-#include "includes/header.h"
+#include "includes/ft_printf.h"
+#include <limits.h>
 
 int		main(void)
 {
@@ -21,8 +22,8 @@ int		main(void)
 	
 	char *str = "this is a string";
 	char *ptr = "";
-	int i;
-	i = 1;
+//	int i;
+//	i = 1;
 	int my_print;
 	int real_print;
 	/*
@@ -413,7 +414,68 @@ int		main(void)
 	//printf("%-015.8d", 1000000);
 	char *p;
 	p = "haha";
-	printf("@moulitest: %#.o %#.0o", 0, 0);
+//	printf("13 '%%05.0' '%05.0hhd' '%05.0hhi'\n", '~', '~');
+
+//	printf("13 '%%05.0' '%05.0hd' '%05.0hi'\n", -10, -10);
+//	printf("13 '%%05.0' '%05.0hhd' '%05.0hhi'\n", -10, -10);
+
+//	printf("13 '%%05.0' '%05.0hhd' '%05.0hhi'\n", 127, 127);
+
+//	printf("13 '%%05.0' '%05.0hhd' '%05.0hhi'\n", 42, 42);
+//	printf("13 '%%05.0' '%05.0hd' '%05.0hi'\n", 42, 42);
+//	ft_printf("22 '%%#-10.10' '%#-10.10o' '%-10.10u' '%#-10.10x' '%#-10.10X'\n", 392082, 392082, 392082, 392082);
 //	printf("%0+5d", -42);
+//	ft_printf("11 '%%.' '%.o' '%.u' '%.x' '%.X'\n", 0, 0, 0, 0);
+//	ft_printf("11 '%%.' '%.o' '%.u' '%.x' '%.X'\n", 392082, 392082, 392082, 392082);
+	unsigned char s;
+	s = 0;
+	unsigned long ulong;
+	ulong = ULONG_MAX - 1;
+	float x;
+	float y;
+	int len;
+//	int i;
+	int ii;
+//	x = -3.14159265;
+	x = 1.500000;
+	y = 1.0;
+	//POISTA
+//	ft_check_float_len(x);
+//	len = printf("%f", x);
+//	ft_putnbr(len);
+//	printf("real %.3f\n", 0.1255);
+//	ft_printf("my %.3f\n", 0.1255);
+//	printf("%.1f\n",  0.84999999999999997779553950749686919152736663818359375);
+//	ft_printf("my %.1f\n",  0.84999999999999997779553950749686919152736663818359375);
+//printf("print %.1Lf\n", 0.85l);
+//ft_printf("my %.1Lf\n", 0.85l);
+ //printf("%.20Lf\n", 0.85l);
+
+
+ // ft_printf("%.2c\n", (int)NULL);
+// printf("%.2c\n", (int)NULL);
+
+//printf("%08.5d\n", -8473);
+//ft_printf("%08.5d\n", -8473);
+
+//ft_printf("simple test");
+// i = printf("%.09s\n", NULL);
+// ii = ft_printf("%.09s\n", NULL);
+// printf("real one %i and my %i\n", i, ii);
+// KORJAA NAA KAKS
+//ft_printf("@moulitest: |%5.x| |%5.0x|\n", 0, 0);
+//printf("@moulitest: |%5.x| |%5.0x|\n", 0, 0);
+//ft_printf("%.f\n", 0.876509);
+//printf("%.f\n", 0.876509);
+ft_printf("%.f\n", 0.5000);
+printf("%.f\n", 0.5000);
+//  ft_printf("%+u\n", 4294967295);
+// printf("%+u\n", 4294967295);
+//	ft_printf("%%f '%f' %%lf '%lf'\n", x, x);
+//	ft_printf("15 '%%1.5' '%1.5ho' '%1.5hu' '%1.5hx' '%1.5hX'\n", 42, 42, 42, 42);
+//	ft_printf("24 '%%.' '%.hho' '%.hhu' '%.hhx' '%.hhX'\n", s, s, s, s);
+//	ft_printf("7 '%%' '%lo' '%lu' '%lx' '%lX'\n", ulong, ulong, ulong, ulong);
+//	ft_printf("13 '%%05.0' '%05.0ho' '%05.0hu' '%05.0hx' '%05.0hX'\n", 42, 42, 42, 42);
+//printf("24 '%%.' '%.o' '%.u' '%.x' '%.X'\n", 4294967295, 4294967295, 4294967295, 4294967295);
 	return (0);
 }

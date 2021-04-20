@@ -6,11 +6,11 @@
 /*   By: ehelmine <ehelmine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/16 17:05:32 by ehelmine          #+#    #+#             */
-/*   Updated: 2021/03/29 15:11:13 by ehelmine         ###   ########.fr       */
+/*   Updated: 2021/03/30 14:07:51 by ehelmine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/header.h"
+#include "../includes/ft_printf.h"
 
 /*void	write_d_and_i_test(t_val *all)
 {

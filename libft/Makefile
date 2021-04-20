@@ -6,7 +6,7 @@
 #    By: ehelmine <ehelmine@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/06/09 13:01:03 by ehelmine          #+#    #+#              #
-#    Updated: 2021/02/11 00:06:02 by ehelmine         ###   ########.fr        #
+#    Updated: 2021/04/14 18:18:39 by ehelmine         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,7 +23,7 @@ SRCS = ft_putchar.c ft_putstr.c ft_atoi.c ft_strlen.c ft_strcmp.c ft_putnbr.c \
 	ft_putchar_fd.c ft_putstr_fd.c ft_putendl_fd.c ft_putnbr_fd.c ft_lstnew.c \
 	ft_lstadd.c ft_lstdelone.c ft_lstdel.c ft_lstiter.c ft_lstmap.c \
 	ft_check_int_len.c ft_islower.c ft_isupper.c ft_isspace.c ft_strndup.c \
-	get_next_line.c
+	get_next_line.c ft_check_float_len.c
 
 OBJS = $(SRCS:.c=.o)
 

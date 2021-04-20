@@ -6,7 +6,7 @@
 /*   By: ehelmine <ehelmine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/09 10:13:02 by ehelmine          #+#    #+#             */
-/*   Updated: 2021/03/15 17:06:35 by ehelmine         ###   ########.fr       */
+/*   Updated: 2021/04/14 18:17:30 by ehelmine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -151,5 +151,7 @@ int					ft_islower(int c);
 char				*ft_strndup(const char *s1, size_t n);
 
 int					get_next_line(const int fd, char **line);
+
+int					ft_check_float_len(double n);
 
 #endif

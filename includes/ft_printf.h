@@ -1,23 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   header.h                                           :+:      :+:    :+:   */
+/*   ft_printf.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ehelmine <ehelmine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/21 18:31:32 by ehelmine          #+#    #+#             */
-/*   Updated: 2021/03/29 19:03:35 by ehelmine         ###   ########.fr       */
+/*   Updated: 2021/04/19 12:01:44 by ehelmine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef HEADER_H
-# define HEADER_H
-# define SHORT_MAX		+32767
-# define SHORT_MIN		-32767
-# define INT_MAX		+2147483647
-# define INT_MIN		-2147483647
-# define LLONG_MAX		+9223372036854775807
-# define LLONG_MIN		-9223372036854775807
+#ifndef FT_PRINTF_H
+# define FT_PRINTF_H
+//# define SHORT_MAX		+32767
+//# define SHORT_MIN		-32767
+//# define INT_MAX		+2147483647
+//# define INT_MIN		-2147483647
+//# define LLONG_MAX		+9223372036854775807
+//# define LLONG_MIN		-9223372036854775807
 # include <unistd.h>
 # include <stdarg.h>
 # include <stdio.h>
@@ -47,8 +47,10 @@ typedef struct		s_val
 					int hh;
 					int l;
 					int ll;
+					int L;
 					unsigned long long llnum;
 					intmax_t num;
+					uintmax_t unum;
 					int len;
 					int output_len;
 					char fill_char;
@@ -61,6 +63,11 @@ typedef struct		s_val
 					char conv;
 					int big_x;
 					int zero_x;
+					long double d_num;
+					signed long int begin_i;
+					signed long int end_i;
+					char *begin_str;
+					char *end_str;
 }					t_val;
 
 
@@ -68,19 +75,23 @@ int		ft_printf(const char *begin, ...);
 
 char	*trim_string(char *flags);
 
+void	set_values(t_val *all, char c);
+
 int		check_num_type(t_val *all);
 
 int		check_flags_s(t_val *all, char *flags);
 
 int		check_flags_percentage(t_val *all, char *flags);
 
-int		check_flags_c(t_val *all, char *flags);
+int		check_flags_c(t_val *all, char *flags, char c);
 
 int		check_flags_int(t_val *all, char *flags);
 
 int		check_flags_p(t_val *all, char *flags);
 
 int		check_flags_unsigned(t_val *all, char *flags);
+
+int		check_flags_float(t_val *all, char *flags);
 
 int		real_width(int num_len, int input_width, int precision);
 
@@ -93,5 +104,9 @@ void	write_d_and_i(t_val *all);
 void	write_p(t_val *all);
 
 void	write_unsigned(t_val *all);
+
+void	write_zero(t_val *all);
+
+void	write_float(t_val *all);
 
 #endif
