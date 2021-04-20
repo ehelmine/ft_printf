@@ -6,7 +6,7 @@
 /*   By: ehelmine <ehelmine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/10 17:53:58 by ehelmine          #+#    #+#             */
-/*   Updated: 2021/04/19 21:13:12 by ehelmine         ###   ########.fr       */
+/*   Updated: 2021/04/20 14:44:08 by ehelmine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,18 +61,11 @@ void	write_float(t_val *all)
 //	printf("all->d_num after minusing begin %Lf\n", all->d_num);
 	all->d_num *= amount_of_decimals;
 	i = 0;
-	if (precis == 1 && all->begin_i != 0 && all->d_num != 0.5)
+//	printf("%Lf\n", all->d_num);
+/*	if (all->begin_i != 0 && all->d_num != 0.5 && (precis == 1 || precis == 0))
 	{
-		if ((int)all->d_num > 5)
-		{
-			free(all->begin_str);
-			all->begin_str = ft_itoa(all->begin_i + 1);
-			all->d_num = 0;
-		}
-	}
-	if (precis == 0 && all->begin_i != 0 && all->d_num != 0.5)
-	{
-		all->d_num *= 10;
+		if (precis == 0)
+			all->d_num *= 10;
 		if ((int)all->d_num > 5)
 		{
 			free(all->begin_str);
@@ -133,8 +126,90 @@ void	write_float(t_val *all)
 		all->begin_i = ii;
 		free(all->begin_str);
 		all->begin_str = ft_itoa(all->begin_i);
+	}*/
+//	all->end_i = (signed long long int)(all->d_num + 0.5);
+	all->end_i = (signed long long int)all->d_num;
+//	printf("end_i %li\n", all->end_i);
+	if (precis > 0)
+	{
+		out = 0;
+		i = ft_check_int_len(all->end_i);
+		amount_of_decimals = 1;
+		while (i != 0)
+		{
+			amount_of_decimals *= 10;
+			i--;
+		}
+		x = 0;
+		all->d_num *= amount_of_decimals;
+//		printf("d_num %Lf d_num as int %i\n", all->d_num, (int)all->d_num);
+		ii = (int)all->d_num;
+		while (x < 1000)
+		{
+			if ((int)all->end_i == 5)
+			{
+				x = 0;
+				while (x < 1000)
+				{
+					i = (int)all->d_num;
+					all->d_num -= i;
+					all->d_num *= 10;
+					if ((int)all->d_num != 0)
+					{
+						free(all->begin_str);
+						all->begin_str = ft_itoa(all->begin_i + 1);
+						all->d_num = 0;
+						out = 1;
+						break ;
+					}
+					x++;
+				}
+			}
+			if (out)
+				break ;
+			if ((int)all->end_i > 5)
+			{
+				all->end_i++;
+				out = 1;
+				break ;
+			}
+			if ((int)all->end_i >= 0 && (int)all->end_i < 5)
+			{
+				out = 1;
+				break ;
+			}
+			x++;
+		}
+//		printf("numero %Lf out %i\n", all->d_num, out);
+		if (out != 1)
+		{
+			if (all->end_i % 2 != 0)
+				all->end_i--;
+		}
 	}
-	all->end_i = (signed long long int)(all->d_num + 0.5);
+//	printf("%Lf %Lf\n", all->d_num, all->d_num - (int)all->d_num);
+/*	if ((all->d_num - (int)all->d_num) * 10 == 5 && all->begin_i != 0 && precis)
+	{
+		if ((int)all->end_i % 2 != 0)
+			all->end_i--;
+	}*/
+/*	if (precis >= 1 && precis != 6)
+	{
+		if ((all->d_num - (int)all->d_num) * 10 > 5)
+		{
+			if ((int)all->end_i % 2 != 0)
+			{
+				free(all->begin_str);
+				all->begin_str = ft_itoa(all->begin_i + 1);
+				all->d_num = 0;
+			}
+		}
+		if ((all->d_num - (int)all->d_num) * 10 == 5)
+		{
+			if ((int)all->end_i % 2 != 0)
+				all->end_i--;
+		}
+	}*/
 	all->end_str = ft_itoa(all->end_i);
 	if (!(all->str = (char*)malloc(sizeof(char) * 10000)))
 		return ;

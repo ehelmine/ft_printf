@@ -6,7 +6,7 @@
 /*   By: ehelmine <ehelmine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/19 13:31:36 by ehelmine          #+#    #+#             */
-/*   Updated: 2021/04/19 20:48:40 by ehelmine         ###   ########.fr       */
+/*   Updated: 2021/04/20 12:52:34 by ehelmine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -467,8 +467,8 @@ int		main(void)
 //printf("@moulitest: |%5.x| |%5.0x|\n", 0, 0);
 //ft_printf("%.f\n", 0.876509);
 //printf("%.f\n", 0.876509);
-ft_printf("%.f\n", 0.5000);
-printf("%.f\n", 0.5000);
+ft_printf("%.1f\n", -958.125000);
+printf("%.1f\n",-958.125000);
 //  ft_printf("%+u\n", 4294967295);
 // printf("%+u\n", 4294967295);
 //	ft_printf("%%f '%f' %%lf '%lf'\n", x, x);
