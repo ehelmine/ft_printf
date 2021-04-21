@@ -6,7 +6,7 @@
 /*   By: ehelmine <ehelmine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/10 17:53:58 by ehelmine          #+#    #+#             */
-/*   Updated: 2021/04/20 17:47:41 by ehelmine         ###   ########.fr       */
+/*   Updated: 2021/04/21 16:12:28 by ehelmine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,12 +24,6 @@ int		real_width(int num_len, int input_width, int precision)
 	return (-1);
 }
 
-/*void	write_float_2(t_val *all)
-{
-
-	all->real_len = 1;
-	return ;
-}*/
 void	write_float(t_val *all)
 {
 	int negative_val;
@@ -39,6 +33,8 @@ void	write_float(t_val *all)
 	int i;
 	int ii;
 	int out;
+	int extra_zero;
+	double y;
 	
 	if (all->space_flag && all->plus_flag)
 		all->space_flag = 0;
@@ -58,104 +54,78 @@ void	write_float(t_val *all)
 	}
 	all->begin_str = ft_itoa(all->begin_i);
 	all->d_num -= all->begin_i;
-//	printf("all->d_num after minusing begin %Lf\n", all->d_num);
-	all->d_num *= amount_of_decimals;
-	i = 0;
-//	printf("%Lf\n", all->d_num);
-/*	if (all->begin_i != 0 && all->d_num != 0.5 && (precis == 1 || precis == 0))
+	extra_zero = 0;
+	while (amount_of_decimals != 1)
 	{
-		if (precis == 0)
-			all->d_num *= 10;
-		if ((int)all->d_num > 5)
-		{
-			free(all->begin_str);
-			all->begin_str = ft_itoa(all->begin_i + 1);
-			all->d_num = 0;
-		}
+		all->d_num *= 10;
+		if ((int)all->d_num == 0)
+			extra_zero++;
+		amount_of_decimals /= 10;
 	}
-	if (precis == 0 && all->begin_i == 0)
+	i = 0;
+	all->end_i = (signed long long int)all->d_num;
+	if (precis == 0)
 	{
-		out = 0;
-		ii = (int)(all->d_num * 10);
-		while (all->d_num)
+		if (all->begin_i != 0)
+		{
+			all->d_num *= 10;
+			if ((int)all->d_num >= 5)
+			{
+				free(all->begin_str);
+				if ((all->begin_i + 1) % 2 == 0)
+					all->begin_i++;
+				all->begin_str = ft_itoa(all->begin_i);
+				all->d_num = 0;
+			}
+		}
+		else
 		{
 			all->d_num *= 10;
 			if ((int)all->d_num == 5)
 			{
-				while (all->d_num)
+				x = 0;
+				while (x < 5)
 				{
 					i = (int)all->d_num;
 					all->d_num -= i;
 					all->d_num *= 10;
 					if ((int)all->d_num != 0)
 					{
-						free(all->begin_str);
-						all->begin_str = ft_itoa(all->begin_i + 1);
-						all->d_num = 0;
-						out = 1;
-						break ;
+						if ((int)all->d_num >= 5)
+						{
+							free(all->begin_str);
+							all->begin_str = ft_itoa(all->begin_i + 1);
+							all->d_num = 0;
+							break ;
+						}
+						if ((int)all->d_num < 5)
+							break ;
 					}
+					x++;
 				}
 			}
-			if (out)
-				break ;
-			if ((int)all->d_num > 5)
+			else if ((int)all->d_num > 5)
 			{
 				free(all->begin_str);
 				all->begin_str = ft_itoa(all->begin_i + 1);
 				all->d_num = 0;
-				out = 1;
-				break ;
-			}
-			if ((int)all->d_num >= 0 && (int)all->d_num < 5)
-			{
-				out = 1;
-				break ;
 			}
 		}
-//		printf("numero %Lf out %i\n", all->d_num, out);
-		if (out != 1)
-			all->d_num = ii;
 	}
-//	ft_putnbr((int)all->d_num);
-	if (all->d_num == 0.5)
-	{
-		ii = all->begin_i;
-		if (ii % 2 != 0)
-			ii++;
-		all->begin_i = ii;
-		free(all->begin_str);
-		all->begin_str = ft_itoa(all->begin_i);
-	}*/
-//	all->end_i = (signed long long int)(all->d_num + 0.5);
-	all->end_i = (signed long long int)all->d_num;
-//	printf("end_i %li\n", all->end_i);
-//	printf("%i\n", precis);
-/*	if (precis == 0)
-	{
-		if (all->begin_i != 0)
-		{
-
-		}
-		else
-		{
-			
-		}
-	}*/
-//	printf("%i\n", precis);
 	if (precis > 0)
 	{
 		out = 0;
 		x = 0;
-//		printf("end_i %li before d_num %Lf d_num as int %i\n", all->end_i, all->d_num, (int)all->d_num);
+		y = 0;
 		all->d_num = all->d_num - all->end_i;
 		all->d_num *= 10;
-//		printf("after d_num %Lf d_num as int %i\n", all->d_num, (int)all->d_num);
-		if ((int)all->d_num == 5)
+		if ((int)all->d_num == 5 || (((int)(all->d_num + 0.5) == 5) && all->L))
 		{
+			if ((int)all->d_num == 4 && (int)(all->d_num + 0.5) == 5)
+				y = 0.5;
 			while (x < 5)
 			{
-				i = (int)all->d_num;
+				i = (int)(all->d_num + y);
 				all->d_num -= i;
 				all->d_num *= 10;
 				if ((int)all->d_num != 0)
@@ -174,22 +144,37 @@ void	write_float(t_val *all)
 				}
 				x++;
 			}
-	//		printf("after IFF d_num %Lf d_num as int %i\n", all->d_num, (int)all->d_num);
 		}
 		else if ((int)all->d_num > 5 && !out)
 		{
 			all->end_str = ft_itoa(all->end_i);
-		//	printf("string %s\n", all->end_str);
 			if (all->end_str[0] == '9')
 			{
-				free(all->end_str);
-				free(all->begin_str);
-				all->begin_str = ft_itoa(all->begin_i + 1);
-				all->end_i = 0;
-				out = 1;
+				if (precis == 1)
+				{
+					free(all->end_str);
+					free(all->begin_str);
+					all->begin_str = ft_itoa(all->begin_i + 1);
+					all->end_i = 0;
+					out = 1;
+				}
+				else if (precis > 1 && all->begin_i != 0)
+				{
+					free(all->end_str);
+					free(all->begin_str);
+					all->begin_str = ft_itoa(all->begin_i + 1);
+					all->end_i = 0;
+					out = 1;
+				}
+				else
+				{
+					all->end_i++;
+					out = 1;
+				}		
 			}
 			else
 			{
+
 				all->end_i++;
 				out = 1;
 			}
@@ -198,26 +183,70 @@ void	write_float(t_val *all)
 		{
 			out = 1;
 		}
-	//	printf("out %i begin %ld end %ld\n", out, all->begin_i, all->end_i);
 		if (!out)
 		{
-			//outtiin tullaan vain kun d_num on ollut 5000000 eli tasan puolikas
-			// kun end_i on vain yhden numeron pituinen
 			if (all->end_i == 0)
 			{
-				all->end_i++;
+				if (!all->L || (precis == 1 && all->L))
+					all->end_i++;
+				else
+				{
+					x = extra_zero;
+					all->end_str = ft_itoa(all->end_i);
+					out = all->end_str[x];
+					all->end_str[x] = out + 1;
+					all->end_i = ft_atoi(all->end_str);
+					free(all->end_str);
+				}
 			}
 			else if (all->end_i > 0 && all->end_i < 10)
 			{
-				if (all->end_i % 2 != 0 || all->end_i == 4 || all->end_i == 6)
-					all->end_i++;
+				if (!all->L)
+				{
+					if (all->end_i % 2 != 0 || all->end_i == 4 || all->end_i == 6)
+						all->end_i++;
+				}
+				else
+				{
+					if ((all->end_i >= 5 && all->end_i != 6 && all->end_i != 9) || all->end_i == 1)
+						all->end_i++;
+				}
+				
 			}
 			else if (all->end_i > 9)
 			{
 				if (all->begin_i != 0)
 				{
-					if (all->end_i % 2 != 0)
+					all->end_str = ft_itoa(all->end_i);
+					if (all->L)
+					{
+						if (all->end_str[(ft_strlen(all->end_str) - 1)] == '1')
+							all->end_i++;
+					}
+					if (all->end_i % 2 != 0 && !all->L) 
 						all->end_i++;
+					free(all->end_str);
+				}
+				else
+				{
+					all->end_str = ft_itoa(all->end_i);
+					if (!all->L)
+					{
+						if (all->end_str[(ft_strlen(all->end_str) - 1)] > '5')
+							all->end_i++;
+						else
+						{
+							if (all->end_i % 2 != 0)
+								all->end_i++;
+						}
+						free(all->end_str);
+					}
+					else
+					{
+						if (all->end_str[(ft_strlen(all->end_str) - 1)] >= '5')
+							all->end_i++;
+						free(all->end_str);
+					}
 				}
 			}
 		}

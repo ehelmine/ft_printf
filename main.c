@@ -6,7 +6,7 @@
 /*   By: ehelmine <ehelmine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/19 13:31:36 by ehelmine          #+#    #+#             */
-/*   Updated: 2021/04/20 17:33:02 by ehelmine         ###   ########.fr       */
+/*   Updated: 2021/04/21 18:15:10 by ehelmine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -434,7 +434,7 @@ int		main(void)
 	float x;
 	float y;
 	int len;
-//	int i;
+	int i;
 	int ii;
 //	x = -3.14159265;
 	x = 1.500000;
@@ -469,8 +469,14 @@ int		main(void)
 //printf("%.f\n", 0.876509);
 //ft_printf("%.1f\n", -958.125000);
 //printf("%.1f\n",-958.125000);
-ft_printf("%.10f\n", 0.95000000);
-printf("%.10f\n", 0.95000000);
+//ft_printf("%.3Lf\n", 0.1255000l);
+//printf("%.3Lf\n", 0.1255000l);
+//ii = printf("{%}\n");
+//i = ft_printf("{%}\n");
+
+ii = printf("{% %}\n");
+i = ft_printf("{% %}\n");
+printf("real one %i and my %i\n", i, ii);
 //ft_printf("%.15f\n", 3.141593);
 //printf("%.15f\n", 3.141593);
 //  ft_printf("%+u\n", 4294967295);
