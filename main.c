@@ -6,7 +6,7 @@
 /*   By: ehelmine <ehelmine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/19 13:31:36 by ehelmine          #+#    #+#             */
-/*   Updated: 2021/04/21 18:15:10 by ehelmine         ###   ########.fr       */
+/*   Updated: 2021/04/22 16:53:05 by ehelmine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -474,8 +474,8 @@ int		main(void)
 //ii = printf("{%}\n");
 //i = ft_printf("{%}\n");
 
-ii = printf("{% %}\n");
-i = ft_printf("{% %}\n");
+ii = printf("hehe %iheh %c\n", 50, '%');
+i = ft_printf("hehe %iheh %c\n", 50, '%');
 printf("real one %i and my %i\n", i, ii);
 //ft_printf("%.15f\n", 3.141593);
 //printf("%.15f\n", 3.141593);

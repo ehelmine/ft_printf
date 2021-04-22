@@ -6,7 +6,7 @@
 /*   By: ehelmine <ehelmine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/21 18:31:32 by ehelmine          #+#    #+#             */
-/*   Updated: 2021/04/21 11:11:41 by ehelmine         ###   ########.fr       */
+/*   Updated: 2021/04/22 17:50:59 by ehelmine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,6 @@ typedef struct		s_val
 					char fill_char;
 					int real_len;
 					int i;
-					int no_flags;
 					int zero_num;
 					void *vd_ptr;
 					int base;
@@ -68,6 +67,8 @@ typedef struct		s_val
 					signed long int end_i;
 					char *begin_str;
 					char *end_str;
+					char *tmp;
+					int move;
 }					t_val;
 
 
@@ -75,23 +76,23 @@ int		ft_printf(const char *begin, ...);
 
 char	*trim_string(char *flags);
 
-void	set_values(t_val *all, char c);
+void	set_values(t_val *all, char *flags, char c);
+
+int		check_width_and_precision(t_val *all, char *flags, int i);
 
 int		check_num_type(t_val *all);
 
-int		check_flags_s(t_val *all, char *flags);
+int		check_flags_percentage(t_val *all, char *flags, int i);
 
-int		check_flags_percentage(t_val *all, char *flags);
+int		check_flags_c(t_val *all, char *flags, char c, int i);
 
-int		check_flags_c(t_val *all, char *flags, char c);
+int		check_flags_int(t_val *all, char *flags, int i, char c);
 
-int		check_flags_int(t_val *all, char *flags);
+int		check_flags_p_and_s(t_val *all, char *flags, int i);
 
-int		check_flags_p(t_val *all, char *flags);
+int		check_flags_float(t_val *all, char *flags, int i);
 
-int		check_flags_unsigned(t_val *all, char *flags);
-
-int		check_flags_float(t_val *all, char *flags);
+int		get_arg(t_val *all, va_list args, char c);
 
 int		real_width(int num_len, int input_width, int precision);
 
@@ -101,6 +102,10 @@ void	write_s(t_val *all);
 
 void	write_d_and_i(t_val *all);
 
+void	write_d_and_i_left_ad(t_val *all);
+
+void	write_d_and_i_right_ad(t_val *all);
+
 void	write_p(t_val *all);
 
 void	write_unsigned(t_val *all);
@@ -108,5 +113,7 @@ void	write_unsigned(t_val *all);
 void	write_zero(t_val *all);
 
 void	write_float(t_val *all);
+
+void	free_array(void **any_array);
 
 #endif
