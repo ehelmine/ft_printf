@@ -6,7 +6,7 @@
 /*   By: ehelmine <ehelmine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/19 13:31:36 by ehelmine          #+#    #+#             */
-/*   Updated: 2021/04/22 16:53:05 by ehelmine         ###   ########.fr       */
+/*   Updated: 2021/04/22 19:06:29 by ehelmine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -473,10 +473,16 @@ int		main(void)
 //printf("%.3Lf\n", 0.1255000l);
 //ii = printf("{%}\n");
 //i = ft_printf("{%}\n");
-
-ii = printf("hehe %iheh %c\n", 50, '%');
-i = ft_printf("hehe %iheh %c\n", 50, '%');
-printf("real one %i and my %i\n", i, ii);
+int yy;
+long double f_arr[] = {10.55l, 5.321l, 0.05l, 1.0l, 9.1111889l, 2l, 0.6901385l};
+yy = 0;
+while (yy < 7)
+{
+	ii = printf("%.Lf %.1Lf %.3Lf %Lf %.10Lf\n", f_arr[yy], f_arr[yy], f_arr[yy], f_arr[yy], f_arr[yy]);
+	i = ft_printf("%.Lf %.1Lf %.3Lf %Lf %.10Lf\n", f_arr[yy], f_arr[yy], f_arr[yy], f_arr[yy], f_arr[yy]);
+	printf("real one %i and my %i\n", i, ii);
+	yy++;
+}
 //ft_printf("%.15f\n", 3.141593);
 //printf("%.15f\n", 3.141593);
 //  ft_printf("%+u\n", 4294967295);

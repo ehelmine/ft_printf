@@ -6,7 +6,7 @@
 /*   By: ehelmine <ehelmine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/10 17:53:58 by ehelmine          #+#    #+#             */
-/*   Updated: 2021/04/22 18:05:13 by ehelmine         ###   ########.fr       */
+/*   Updated: 2021/04/22 19:08:52 by ehelmine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,12 @@ int	real_width(int num_len, int input_width, int precision)
 	else if (precision >= input_width && num_len <= precision)
 		return (precision);
 	return (-1);
+}
+
+void	check_long_double(t_val *all)
+{
+	all->i = 0;
+	return ;
 }
 
 void	write_float(t_val *all)
@@ -64,6 +70,8 @@ void	write_float(t_val *all)
 	}
 	i = 0;
 	all->end_i = (signed long long int)all->d_num;
+	if (all->L)
+		check_long_double(all);
 	if (precis == 0)
 	{
 		if (all->begin_i != 0)
@@ -311,193 +319,6 @@ void	write_float(t_val *all)
 	free(all->begin_str);
 }
 
-void	write_zero_2(t_val *all)
-{
-	while (all->real_len > 1)
-	{
-		write(1, " ", 1);
-		all->real_len--;
-		all->output_len++;
-	}
-	if (all->conv == 'o' && all->hash_flag && all->width <= 1 && all->real_len == 1)
-	{
-		write(1, "0", 1);
-		all->output_len++;
-		all->real_len--;
-	}
-	if (all->width != -1 && all->real_len == 1)
-	{
-		write(1, " ", 1);
-		all->output_len++;
-		all->real_len--;
-	}
-	if (all->plus_flag && !all->minus_flag)
-	{
-		write(1, "+", 1);
-		all->output_len++;
-		all->real_len--;
-	}
-	return ;
-}
-
-void	write_zero(t_val *all)
-{
-	int x;
-	
-	x = 0;
-	if (all->width == -1 && ((all->conv == 'o' && !all->hash_flag) ||
-		(all->conv == 'x' || all->conv == 'X')))
-		all->real_len -= 1;
-	if (all->plus_flag && all->minus_flag)
-	{
-		write(1, "+", 1);
-		all->output_len++;
-		all->real_len--;
-	}
-	if (all->space_flag)
-	{
-		write(1, " ", 1);
-		all->output_len++;
-		all->real_len--;
-	}
-	write_zero_2(all);
-}
-
-char	*convert_num(t_val *all)
-{
-	char *number;
-	char *abc;
-	int a;
-	int x;
-	
-	abc = "0123456789abcdef";
-	if (!(number = (char*)malloc(sizeof(char) * 1000)))
-		return NULL;
-	a = 0;
-	if (all->unum == 0)
-	{
-		number[a++] = '0';
-		all->len = a;
-		return (number);
-	}
-	while (all->unum != 0)
-	{
-		x = all->unum % all->base;
-		number[a++] = abc[x];
-		all->unum /= all->base;
-	}
-	number[a] = '\0';
-	if (all->precision && (all->conv == 'u' || all->conv == 'x' || all->conv == 'X'))
-	{
-		while ((int)ft_strlen(number) < all->precision)
-		{
-			number[a++] = '0';
-			number[a] = '\0';
-		}
-	}
-	if (all->hash_flag && (all->conv == 'x' || all->conv == 'X') && !all->minus_flag && all->zero_flag)
-	{
-		while ((int)ft_strlen(number) < all->width - 2)
-		{
-			number[a++] = '0';
-			number[a] = '\0';
-		}	
-	}
-	if (all->hash_flag && !all->zero_num && (all->conv == 'x' || all->conv == 'X'))
-	{
-		number[a++] = all->conv;
-		number[a++] = '0';
-		all->zero_x = 1;
-	}
-	if (all->conv == 'o' && all->hash_flag)
-		number[a++] = '0';
-	number[a] = '\0';
-	if (all->precision && (all->conv == 'o' || all->conv == 'u'))
-	{
-		x = all->precision;
-		while ((int)ft_strlen(number) < x)
-		{
-			number[a] = '0';
-			number[++a] = '\0';
-		}
-	}
-	all->len = a;
-	return (number);
-}
-
-void	write_unsigned(t_val *all)
-{
-	char *abc;
-	int i;
-	char *output;
-	char *number;
-	int a;
-
-	abc = "0123456789abcdef";
-	number = convert_num(all);
-	if (all->minus_flag)
-		all->zero_flag = 0;
-	if (!all->zero_x && all->hash_flag && !all->zero_num && (all->conv == 'X' || all->conv == 'x'))
-		all->len += 2;
-	all->real_len = all->len;
-	all->fill_char = ' ';
-	if (all->width > all->real_len)
-		all->real_len = all->width;
-	if (all->precision > all->real_len)
-		all->real_len = all->precision;
-	if ((all->zero_flag && all->precision && all->precision > all->width) || (all->zero_num && all->precision == all->real_len) || 
-	(all->width == -1 && all->precision) || (all->zero_flag && all->width && all->precision < 0))
-		all->fill_char = '0';
-	if (all->zero_num && all->precision == 0)
-	{
-		write_zero(all);
-		return ;
-	}
-	if (!(output = (char*)malloc(sizeof(char) * (all->real_len + 1))))
-		return ;
-	i = 0;
-	if (!all->minus_flag)
-	{
-		while (i < all->real_len - (all->len))
-		{
-			if (all->precision != -1 && i >= all->width - all->precision)
-				all->fill_char = '0';
-			output[i++] = all->fill_char;
-			all->output_len++;
-		}
-	}
-	if (!all->zero_x && all->hash_flag && !all->zero_num && (all->conv == 'X' || all->conv == 'x'))
-	{
-		output[i++] = '0';
-		output[i++] = all->conv;
-		all->output_len += 2;
-		all->real_len -= 2;
-	}
-	a = all->len - 1;
-	while (a >= 0)
-	{
-		output[i++] = number[a--];
-		if (output[i - 1] >= 'a' && output[i - 1] <= 'z' && all->big_x)
-			output[i - 1] = output[i - 1] - 32;
-		all->output_len++;
-	}
-	free(number);
-	if (all->minus_flag)
-	{
-		while (i < all->real_len)
-		{
-			all->fill_char = ' ';
-			if (i < all->precision && all->zero_num && all->precision != -1)
-				all->fill_char = '0';
-			output[i++] = all->fill_char;
-			all->output_len++;
-		}
-	}
-	output[i] = '\0';
-	ft_putstr(output);
-	free(output);
-	return ;
-}
 
 void	write_d_and_i(t_val *all)
 {

@@ -6,7 +6,7 @@
 /*   By: ehelmine <ehelmine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/22 17:58:06 by ehelmine          #+#    #+#             */
-/*   Updated: 2021/04/22 17:58:41 by ehelmine         ###   ########.fr       */
+/*   Updated: 2021/04/22 18:43:22 by ehelmine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 static void	write_p_3(t_val *all, char *output, char *number, int i)
 {
-	int a;
-	
+	int	a;
+
 	a = all->len - 1;
 	while (a >= 0)
 	{
@@ -38,9 +38,9 @@ static void	write_p_3(t_val *all, char *output, char *number, int i)
 
 static int	write_p_2(t_val *all, char *number, char *abc)
 {
-	int a;
-	int x;
-	
+	int	a;
+	int	x;
+
 	a = 0;
 	if (all->num == 0)
 		number[a++] = '0';
@@ -62,18 +62,18 @@ static int	write_p_2(t_val *all, char *number, char *abc)
 
 void	write_p(t_val *all)
 {
-	char *abc;
-	char *output;
-	char *number;
-	int a;
-	int i;
+	char	*abc;
+	char	*output;
+	char	*number;
+	int		a;
+	int		i;
 
 	abc = "0123456789abcdef";
-	number = (char*)malloc(sizeof(char) * 1000);
+	number = (char *)malloc(sizeof(char) * 1000);
 	if (number == NULL)
 		return ;
 	a = write_p_2(all, number, abc);
-	output = (char*)malloc(sizeof(char) * (all->real_len + 1));
+	output = (char *)malloc(sizeof(char) * (all->real_len + 1));
 	if (output == NULL)
 		return ;
 	i = 0;

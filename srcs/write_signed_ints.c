@@ -6,7 +6,7 @@
 /*   By: ehelmine <ehelmine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/22 17:20:52 by ehelmine          #+#    #+#             */
-/*   Updated: 2021/04/22 17:31:45 by ehelmine         ###   ########.fr       */
+/*   Updated: 2021/04/22 18:42:31 by ehelmine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,8 @@ void	write_d_and_i_right_ad(t_val *all)
 
 	x = 0;
 	i = 0;
-	if (!(output = (char *)malloc(sizeof(char) * 10000)))
+	output = (char *)malloc(sizeof(char) * 10000);
+	if (output == NULL)
 		return ;
 	if (all->space_flag && all->num >= 0)
 	{

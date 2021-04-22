@@ -6,14 +6,16 @@
 /*   By: ehelmine <ehelmine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/22 15:21:32 by ehelmine          #+#    #+#             */
-/*   Updated: 2021/04/22 16:32:52 by ehelmine         ###   ########.fr       */
+/*   Updated: 2021/04/22 18:51:36 by ehelmine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_printf.h"
 
-// %[flags in any order:#+-0 ]
-// [min field width][.precision][conversion specifier]
+/*
+** %[flags in any order:#+-0 ]
+** [min field width][.precision][conversion specifier]
+*/
 
 void	check_h_and_l(t_val *all, char *flags, int i)
 {
@@ -65,7 +67,7 @@ int	check_flags_float(t_val *all, char *flags, int i)
 		if (flags[i] == 'l')
 			all->l = 1;
 		else if (flags[i] == 'L')
-			all-> L = 1;
+			all->L = 1;
 		i++;
 	}
 	return (1);

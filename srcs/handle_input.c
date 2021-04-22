@@ -6,7 +6,7 @@
 /*   By: ehelmine <ehelmine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/21 17:36:02 by ehelmine          #+#    #+#             */
-/*   Updated: 2021/04/22 17:04:00 by ehelmine         ###   ########.fr       */
+/*   Updated: 2021/04/22 18:43:43 by ehelmine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,7 +106,8 @@ int	ft_printf(const char *begin, ...)
 
 	all.check = 0;
 	va_start(args, begin);
-	if (!(flags = (char *)malloc(sizeof(char) * 200)))
+	flags = (char *)malloc(sizeof(char) * 200);
+	if (flags == NULL)
 		return (-1);
 	all.output_len = 0;
 	loop_parameters(begin, args, &all, flags);
