@@ -6,7 +6,7 @@
 /*   By: ehelmine <ehelmine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/21 18:31:32 by ehelmine          #+#    #+#             */
-/*   Updated: 2021/04/23 13:29:45 by ehelmine         ###   ########.fr       */
+/*   Updated: 2021/04/23 21:56:04 by ehelmine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,6 +116,6 @@ void	write_zero(t_val *all);
 
 void	write_float(t_val *all);
 
-void	check_long_double(t_val *all);
+void	check_long_double(t_val *all, int amount_of_decimals);
 
 #endif

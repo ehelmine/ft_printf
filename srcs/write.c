@@ -6,7 +6,7 @@
 /*   By: ehelmine <ehelmine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/10 17:53:58 by ehelmine          #+#    #+#             */
-/*   Updated: 2021/04/23 16:47:19 by ehelmine         ###   ########.fr       */
+/*   Updated: 2021/04/23 22:01:57 by ehelmine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,11 +24,20 @@ int	real_width(int num_len, int input_width, int precision)
 	return (-1);
 }
 
-void	check_long_double(t_val *all)
+/*void	check_long_double(t_val *all, int amount_of_decimals)
 {
+	while (amount_of_decimals != 1)
+	{
+		all->d_num *= 10;
+		amount_of_decimals /= 10;
+	}
+	all->end_i = (intmax_t)all->d_num;
+	all->d_num -= all->end_i;
+	printf("begin %li end %jd d_num %Lf\n", all->begin_i, all->end_i, all->d_num);
+	all->d_num *= 10;
 	all->i = 0;
 	return ;
-}
+}*/
 
 void	write_float(t_val *all)
 {
@@ -61,6 +70,9 @@ void	write_float(t_val *all)
 	all->begin_str = ft_itoa(all->begin_i);
 	all->d_num -= all->begin_i;
 	extra_zero = 0;
+//	printf("decis %i begin %li end %jd d_num %Lf\n", amount_of_decimals, all->begin_i, all->end_i, all->d_num);
+//	if (all->L)
+//		check_long_double(all, amount_of_decimals);
 	while (amount_of_decimals != 1)
 	{
 		all->d_num *= 10;
@@ -73,7 +85,7 @@ void	write_float(t_val *all)
 	i = 0;
 	all->end_i = (intmax_t)all->d_num;
 	all->d_num -= all->end_i;
-//	printf("begin %li end %jd d_num %Lf\n", all->begin_i, all->end_i, all->d_num);
+	printf("begin %li end %jd d_num %.10Lf\n", all->begin_i, all->end_i, all->d_num);
 	all->d_num *= 10;
 	if (precis == 0)
 	{
@@ -87,7 +99,7 @@ void	write_float(t_val *all)
 		else if ((int)all->d_num == 5)
 		{
 			out = 0;
-			while (i < 10)
+			while (i < 7)
 			{
 				all->d_num -= (int)all->d_num;
 				all->d_num *= 10;
@@ -128,13 +140,47 @@ void	write_float(t_val *all)
 	}
 	else if (precis > 0)
 	{
-		if ((int)all->d_num >= 5)
+		if ((int)all->d_num == 5)
+		{
+			x = 0;
+			out = 0;
+			while (x < 18)
+			{
+				all->d_num -= (int)all->d_num;
+				all->d_num *= 10;
+				if ((int)all->d_num != 0)
+				{
+					all->end_i++;
+					out = 1;
+					break ;
+				}
+				x++;
+			}
+//		printf("extrazero %i out %i begin %li end %jd d_num %Lf\n", extra_zero, out, all->begin_i, all->end_i, all->d_num);
+			if (out != 1)
+			{
+				all->end_str = ft_itoa(all->end_i);
+				i = ft_strlen(all->end_str) - 1;
+				if (all->begin_i == 0 && all->end_i == 0)
+				{
+					all->end_i++;
+				}
+				else if ((int)all->end_str[i] % 2 != 0)
+				{
+//					printf("%c str %s begin %li end %jd d_num %Lf\n", all->end_str[i], all->end_str, all->begin_i, all->end_i, all->d_num);
+					free(all->end_str);
+					all->end_i++;
+					all->d_num = 0;
+				}
+			}
+		}
+		else if ((int)all->d_num > 5)
 		{
 			i = 0;
-			x = 0;
+	//		printf("begin %li end %jd d_num %Lf\n", all->begin_i, all->end_i, all->d_num);
 			if ((int)all->end_i % 10 == 9)
 			{
-		//		printf("begin %li end %jd d_num %Lf\n", all->begin_i, all->end_i, all->d_num);
+	//			printf("begin %li end %jd d_num %Lf\n", all->begin_i, all->end_i, all->d_num);
 				all->end_str = ft_itoa(all->end_i);
 				i = ft_strlen(all->end_str) - 1;
 				while (i >= 0 && all->end_str[i] == '9')
@@ -160,22 +206,11 @@ void	write_float(t_val *all)
 			else
 			{
 			//	printf("%i begin %li end %jd d_num %Lf\n", i, all->begin_i, all->end_i, all->d_num);
-//				if (all->end_i % 10 == 5)
-				if ((int)all->d_num == 5)
-				{
-					if (all->end_i % 2 != 0)
-						all->end_i++;
-					all->d_num = 0;
-				}
-				else
-				{
-					all->end_i++;
-					all->d_num = 0;
-				}
+				all->end_i++;
+				all->d_num = 0;
 			}
 		}
 	}
-//	printf("all->end_i %jd\n", all->end_i);
 	all->end_str = ft_itoa(all->end_i);
 	if (!(all->str = (char*)malloc(sizeof(char) * 10000)))
 		return ;
