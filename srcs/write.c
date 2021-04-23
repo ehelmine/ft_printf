@@ -6,7 +6,7 @@
 /*   By: ehelmine <ehelmine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/10 17:53:58 by ehelmine          #+#    #+#             */
-/*   Updated: 2021/04/23 22:01:57 by ehelmine         ###   ########.fr       */
+/*   Updated: 2021/04/23 22:05:24 by ehelmine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -137,6 +137,8 @@ void	write_float(t_val *all)
 			all->end_i = 0;
 			all->d_num = 0;
 		}
+		//LISAA TANNE
+		// ELSE IF all->end_i == 0!!!!!!!
 	}
 	else if (precis > 0)
 	{
