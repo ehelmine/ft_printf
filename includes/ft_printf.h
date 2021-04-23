@@ -6,7 +6,7 @@
 /*   By: ehelmine <ehelmine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/21 18:31:32 by ehelmine          #+#    #+#             */
-/*   Updated: 2021/04/22 19:08:34 by ehelmine         ###   ########.fr       */
+/*   Updated: 2021/04/23 13:29:45 by ehelmine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ typedef struct		s_val
 					int zero_x;
 					long double d_num;
 					signed long int begin_i;
-					signed long int end_i;
+					intmax_t end_i;
 					char *begin_str;
 					char *end_str;
 					char *tmp;

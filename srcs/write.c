@@ -6,7 +6,7 @@
 /*   By: ehelmine <ehelmine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/10 17:53:58 by ehelmine          #+#    #+#             */
-/*   Updated: 2021/04/22 19:08:52 by ehelmine         ###   ########.fr       */
+/*   Updated: 2021/04/23 16:47:19 by ehelmine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,212 @@ void	check_long_double(t_val *all)
 	return ;
 }
 
+void	write_float(t_val *all)
+{
+	int negative_val;
+	double amount_of_decimals;
+	int precis;
+	int extra_zero;
+	int i;
+	int ii;
+	int x;
+//	char y;
+	int out;
+
+	if (all->space_flag && all->plus_flag)
+		all->space_flag = 0;
+	negative_val = 0;
+	if (all->d_num < 0 || (all->d_num == 0 && 1.0 / all->d_num < 0))
+	{
+		all->d_num *= -1;
+		negative_val = 1;
+	}
+	all->begin_i = (signed long int)all->d_num;
+	amount_of_decimals = 1;
+	precis = all->precision;
+	while (all->precision != 0)
+	{
+		amount_of_decimals *= 10;
+		all->precision--;
+	}
+	all->begin_str = ft_itoa(all->begin_i);
+	all->d_num -= all->begin_i;
+	extra_zero = 0;
+	while (amount_of_decimals != 1)
+	{
+		all->d_num *= 10;
+		if ((int)all->d_num == 0)
+			extra_zero++;
+		amount_of_decimals /= 10;
+	}
+	// tassa jaettiin sita jaljella olevaa numeroa precisionin maaralla. eli paastaan siihen kohtaan
+	// missa pilkun jalkee seuraava numero on VERY IMPORTANT
+	i = 0;
+	all->end_i = (intmax_t)all->d_num;
+	all->d_num -= all->end_i;
+//	printf("begin %li end %jd d_num %Lf\n", all->begin_i, all->end_i, all->d_num);
+	all->d_num *= 10;
+	if (precis == 0)
+	{
+	//	printf("begin %li end %jd d_num %Lf\n", all->begin_i, all->end_i, all->d_num);
+		if ((int)all->d_num > 5)
+		{
+			free(all->begin_str);
+			all->begin_str = ft_itoa(all->begin_i + 1);
+			all->d_num = 0;
+		}
+		else if ((int)all->d_num == 5)
+		{
+			out = 0;
+			while (i < 10)
+			{
+				all->d_num -= (int)all->d_num;
+				all->d_num *= 10;
+			//	printf("%i string %s begin %li end %jd d_num %Lf\n", i, all->end_str, all->begin_i, all->end_i, all->d_num);
+				if ((int)all->d_num >= 5)
+				{
+					free(all->begin_str);
+					all->begin_str = ft_itoa(all->begin_i + 1);
+					all->end_i = 0;
+					out = 1;
+			//		printf("INSIDE %i string %s begin %li end %jd d_num %Lf\n", i, all->end_str, all->begin_i, all->end_i, all->d_num);
+					break ;
+				}
+				else if ((int)all->d_num > 0 && (int)all->d_num < 5)
+				{
+					out = 1;
+					break ;
+				}
+				i++;
+			}
+			if (out != 1)
+			{
+				if (all->begin_i % 2 != 0)
+				{
+					free(all->begin_str);
+					all->begin_str = ft_itoa(all->begin_i + 1);
+					all->d_num = 0;
+				}
+			}
+		}
+		else if (all->end_i > 5)
+		{
+			free(all->begin_str);
+			all->begin_str = ft_itoa(all->begin_i + 1);
+			all->end_i = 0;
+			all->d_num = 0;
+		}
+	}
+	else if (precis > 0)
+	{
+		if ((int)all->d_num >= 5)
+		{
+			i = 0;
+			x = 0;
+			if ((int)all->end_i % 10 == 9)
+			{
+		//		printf("begin %li end %jd d_num %Lf\n", all->begin_i, all->end_i, all->d_num);
+				all->end_str = ft_itoa(all->end_i);
+				i = ft_strlen(all->end_str) - 1;
+				while (i >= 0 && all->end_str[i] == '9')
+					i--;
+		//		printf("%i %c begin %li end %jd d_num %Lf\n", i, all->end_str[i] + '1', all->begin_i, all->end_i, all->d_num);
+				if (i >= 0)
+				{
+		//			printf("%i %s\n", i, all->end_str);
+					all->end_str[i] = all->end_str[i] + 1;
+					i++;
+					while (all->end_str[i] != '\0')
+						all->end_str[i++] = '0';
+					all->end_i = ft_atoi(all->end_str);
+				}
+				else
+				{
+					free(all->begin_str);
+					all->begin_str = ft_itoa(all->begin_i + 1);
+					all->end_i = 0;
+					all->d_num = 0;
+				}
+			}
+			else
+			{
+			//	printf("%i begin %li end %jd d_num %Lf\n", i, all->begin_i, all->end_i, all->d_num);
+//				if (all->end_i % 10 == 5)
+				if ((int)all->d_num == 5)
+				{
+					if (all->end_i % 2 != 0)
+						all->end_i++;
+					all->d_num = 0;
+				}
+				else
+				{
+					all->end_i++;
+					all->d_num = 0;
+				}
+			}
+		}
+	}
+//	printf("all->end_i %jd\n", all->end_i);
+	all->end_str = ft_itoa(all->end_i);
+	if (!(all->str = (char*)malloc(sizeof(char) * 10000)))
+		return ;
+	all->tmp = all->str;
+	i = 0;
+	if (all->space_flag && !negative_val)
+		all->str[i++] = ' ';
+	if (negative_val)
+		all->str[i++] = '-';
+	if (!negative_val && all->plus_flag && !all->space_flag)
+		all->str[i++] = '+';
+	ii = 0;
+	while (all->begin_str[ii] != '\0')
+		all->str[i++] = all->begin_str[ii++];
+	all->str[i] = '\0';
+	if (precis != 0 || all->hash_flag)
+		all->str[i++] = '.';
+	if (precis != 0)
+	{
+		x = ft_strlen(all->end_str);
+		while (x < precis)
+		{
+			all->str[i++] = '0';
+			x++;
+		}
+		ii = 0;
+		while (all->end_str[ii] != '\0')
+			all->str[i++] = all->end_str[ii++];
+		all->str[i] = '\0';
+	}
+	all->len = ft_strlen(all->str);
+	if (all->len < all->width)
+	{
+		while (all->len < all->width)
+		{
+			if (all->minus_flag)
+				all->str[i++] = ' ';
+			else
+			{
+				if (all->zero_flag)
+				{
+					if (all->str[0] == '+' || all->str[0] == '-' || all->str[0] == ' ')
+					{
+						ft_putchar(all->str[0]);
+						all->str++;
+					}
+					ft_putchar('0');
+				}
+				else
+					ft_putchar(' ');
+			}
+			all->len++;
+		}
+	}
+	all->output_len += all->len;
+	ft_putstr(all->str);
+	free(all->end_str);
+	free(all->begin_str);
+}
+/*
 void	write_float(t_val *all)
 {
 	int negative_val;
@@ -317,8 +523,7 @@ void	write_float(t_val *all)
 	ft_putstr(all->str);
 	free(all->end_str);
 	free(all->begin_str);
-}
-
+}*/
 
 void	write_d_and_i(t_val *all)
 {

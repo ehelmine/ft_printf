@@ -6,7 +6,7 @@
 /*   By: ehelmine <ehelmine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/19 13:31:36 by ehelmine          #+#    #+#             */
-/*   Updated: 2021/04/22 19:06:29 by ehelmine         ###   ########.fr       */
+/*   Updated: 2021/04/23 16:40:25 by ehelmine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -474,15 +474,28 @@ int		main(void)
 //ii = printf("{%}\n");
 //i = ft_printf("{%}\n");
 int yy;
-long double f_arr[] = {10.55l, 5.321l, 0.05l, 1.0l, 9.1111889l, 2l, 0.6901385l};
+long double f_aarr[] = {10.55l, 5.321l, 0.05l, 1.0l, 9.1111889l, 2l, 0.6901385l};
 yy = 0;
-while (yy < 7)
+/*while (yy < 7)
 {
-	ii = printf("%.Lf %.1Lf %.3Lf %Lf %.10Lf\n", f_arr[yy], f_arr[yy], f_arr[yy], f_arr[yy], f_arr[yy]);
-	i = ft_printf("%.Lf %.1Lf %.3Lf %Lf %.10Lf\n", f_arr[yy], f_arr[yy], f_arr[yy], f_arr[yy], f_arr[yy]);
+	ii = printf("%.Lf %.1Lf %.3Lf %Lf %.10Lf\n", f_aarr[yy], f_aarr[yy], f_aarr[yy], f_aarr[yy], f_aarr[yy]);
+	i = ft_printf("%.Lf %.1Lf %.3Lf %Lf %.10Lf\n", f_aarr[yy], f_aarr[yy], f_aarr[yy], f_aarr[yy], f_aarr[yy]);
 	printf("real one %i and my %i\n", i, ii);
 	yy++;
 }
+
+double f_arr[] = {10.55, 5.321, 0.05, 1.0, 9.1111889, 2l, 0.6901385};
+yy = 0;
+while (yy < 7)
+{
+	ii = printf("not long %.lf %.1lf %.3lf %lf %.10lf\n", f_arr[yy], f_arr[yy], f_arr[yy], f_arr[yy], f_arr[yy]);
+	i = ft_printf("not long %.lf %.1lf %.3lf %lf %.10lf\n", f_arr[yy], f_arr[yy], f_arr[yy], f_arr[yy], f_arr[yy]);
+	printf("real one %i and my %i\n", i, ii);
+	yy++;
+}*/
+
+printf("%.2lf\n", -958.125);
+ft_printf("%.2lf\n", -958.125);
 //ft_printf("%.15f\n", 3.141593);
 //printf("%.15f\n", 3.141593);
 //  ft_printf("%+u\n", 4294967295);
