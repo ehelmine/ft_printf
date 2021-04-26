@@ -6,13 +6,13 @@
 /*   By: ehelmine <ehelmine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/22 18:22:11 by ehelmine          #+#    #+#             */
-/*   Updated: 2021/04/23 13:54:49 by ehelmine         ###   ########.fr       */
+/*   Updated: 2021/04/26 20:20:46 by ehelmine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_printf.h"
 
-static char	*convert_num_3(t_val *all, char *number, int a)
+static char		*convert_num_3(t_val *all, char *number, int a)
 {
 	int	x;
 
@@ -39,7 +39,7 @@ static char	*convert_num_3(t_val *all, char *number, int a)
 	return (number);
 }
 
-static char	*convert_num_2(t_val *all, char *number, int a)
+static char		*convert_num_2(t_val *all, char *number, int a)
 {
 	number[a] = '\0';
 	if (all->precision && (all->conv == 'u' || all->conv == 'x'
@@ -63,7 +63,7 @@ static char	*convert_num_2(t_val *all, char *number, int a)
 	return (convert_num_3(all, number, a));
 }
 
-char	*convert_num(t_val *all)
+char			*convert_num(t_val *all)
 {
 	char	*number;
 	char	*abc;

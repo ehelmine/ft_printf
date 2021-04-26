@@ -6,7 +6,7 @@
 /*   By: ehelmine <ehelmine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/22 17:36:20 by ehelmine          #+#    #+#             */
-/*   Updated: 2021/04/22 17:38:37 by ehelmine         ###   ########.fr       */
+/*   Updated: 2021/04/26 21:16:39 by ehelmine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ static void	write_s_right_ad(t_val *all)
 	}
 }
 
-void	write_s(t_val *all)
+void		write_s(t_val *all)
 {
 	char	*ptr;
 

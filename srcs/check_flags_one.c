@@ -6,7 +6,7 @@
 /*   By: ehelmine <ehelmine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/22 15:21:32 by ehelmine          #+#    #+#             */
-/*   Updated: 2021/04/22 18:51:36 by ehelmine         ###   ########.fr       */
+/*   Updated: 2021/04/26 20:23:37 by ehelmine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ void	check_h_and_l(t_val *all, char *flags, int i)
 	return ;
 }
 
-int	check_flags_float(t_val *all, char *flags, int i)
+int		check_flags_float(t_val *all, char *flags, int i)
 {
 	while (flags[i] == '+' || flags[i] == '-'
 		|| flags[i] == ' ' || flags[i] == '#' || flags[i] == '0')
@@ -67,13 +67,13 @@ int	check_flags_float(t_val *all, char *flags, int i)
 		if (flags[i] == 'l')
 			all->l = 1;
 		else if (flags[i] == 'L')
-			all->L = 1;
+			all->big_l = 1;
 		i++;
 	}
 	return (1);
 }
 
-int	check_flags_int(t_val *all, char *flags, int i, char c)
+int		check_flags_int(t_val *all, char *flags, int i, char c)
 {
 	while (flags[i] == '+' || flags[i] == '-'
 		|| flags[i] == ' ' || flags[i] == '#' || flags[i] == '0')
@@ -95,7 +95,7 @@ int	check_flags_int(t_val *all, char *flags, int i, char c)
 	return (1);
 }
 
-int	check_flags_percentage(t_val *all, char *flags, int i)
+int		check_flags_percentage(t_val *all, char *flags, int i)
 {
 	if (flags[i] == '%' && flags[i + 1] == '\0')
 		return (1);

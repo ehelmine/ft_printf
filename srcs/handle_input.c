@@ -6,7 +6,7 @@
 /*   By: ehelmine <ehelmine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/21 17:36:02 by ehelmine          #+#    #+#             */
-/*   Updated: 2021/04/23 13:56:25 by ehelmine         ###   ########.fr       */
+/*   Updated: 2021/04/26 22:18:25 by ehelmine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ int	check_correct_flags(char *flags, va_list args, t_val *all)
 		check_flags_float(all, flags, ii);
 	x = all->check;
 	if (x == 1)
-		get_arg(all, args, flags[i]);
+		return (get_arg(all, args, flags[i]));
 	return (1);
 }
 
@@ -91,7 +91,8 @@ int	loop_parameters(const char *ptr, va_list args, t_val *all, char *flags)
 		x = loop_flags(ptr, all, flags);
 		if (x == 0)
 			break ;
-		check_correct_flags(flags, args, all);
+		if (check_correct_flags(flags, args, all) == -1)
+			return (-1);
 		ptr = ptr + all->move;
 	}
 	return (1);
@@ -110,12 +111,13 @@ int	ft_printf(const char *begin, ...)
 	if (flags == NULL)
 		return (-1);
 	all.output_len = 0;
-	loop_parameters(begin, args, &all, flags);
+	if (loop_parameters(begin, args, &all, flags) == -1)
+		return (-1);
 	all.check = 1;
-	loop_parameters(begin, args, &all, flags);
+	if (loop_parameters(begin, args, &all, flags) == -1)
+		return (-1);
 	va_end(args);
 	len = all.output_len;
 	free(flags);
-//	system("leaks testi");
 	return (len);
 }

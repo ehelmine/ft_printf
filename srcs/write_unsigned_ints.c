@@ -6,13 +6,13 @@
 /*   By: ehelmine <ehelmine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/22 18:18:17 by ehelmine          #+#    #+#             */
-/*   Updated: 2021/04/22 18:41:14 by ehelmine         ###   ########.fr       */
+/*   Updated: 2021/04/26 22:15:58 by ehelmine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_printf.h"
 
-static void	write_unsigned_4(t_val *all, char *output, int i)
+static int	write_unsigned_4(t_val *all, char *output, int i)
 {
 	if (all->minus_flag)
 	{
@@ -28,9 +28,10 @@ static void	write_unsigned_4(t_val *all, char *output, int i)
 	output[i] = '\0';
 	ft_putstr(output);
 	free(output);
+	return (1);
 }
 
-static void	write_unsigned_3(t_val *all, char *output, char *number, int i)
+static int	write_unsigned_3(t_val *all, char *output, char *number, int i)
 {
 	if (!all->zero_x && all->hash_flag && !all->zero_num && (all->conv == 'X'
 			|| all->conv == 'x'))
@@ -49,10 +50,10 @@ static void	write_unsigned_3(t_val *all, char *output, char *number, int i)
 		all->output_len++;
 	}
 	free(number);
-	write_unsigned_4(all, output, i);
+	return (write_unsigned_4(all, output, i));
 }
 
-static void	write_unsigned_2(t_val *all, char *number)
+static int	write_unsigned_2(t_val *all, char *number)
 {
 	int		i;
 	char	*output;
@@ -60,11 +61,11 @@ static void	write_unsigned_2(t_val *all, char *number)
 	if (all->zero_num && all->precision == 0)
 	{
 		write_zero(all);
-		return ;
+		return (1);
 	}
 	output = (char *)malloc(sizeof(char) * (all->real_len + 1));
 	if (output == NULL)
-		return ;
+		return (-1);
 	i = 0;
 	if (!all->minus_flag)
 	{
@@ -76,16 +77,18 @@ static void	write_unsigned_2(t_val *all, char *number)
 			all->output_len++;
 		}
 	}
-	write_unsigned_3(all, output, number, i);
+	return (write_unsigned_3(all, output, number, i));
 }
 
-void	write_unsigned(t_val *all)
+int			write_unsigned(t_val *all)
 {
 	char	*abc;
 	char	*number;
 
 	abc = "0123456789abcdef";
 	number = convert_num(all);
+	if (number == NULL)
+		return (-1);
 	if (all->minus_flag)
 		all->zero_flag = 0;
 	if (!all->zero_x && all->hash_flag && !all->zero_num && (all->conv == 'X'
@@ -102,5 +105,5 @@ void	write_unsigned(t_val *all)
 			== -1 && all->precision) || (all->zero_flag && all->width
 			&& all->precision < 0))
 		all->fill_char = '0';
-	write_unsigned_2(all, number);
+	return (write_unsigned_2(all, number));
 }

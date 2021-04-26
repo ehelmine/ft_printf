@@ -6,13 +6,13 @@
 /*   By: ehelmine <ehelmine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/22 17:58:06 by ehelmine          #+#    #+#             */
-/*   Updated: 2021/04/26 19:46:55 by ehelmine         ###   ########.fr       */
+/*   Updated: 2021/04/26 22:02:20 by ehelmine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_printf.h"
 
-static void	write_p_3(t_val *all, char *output, char *number, int i)
+static int	write_p_3(t_val *all, char *output, char *number, int i)
 {
 	int	a;
 
@@ -34,6 +34,7 @@ static void	write_p_3(t_val *all, char *output, char *number, int i)
 	ft_putstr(output);
 	free(number);
 	free(output);
+	return (1);
 }
 
 static int	write_p_2(t_val *all, char *number, char *abc)
@@ -60,7 +61,7 @@ static int	write_p_2(t_val *all, char *number, char *abc)
 	return (a);
 }
 
-void	write_p(t_val *all)
+int			write_p(t_val *all)
 {
 	char	*abc;
 	char	*output;
@@ -71,11 +72,11 @@ void	write_p(t_val *all)
 	abc = "0123456789abcdef";
 	number = (char *)malloc(sizeof(char) * 1000);
 	if (number == NULL)
-		return ;
+		return (-1);
 	a = write_p_2(all, number, abc);
 	output = (char *)malloc(sizeof(char) * (all->real_len + 1));
 	if (output == NULL)
-		return ;
+		return (-1);
 	i = 0;
 	if (!all->minus_flag)
 	{
@@ -85,5 +86,5 @@ void	write_p(t_val *all)
 			all->output_len++;
 		}
 	}
-	write_p_3(all, output, number, i);
+	return (write_p_3(all, output, number, i));
 }

@@ -6,13 +6,13 @@
 /*   By: ehelmine <ehelmine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/22 15:20:12 by ehelmine          #+#    #+#             */
-/*   Updated: 2021/04/26 19:50:07 by ehelmine         ###   ########.fr       */
+/*   Updated: 2021/04/26 20:24:30 by ehelmine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_printf.h"
 
-int	check_width_and_precision(t_val *all, char *flags, int i)
+int		check_width_and_precision(t_val *all, char *flags, int i)
 {
 	if (flags[i] >= '0' && flags[i] <= '9')
 	{
@@ -37,7 +37,7 @@ int	check_width_and_precision(t_val *all, char *flags, int i)
 	return (i);
 }
 
-int	check_flags_c(t_val *all, char *flags, char c, int i)
+int		check_flags_c(t_val *all, char *flags, char c, int i)
 {
 	if (c == '%')
 		return (check_flags_percentage(all, flags, i));
@@ -60,7 +60,7 @@ int	check_flags_c(t_val *all, char *flags, char c, int i)
 	return (1);
 }
 
-int	check_flags_p_and_s(t_val *all, char *flags, int i)
+int		check_flags_p_and_s(t_val *all, char *flags, int i)
 {
 	if (flags[i + 1] == '\0')
 		return (1);
@@ -85,7 +85,7 @@ void	set_values(t_val *all, char *flags, char c)
 	all->space_flag = 0;
 	all->l = 0;
 	all->ll = 0;
-	all->L = 0;
+	all->big_l = 0;
 	all->h = 0;
 	all->hh = 0;
 	all->zero_num = 0;

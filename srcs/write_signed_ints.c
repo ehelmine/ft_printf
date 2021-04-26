@@ -6,25 +6,14 @@
 /*   By: ehelmine <ehelmine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/22 17:20:52 by ehelmine          #+#    #+#             */
-/*   Updated: 2021/04/26 20:01:16 by ehelmine         ###   ########.fr       */
+/*   Updated: 2021/04/26 22:11:25 by ehelmine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_printf.h"
 
-void	write_d_and_i_right_ad_3(t_val *all, char *num_str, char *output, int x)
+void	write_d_and_i_right_ad_4(t_val *all, char *output, int x)
 {
-	while (all->precision > all->len)
-	{
-		output[x++] = all->fill_char;
-		all->output_len++;
-		all->real_len--;
-		all->precision--;
-	}
-	output[x] = '\0';
-	num_str = ft_itoa(all->num);
-	all->output_len += all->len;
-	all->real_len -= all->len;
 	while (all->real_len > 0)
 	{
 		if (all->zero_flag && all->precision < 0)
@@ -42,13 +31,33 @@ void	write_d_and_i_right_ad_3(t_val *all, char *num_str, char *output, int x)
 		all->real_len--;
 		all->output_len++;
 	}
+}
+
+int		write_d_and_i_right_ad_3(t_val *all, char *num_str, char *output, int x)
+{
+	while (all->precision > all->len)
+	{
+		output[x++] = all->fill_char;
+		all->output_len++;
+		all->real_len--;
+		all->precision--;
+	}
+	output[x] = '\0';
+	num_str = ft_itoa(all->num);
+	all->tmp = num_str;
+	all->output_len += all->len;
+	all->real_len -= all->len;
+	write_d_and_i_right_ad_4(all, output, x);
 	ft_putstr(output);
 	if (all->num < 0)
 		num_str++;
 	ft_putstr(num_str);
+	free(all->tmp);
+	free(output);
+	return (1);
 }
 
-int	write_d_and_i_right_ad_2(t_val *all, char *output, int x)
+int		write_d_and_i_right_ad_2(t_val *all, char *output, int x)
 {
 	if (all->num >= 0)
 	{
@@ -71,7 +80,7 @@ int	write_d_and_i_right_ad_2(t_val *all, char *output, int x)
 	return (x);
 }
 
-void	write_d_and_i_right_ad(t_val *all)
+int		write_d_and_i_right_ad(t_val *all)
 {
 	char	*output;
 	char	*num_str;
@@ -82,7 +91,7 @@ void	write_d_and_i_right_ad(t_val *all)
 	i = 0;
 	output = (char *)malloc(sizeof(char) * 10000);
 	if (output == NULL)
-		return ;
+		return (-1);
 	if (all->space_flag && all->num >= 0)
 	{
 		output[x++] = ' ';
@@ -92,10 +101,10 @@ void	write_d_and_i_right_ad(t_val *all)
 	if ((all->plus_flag && all->num >= 0) || (all->num < 0))
 		x = write_d_and_i_right_ad_2(all, output, x);
 	num_str = NULL;
-	write_d_and_i_right_ad_3(all, num_str, output, x);
+	return (write_d_and_i_right_ad_3(all, num_str, output, x));
 }
 
-static void	write_d_and_i_left_ad_2(t_val *all)
+void	write_d_and_i_left_ad_2(t_val *all)
 {
 	while (all->precision > all->len)
 	{
@@ -115,27 +124,4 @@ static void	write_d_and_i_left_ad_2(t_val *all)
 		all->real_len--;
 		all->output_len++;
 	}
-}
-
-void	write_d_and_i_left_ad(t_val *all)
-{
-	if (all->num < 0)
-	{
-		write(1, "-", 1);
-		all->output_len++;
-		all->real_len--;
-	}
-	if (all->space_flag && all->num >= 0)
-	{
-		write(1, " ", 1);
-		all->output_len++;
-		all->real_len--;
-	}
-	if (all->plus_flag)
-	{
-		write(1, "+", 1);
-		all->output_len++;
-		all->real_len--;
-	}
-	write_d_and_i_left_ad_2(all);
 }
