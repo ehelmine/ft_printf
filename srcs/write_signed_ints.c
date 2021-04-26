@@ -6,7 +6,7 @@
 /*   By: ehelmine <ehelmine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/22 17:20:52 by ehelmine          #+#    #+#             */
-/*   Updated: 2021/04/23 13:57:15 by ehelmine         ###   ########.fr       */
+/*   Updated: 2021/04/26 20:01:16 by ehelmine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,15 @@ void	write_d_and_i_right_ad_3(t_val *all, char *num_str, char *output, int x)
 	while (all->real_len > 0)
 	{
 		if (all->zero_flag && all->precision < 0)
-			write(1, "0", 1);
+		{
+			if (all->num == 0 && all->zero_flag)
+			{
+				output[x++] = '0';
+				output[x] = '\0';
+			}
+			else
+				write(1, "0", 1);
+		}
 		else
 			write(1, " ", 1);
 		all->real_len--;

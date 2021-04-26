@@ -6,7 +6,7 @@
 /*   By: ehelmine <ehelmine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/22 15:20:12 by ehelmine          #+#    #+#             */
-/*   Updated: 2021/04/22 16:30:57 by ehelmine         ###   ########.fr       */
+/*   Updated: 2021/04/26 19:50:07 by ehelmine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,7 @@ void	set_values(t_val *all, char *flags, char c)
 	all->width = 0;
 	all->minimum_width = 0;
 	if (c == 's' || c == '%' || c == 'd' || c == 'i' || c == 'x'
-		|| c == 'X' || c == 'u' || c == 'o')
+		|| c == 'X' || c == 'u' || c == 'o' || c == 'p')
 		all->precision = -1;
 	if (c == 'd' || c == 'i' || c == 'p' || c == 'x' || c == 'X'
 		|| c == 'u' || c == 'o' || c == 'f')

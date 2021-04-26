@@ -6,7 +6,7 @@
 /*   By: ehelmine <ehelmine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/16 17:05:32 by ehelmine          #+#    #+#             */
-/*   Updated: 2021/04/22 14:35:35 by ehelmine         ###   ########.fr       */
+/*   Updated: 2021/04/26 20:06:50 by ehelmine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,9 +64,9 @@ int	get_arg_signed_int(t_val *all, va_list args)
 {
 	if (all->h)
 		all->num = (short int)va_arg(args, int);
-	else if (all->l)
-		all->num = (long int)va_arg(args, long);
-	else if (all->ll)
+//	else if (all->l)
+//		all->num = (long int)va_arg(args, long);
+	else if (all->ll || all->l)
 	{
 		all->num = (long long int)va_arg(args, long long int);
 		if ((long long int)all->num == -9223372036854775807 - 1)

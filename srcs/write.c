@@ -6,7 +6,7 @@
 /*   By: ehelmine <ehelmine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/10 17:53:58 by ehelmine          #+#    #+#             */
-/*   Updated: 2021/04/26 14:05:22 by ehelmine         ###   ########.fr       */
+/*   Updated: 2021/04/26 20:05:00 by ehelmine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,21 +24,6 @@ int	real_width(int num_len, int input_width, int precision)
 	return (-1);
 }
 
-/*void	check_long_double(t_val *all, int amount_of_decimals)
-{
-	while (amount_of_decimals != 1)
-	{
-		all->d_num *= 10;
-		amount_of_decimals /= 10;
-	}
-	all->end_i = (intmax_t)all->d_num;
-	all->d_num -= all->end_i;
-	printf("begin %li end %jd d_num %Lf\n", all->begin_i, all->end_i, all->d_num);
-	all->d_num *= 10;
-	all->i = 0;
-	return ;
-}*/
-
 void	write_float(t_val *all)
 {
 	int negative_val;
@@ -48,8 +33,8 @@ void	write_float(t_val *all)
 	int i;
 	int ii;
 	int x;
-//	char y;
 	int out;
+	double yy;
 
 	if (all->space_flag && all->plus_flag)
 		all->space_flag = 0;
@@ -70,15 +55,23 @@ void	write_float(t_val *all)
 	all->begin_str = ft_itoa(all->begin_i);
 	all->d_num -= all->begin_i;
 	extra_zero = 0;
-//	printf("decis %f begin %li end %jd d_num %Lf\n", amount_of_decimals, all->begin_i, all->end_i, all->d_num);
-//	if (all->L)
-//		check_long_double(all, amount_of_decimals);
 	out = 0;
+	if (all->L && precis == 1 && all->end_i != 0 && all->end_i < 10)
+	{
+		all->i = 1;
+		all->precision = precis + 1;
+		while (all->precision != 0)
+		{
+			all->i *= 10;
+			all->precision--;
+		}
+		yy = (double)5 / (double)all->i;
+		all->d_num -= yy;
+		extra_zero = 1;
+	}
 	while (amount_of_decimals != 1)
 	{
 		all->d_num *= 10;
-		if ((int)all->d_num == 0)
-			extra_zero++;
 		amount_of_decimals /= 10;
 	}
 	out = 0;
@@ -180,6 +173,17 @@ void	write_float(t_val *all)
 	}
 	else if (precis > 0)
 	{
+		if (all->L == 1 && precis == 1 && (int)all->d_num == 5)
+		{
+			if ((int)all->d_num == 5)
+			{
+				if (all->end_i == 0 || all->end_i == 1 || all->end_i == 5 || all->end_i == 8
+					|| all->end_i == 7)
+					all->end_i++;
+				out = 1;
+				all->d_num = 0;
+			}
+		}
 		if ((int)all->d_num == 4 && all->L)
 		{
 			all->d_num -= (int)all->d_num;
@@ -230,21 +234,27 @@ void	write_float(t_val *all)
 				i = ft_strlen(all->end_str) - 1;
 				if (all->L)
 				{
-					amount_of_decimals = 1;
-					all->precision = precis + 1;
-					while (all->precision != 0)
-					{
-						amount_of_decimals *= 5;
-						all->precision--;
-					}
-					if ((all->end_i * 10 + 5) % (int)amount_of_decimals == 0)
-					{
-						if ((int)all->end_i % 2 != 0)
-							all->end_i++;
-					}
+					if (extra_zero == 1)
+						all->end_i = all->end_i;
 					else
 					{
-						all->end_i++;
+						amount_of_decimals = 1;
+						all->precision = precis + 1;
+						while (all->precision != 0)
+						{
+							amount_of_decimals *= 5;
+							all->precision--;
+						}
+						if ((all->end_i * 10 + 5) % (int)amount_of_decimals == 0)
+						{
+							if ((int)all->end_i % 2 != 0)
+								all->end_i++;
+						}
+//						else
+						//{
+						//	if (precis == 1)
+							//	all->end_i++;
+						//}
 					}
 				}	
 				else if (all->begin_i == 0 && all->end_i == 0)

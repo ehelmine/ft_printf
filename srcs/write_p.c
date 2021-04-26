@@ -6,7 +6,7 @@
 /*   By: ehelmine <ehelmine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/22 17:58:06 by ehelmine          #+#    #+#             */
-/*   Updated: 2021/04/22 18:43:22 by ehelmine         ###   ########.fr       */
+/*   Updated: 2021/04/26 19:46:55 by ehelmine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ static int	write_p_2(t_val *all, char *number, char *abc)
 	int	x;
 
 	a = 0;
-	if (all->num == 0)
+	if (all->num == 0 && all->precision != 0)
 		number[a++] = '0';
 	while (all->num != 0)
 	{
