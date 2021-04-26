@@ -6,7 +6,7 @@
 /*   By: ehelmine <ehelmine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/19 13:31:36 by ehelmine          #+#    #+#             */
-/*   Updated: 2021/04/23 22:02:05 by ehelmine         ###   ########.fr       */
+/*   Updated: 2021/04/26 14:09:44 by ehelmine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -493,11 +493,99 @@ while (yy < 7)
 	printf("real one %i and my %i\n", i, ii);
 	yy++;
 }*/
+/*
+printf("%.10f\n", 0.87650894255);
+ft_printf("%.10f\n\n", 0.87650894255);
 
-printf("%.3Lf\n", -0.01000000l);
-ft_printf("%.3Lf\n", -0.01000000l);
-//ft_printf("%.11Lf\n", 0.87650894255l);
-//printf("%.11Lf\n", 0.87650894255l);
+printf("%.10f\n", 0.87650891599);
+ft_printf("%.10f\n\n", 0.87650891599);
+
+printf("%.10f\n", 0.87650743255);
+ft_printf("%.10f\n\n", 0.87650743255);
+
+printf("%.10f\n", 0.17650743255);
+ft_printf("%.10f\n\n", 0.17650743255);
+
+printf("yksi %.1Lf %.1Lf %.2Lf\n", 0.15l, 1.15l, 0.015l);
+ft_printf("yksi %.1Lf %.1Lf %.2Lf\n\n", 0.15l, 1.15l, 0.015l);
+
+printf("%.1Lf %.1Lf %.2Lf\n", 0.25l, 1.25l, 0.025l);
+ft_printf("%.1Lf %.1Lf %.2Lf\n\n", 0.25l, 1.25l, 0.025l);
+
+printf("%.1Lf %.1Lf %.2Lf\n", 0.35l, 1.35l, 0.035l);
+ft_printf("%.1Lf %.1Lf %.2Lf\n\n", 0.35l, 1.35l, 0.035l);
+
+printf("%.1Lf %.1Lf %.2Lf\n", 0.45l, 1.45l, 0.045l);
+ft_printf("%.1Lf %.1Lf %.2Lf\n\n", 0.45l, 1.45l, 0.045l);
+
+printf("%.1Lf %.1Lf %.2Lf\n", 0.55l, 1.55l, 0.055l);
+ft_printf("%.1Lf %.1Lf %.2Lf\n\n", 0.55l, 1.55l, 0.055l);
+
+printf("%.1Lf %.1Lf %.2Lf\n", 0.65l, 1.65l, 0.065l);
+ft_printf("%.1Lf %.1Lf %.2Lf\n\n", 0.65l, 1.65l, 0.065l);
+
+printf("%.1Lf %.1Lf %.2Lf\n", 0.75l, 1.75l, 0.075l);
+ft_printf("%.1Lf %.1Lf %.2Lf\n\n", 0.75l, 1.75l, 0.075l);
+
+printf("%.1Lf %.1Lf %.2Lf\n", 0.85l, 1.85l, 0.085l);
+ft_printf("%.1Lf %.1Lf %.2Lf\n\n", 0.85l, 1.85l, 0.085l);
+
+printf("%.1Lf %.1Lf %.2Lf\n", 0.95l, 1.95l, 0.095l);
+ft_printf("%.1Lf %.1Lf %.2Lf\n\n", 0.95l, 1.95l, 0.095l);
+
+printf("%.1Lf\n", 15.2500l);
+ft_printf("%.1Lf\n\n", 15.2500l);
+
+printf("%.1Lf\n", 1.1500l);
+ft_printf("%.1Lf\n\n", 1.1500l);
+
+printf("%.1Lf\n", 1.2500l);
+ft_printf("%.1Lf\n", 1.2500l);
+
+printf("%.1Lf\n", 1.0500l);
+ft_printf("%.1Lf\n", 1.0500l);
+
+printf("lyhyt %.1f %.1f %.2f\n", 0.25, 1.25, 0.025);
+ft_printf("lyhyt %.1f %.1f %.2f\n\n", 0.25, 1.25, 0.025);
+
+printf("%.1Lf %.1Lf %.2Lf\n", 0.25l, 1.25l, 0.025l);
+ft_printf("%.1Lf %.1Lf %.2Lf\n\n", 0.25l, 1.25l, 0.025l);
+
+printf("%.1Lf %.1Lf %.2Lf\n", 0.35l, 1.35l, 0.035l);
+ft_printf("%.1Lf %.1Lf %.2Lf\n\n", 0.35l, 1.35l, 0.035l);
+
+printf("%.1Lf %.1Lf %.2Lf\n", 0.45l, 1.45l, 0.045l);
+ft_printf("%.1Lf %.1Lf %.2Lf\n\n", 0.45l, 1.45l, 0.045l);
+
+printf("%.1Lf %.1Lf %.2Lf\n", 0.55l, 1.55l, 0.055l);
+ft_printf("%.1Lf %.1Lf %.2Lf\n\n", 0.55l, 1.55l, 0.055l);
+
+printf("%.1Lf %.1Lf %.2Lf\n", 0.65l, 1.65l, 0.065l);
+ft_printf("%.1Lf %.1Lf %.2Lf\n\n", 0.65l, 1.65l, 0.065l);
+
+printf("%.1Lf %.1Lf %.2Lf\n", 0.75l, 1.75l, 0.075l);
+ft_printf("%.1Lf %.1Lf %.2Lf\n\n", 0.75l, 1.75l, 0.075l);
+
+printf("%.1Lf %.1Lf %.2Lf\n", 0.85l, 1.85l, 0.085l);
+ft_printf("%.1Lf %.1Lf %.2Lf\n\n", 0.85l, 1.85l, 0.085l);
+
+printf("%.1Lf %.1Lf %.2Lf\n", 0.95l, 1.95l, 0.095l);
+ft_printf("%.1Lf %.1Lf %.2Lf\n\n", 0.95l, 1.95l, 0.095l);
+
+printf("%.1Lf\n", 15.2500l);
+ft_printf("%.1Lf\n\n", 15.2500l);
+
+printf("%.1Lf\n", 1.1500l);
+ft_printf("%.1Lf\n\n", 1.1500l);
+
+printf("%.1Lf\n", 1.2500l);
+ft_printf("%.1Lf\n", 1.2500l);
+
+printf("%.1Lf\n", 1.0500l);
+ft_printf("%.1Lf\n", 1.0500l);*/
+printf("%.10Lf\n", 0.35l);
+ft_printf("%.10Lf\n", 0.35l);
+
 //printf("%.15f\n", 3.141593);
 //  ft_printf("%+u\n", 4294967295);
 // printf("%+u\n", 4294967295);

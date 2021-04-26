@@ -6,7 +6,7 @@
 #    By: ehelmine <ehelmine@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/06/09 13:01:03 by ehelmine          #+#    #+#              #
-#    Updated: 2021/04/22 18:48:58 by ehelmine         ###   ########.fr        #
+#    Updated: 2021/04/26 11:33:27 by ehelmine         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,7 +32,7 @@ HEADER = libft.h
 all: $(NAME)
 
 $(NAME):
-		@gcc -Wall -Wextra -Werror -c -I includes $(SRCS)
+		@gcc -g -Wall -Wextra -Werror -c -I includes $(SRCS)
 		@ar rc $(NAME) $(OBJS)
 		@ranlib $(NAME)
 

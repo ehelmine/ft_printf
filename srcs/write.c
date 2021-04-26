@@ -6,7 +6,7 @@
 /*   By: ehelmine <ehelmine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/10 17:53:58 by ehelmine          #+#    #+#             */
-/*   Updated: 2021/04/23 22:05:24 by ehelmine         ###   ########.fr       */
+/*   Updated: 2021/04/26 14:05:22 by ehelmine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,9 +70,10 @@ void	write_float(t_val *all)
 	all->begin_str = ft_itoa(all->begin_i);
 	all->d_num -= all->begin_i;
 	extra_zero = 0;
-//	printf("decis %i begin %li end %jd d_num %Lf\n", amount_of_decimals, all->begin_i, all->end_i, all->d_num);
+//	printf("decis %f begin %li end %jd d_num %Lf\n", amount_of_decimals, all->begin_i, all->end_i, all->d_num);
 //	if (all->L)
 //		check_long_double(all, amount_of_decimals);
+	out = 0;
 	while (amount_of_decimals != 1)
 	{
 		all->d_num *= 10;
@@ -80,13 +81,50 @@ void	write_float(t_val *all)
 			extra_zero++;
 		amount_of_decimals /= 10;
 	}
+	out = 0;
+	all->end_i = 0;
+//	printf("begin %li end %jd d_num %.10Lf %i\n", all->begin_i, all->end_i, all->d_num, (int)all->d_num);
 	// tassa jaettiin sita jaljella olevaa numeroa precisionin maaralla. eli paastaan siihen kohtaan
 	// missa pilkun jalkee seuraava numero on VERY IMPORTANT
+//	if (all->d_num > 9)
+//	{
+//		all->str = all->d_num 
+//	}
+	out = 0;
 	i = 0;
 	all->end_i = (intmax_t)all->d_num;
+//	printf("begin %li end %d d_num %Lf miinus %Lf\n", all->begin_i, (int)all->end_i, all->d_num, all->d_num - all->end_i);
+//	if (all->d_num - all->end_i > 0.5)
+//	{
+//		printf("here\n");
+//		all->end_i++;
+//	}
 	all->d_num -= all->end_i;
-	printf("begin %li end %jd d_num %.10Lf\n", all->begin_i, all->end_i, all->d_num);
 	all->d_num *= 10;
+	if ((int)all->d_num == 9 && precis > 1 && all->L)
+	{
+	//	printf("here\n");
+			all->d_num -= (int)all->d_num;
+			all->d_num *= 10;
+			while ((int)all->d_num == 9)
+			{
+				all->d_num -= (int)all->d_num;
+				all->d_num *= 10;
+	//			printf("%Lf\n", all->d_num);
+			}
+			if ((int)all->d_num >= 0)
+			{
+				if (all->end_i == 0)
+					all->d_num = 10;
+				else
+				{
+					all->end_i++;
+					all->d_num = 0;
+				}
+			}
+	}
+//	printf("begin %li end %jd d_num %.10Lf\n", all->begin_i, all->end_i, all->d_num);
+//	all->d_num *= 10;
 	if (precis == 0)
 	{
 	//	printf("begin %li end %jd d_num %Lf\n", all->begin_i, all->end_i, all->d_num);
@@ -142,10 +180,37 @@ void	write_float(t_val *all)
 	}
 	else if (precis > 0)
 	{
+		if ((int)all->d_num == 4 && all->L)
+		{
+			all->d_num -= (int)all->d_num;
+			all->d_num *= 10;
+			if ((int)all->d_num == 9)
+			{
+				while ((int)all->d_num == 9)
+				{
+					all->d_num -= (int)all->d_num;
+					all->d_num *= 10;
+	//				printf("%Lf\n", all->d_num);
+				}
+				if ((int)all->d_num >= 0)
+				{
+					all->d_num = 5;
+				}
+				else
+					all->d_num = 4;
+			}		
+		}
+		out = 0;
 		if ((int)all->d_num == 5)
 		{
 			x = 0;
 			out = 0;
+/*			if (precis == 1 && all->L)
+			{
+				all->end_i++;
+				all->d_num = 0;
+				out = 1;
+			}*/
 			while (x < 18)
 			{
 				all->d_num -= (int)all->d_num;
@@ -158,12 +223,31 @@ void	write_float(t_val *all)
 				}
 				x++;
 			}
-//		printf("extrazero %i out %i begin %li end %jd d_num %Lf\n", extra_zero, out, all->begin_i, all->end_i, all->d_num);
+	//	printf("extrazero %i out %i begin %li end %jd d_num %Lf\n", extra_zero, out, all->begin_i, all->end_i, all->d_num);
 			if (out != 1)
 			{
 				all->end_str = ft_itoa(all->end_i);
 				i = ft_strlen(all->end_str) - 1;
-				if (all->begin_i == 0 && all->end_i == 0)
+				if (all->L)
+				{
+					amount_of_decimals = 1;
+					all->precision = precis + 1;
+					while (all->precision != 0)
+					{
+						amount_of_decimals *= 5;
+						all->precision--;
+					}
+					if ((all->end_i * 10 + 5) % (int)amount_of_decimals == 0)
+					{
+						if ((int)all->end_i % 2 != 0)
+							all->end_i++;
+					}
+					else
+					{
+						all->end_i++;
+					}
+				}	
+				else if (all->begin_i == 0 && all->end_i == 0)
 				{
 					all->end_i++;
 				}
@@ -213,6 +297,7 @@ void	write_float(t_val *all)
 			}
 		}
 	}
+//	printf("extrazero %i begin %li end %jd d_num %Lf\n", extra_zero, all->begin_i, all->end_i, all->d_num);
 	all->end_str = ft_itoa(all->end_i);
 	if (!(all->str = (char*)malloc(sizeof(char) * 10000)))
 		return ;
