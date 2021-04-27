@@ -6,7 +6,7 @@
 /*   By: ehelmine <ehelmine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/19 13:31:36 by ehelmine          #+#    #+#             */
-/*   Updated: 2021/04/27 13:58:36 by ehelmine         ###   ########.fr       */
+/*   Updated: 2021/04/27 15:25:27 by ehelmine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,12 +20,12 @@ int		main(void)
 	// what happens if you pass %s with NULL argument???
 	// The plus takes priority over the space!!
 	
-	char *str = "this is a string";
-	char *ptr = "";
+//	char *str = "this is a string";
+//	char *ptr = "";
 //	int i;
 //	i = 1;
-	int my_print;
-	int real_print;
+//	int my_print;
+//	int real_print;
 	/*
 // sentence in a string
 	printf("test num %d only s\n", i++);
@@ -433,9 +433,9 @@ int		main(void)
 	ulong = ULONG_MAX - 1;
 	float x;
 	float y;
-	int len;
-	int i;
-	int ii;
+//	int len;
+//	int i;
+//	int ii;
 //	x = -3.14159265;
 	x = 1.500000;
 	y = 1.0;
@@ -495,12 +495,26 @@ while (yy < 7)
 	yy++;
 }*/
 
-printf("%.Lf\n", 10.55l);
-ft_printf("%.Lf\n", 10.55l);
+//printf("%.Lf\n", 10.55l);
+//ft_printf("%.Lf\n", 10.55l);
 
-//printf("{% 03d}\n", 0);
-//ft_printf("{% 03d}\n", 0);
+/*char xxx;
 
+xxx = 'a';
+
+printf("%c %c %c %c %c %c %c\n", 'a', 'b', 'c', 'd', 'e', 'f', 'g');
+ft_printf("%c %c %c %c %c %c %c\n", 'a', 'b', 'c', 'd', 'e', 'f', 'g');
+
+ft_printf("character tests: '%c' '%c' '%c' '%c' '%c' '%c' '%c' '%c' '%c' '%c' '%c' '%c' '%c' '%c' '%c' '%c' '%c' '%c' '%c' '%c'\n", 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't');*/
+
+    int ret;
+
+    ret = ft_printf("character tests: '%c' '%c' '%c' '%c' '%c' '%c' '%c' '%c' '%c' '%c' '%c' '%c' '%c' '%c' '%c' '%c' '%c' '%c' '%c' '%c'\n", 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't');
+    ft_printf("ret is %d\n", ret);
+
+    ret = ft_printf("character tests: '%c' '%c' '%c' '%c' '%c' '%c' '%c' '%c' '%c' '%c' '%c' '%c' '%c' '%c' '%c' '%c' '%c' '%c' '%c' '%c'\n", '1', '2', '3', '4', '5', '0', '*', '%', ' ', '\t', '\n', '-', 0, 47, 126, 125, 124, 123, 33, 34);
+    ft_printf("ret is %d\n", ret);
+	
 //printf("{% 010d}\n", 0);
 //ft_printf("{% 010d}\n", 0);
 
