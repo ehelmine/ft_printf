@@ -6,7 +6,7 @@
 /*   By: ehelmine <ehelmine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/22 17:20:52 by ehelmine          #+#    #+#             */
-/*   Updated: 2021/04/26 22:11:25 by ehelmine         ###   ########.fr       */
+/*   Updated: 2021/04/27 13:27:41 by ehelmine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,8 @@ int		write_d_and_i_right_ad_3(t_val *all, char *num_str, char *output, int x)
 	}
 	output[x] = '\0';
 	num_str = ft_itoa(all->num);
+	if (num_str == NULL)
+		return (-1);
 	all->tmp = num_str;
 	all->output_len += all->len;
 	all->real_len -= all->len;

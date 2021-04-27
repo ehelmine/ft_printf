@@ -6,39 +6,11 @@
 /*   By: ehelmine <ehelmine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/26 21:02:38 by ehelmine          #+#    #+#             */
-/*   Updated: 2021/04/26 22:07:13 by ehelmine         ###   ########.fr       */
+/*   Updated: 2021/04/27 13:52:58 by ehelmine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_printf.h"
-
-static void	write_float_5(t_val *all, int out)
-{
-	out = 0;
-	if ((int)all->d_num > 5)
-	{
-		free(all->begin_str);
-		all->begin_str = ft_itoa(all->begin_i + 1);
-		all->d_num = 0;
-	}
-	else if ((int)all->d_num == 5)
-	{
-		out = write_float_6(all);
-		if (out != 1 && all->begin_i % 2 != 0)
-		{
-			free(all->begin_str);
-			all->begin_str = ft_itoa(all->begin_i + 1);
-			all->d_num = 0;
-		}
-	}
-	else if (all->end_i > 5)
-	{
-		free(all->begin_str);
-		all->begin_str = ft_itoa(all->begin_i + 1);
-		all->end_i = 0;
-		all->d_num = 0;
-	}
-}
 
 static void	write_float_4(t_val *all)
 {
@@ -90,7 +62,7 @@ static void	write_float_3(t_val *all)
 	all->d_num *= 10;
 }
 
-static void	write_float_2(t_val *all)
+static int	write_float_2(t_val *all)
 {
 	if (all->space_flag && all->plus_flag)
 		all->space_flag = 0;
@@ -109,32 +81,52 @@ static void	write_float_2(t_val *all)
 		all->precision--;
 	}
 	all->begin_str = ft_itoa(all->begin_i);
+	if (all->begin_str == NULL)
+		return (-1);
 	all->d_num -= all->begin_i;
 	all->extra_zero = 0;
+	return (1);
+}
+
+int			write_float_second(t_val *all, int out)
+{
+	out = 0;
+	if ((int)all->end_i % 10 == 9)
+	{
+		if (write_float_9(all) == -1)
+			return (-1);
+	}
+	else
+	{
+		all->end_i++;
+		all->d_num = 0;
+	}
+	return (1);
 }
 
 int			write_float(t_val *all, int i, int x, int out)
 {
-	write_float_2(all);
+	if (write_float_2(all) == -1)
+		return (-1);
 	write_float_3(all);
 	write_float_4(all);
 	if (all->org_precision == 0)
-		write_float_5(all, out);
+	{
+		if (write_float_5(all, out) == -1)
+			return (-1);
+	}
 	else if (all->org_precision > 0)
 	{
 		write_float_7(all);
 		if ((int)all->d_num == 5)
-			write_float_8(all, out, x, i);
+		{
+			if (write_float_8(all, x, i) == -1)
+				return (-1);
+		}
 		else if ((int)all->d_num > 5)
 		{
-			out = 0;
-			if ((int)all->end_i % 10 == 9)
-				write_float_9(all);
-			else
-			{
-				all->end_i++;
-				all->d_num = 0;
-			}
+			if (write_float_second(all, out) == -1)
+				return (-1);
 		}
 	}
 	return (write_float_output(all));

@@ -6,7 +6,7 @@
 /*   By: ehelmine <ehelmine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/26 21:04:23 by ehelmine          #+#    #+#             */
-/*   Updated: 2021/04/26 22:06:18 by ehelmine         ###   ########.fr       */
+/*   Updated: 2021/04/27 14:04:16 by ehelmine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,8 @@ int			write_float_output(t_val *all)
 	int i;
 
 	all->end_str = ft_itoa(all->end_i);
+	if (all->end_str == NULL)
+		return (-1);
 	if (!(all->str = (char*)malloc(sizeof(char) * 10000)))
 		return (-1);
 	all->tmp = all->str;
@@ -90,11 +92,13 @@ int			write_float_output(t_val *all)
 	return (1);
 }
 
-void		write_float_9(t_val *all)
+int			write_float_9(t_val *all)
 {
 	int i;
 
 	all->end_str = ft_itoa(all->end_i);
+	if (all->end_str == NULL)
+		return (-1);
 	i = ft_strlen(all->end_str) - 1;
 	while (i >= 0 && all->end_str[i] == '9')
 		i--;
@@ -109,8 +113,34 @@ void		write_float_9(t_val *all)
 	else
 	{
 		free(all->begin_str);
-		all->begin_str = ft_itoa(all->begin_i + 1);
+		if (!(all->begin_str = ft_itoa(all->begin_i + 1)))
+			return (-1);
 		all->end_i = 0;
 		all->d_num = 0;
+	}
+	return (1);
+}
+
+void		write_float_8_second(t_val *all)
+{
+	if (all->big_l)
+	{
+		if (all->extra_zero == 1)
+			all->end_i = all->end_i;
+		else
+		{
+			all->am_of_decimals = 1;
+			all->precision = all->org_precision + 1;
+			while (all->precision != 0)
+			{
+				all->am_of_decimals *= 5;
+				all->precision--;
+			}
+			if ((all->end_i * 10 + 5) % (int)all->am_of_decimals == 0)
+			{
+				if ((int)all->end_i % 2 != 0)
+					all->end_i++;
+			}
+		}
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: ehelmine <ehelmine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/22 17:36:20 by ehelmine          #+#    #+#             */
-/*   Updated: 2021/04/27 12:55:45 by ehelmine         ###   ########.fr       */
+/*   Updated: 2021/04/27 14:02:39 by ehelmine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,8 +85,7 @@ int			write_s(t_val *all)
 	all->minimum_width = all->width - all->len;
 	if (all->len > all->precision && all->precision >= 0 && all->str != NULL)
 	{
-		all->str_cpy = ft_strndup(all->str, all->precision);
-		if (all->str_cpy == NULL)
+		if (!(all->str_cpy = ft_strndup(all->str, all->precision)))
 			return (-1);
 		all->minimum_width = all->width - ft_strlen(all->str_cpy);
 	}

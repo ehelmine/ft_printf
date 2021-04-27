@@ -6,7 +6,7 @@
 /*   By: ehelmine <ehelmine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/21 18:31:32 by ehelmine          #+#    #+#             */
-/*   Updated: 2021/04/27 12:57:20 by ehelmine         ###   ########.fr       */
+/*   Updated: 2021/04/27 14:03:35 by ehelmine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,7 @@ typedef struct		s_val
 	double			am_of_decimals;
 	double			yy;
 	int				org_precision;
+	int				ii;
 }					t_val;
 
 int					ft_printf(const char *begin, ...);
@@ -114,13 +115,15 @@ void				write_zero(t_val *all);
 
 int					write_float(t_val *all, int i, int x, int out);
 
-int					write_float_6(t_val *all);
+int					write_float_5(t_val *all, int out);
 
 void				write_float_7(t_val *all);
 
-void				write_float_8(t_val *all, int out, int x, int i);
+int					write_float_8(t_val *all, int x, int i);
 
-void				write_float_9(t_val *all);
+void				write_float_8_second(t_val *all);
+
+int					write_float_9(t_val *all);
 
 int					write_float_output(t_val *all);
 

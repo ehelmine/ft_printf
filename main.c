@@ -6,7 +6,7 @@
 /*   By: ehelmine <ehelmine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/19 13:31:36 by ehelmine          #+#    #+#             */
-/*   Updated: 2021/04/26 20:07:13 by ehelmine         ###   ########.fr       */
+/*   Updated: 2021/04/27 13:58:36 by ehelmine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -473,18 +473,19 @@ int		main(void)
 //printf("%.3Lf\n", 0.1255000l);
 //ii = printf("{%}\n");
 //i = ft_printf("{%}\n");
+/*
 int yy;
-long double f_aarr[] = {10.55l, 5.321l, 0.05l, 1.0l, 9.1111889l, 2l, 0.6901385l};
+long double f_aarr[] = {11.55l, 25.321l, 0.05l, 1.0l, 9.1111889l, 2l, 0.6901385l};
 yy = 0;
-/*while (yy < 7)
+while (yy < 7)
 {
-	ii = printf("%.Lf %.1Lf %.3Lf %Lf %.10Lf\n", f_aarr[yy], f_aarr[yy], f_aarr[yy], f_aarr[yy], f_aarr[yy]);
-	i = ft_printf("%.Lf %.1Lf %.3Lf %Lf %.10Lf\n", f_aarr[yy], f_aarr[yy], f_aarr[yy], f_aarr[yy], f_aarr[yy]);
+	ii = printf("what %.Lf %.1Lf %.3Lf %.Lf %.10Lf\n", f_aarr[yy], f_aarr[yy], f_aarr[yy], f_aarr[yy], f_aarr[yy]);
+	i = ft_printf("what %.Lf %.1Lf %.3Lf %.Lf %.10Lf\n", f_aarr[yy], f_aarr[yy], f_aarr[yy], f_aarr[yy], f_aarr[yy]);
 	printf("real one %i and my %i\n", i, ii);
 	yy++;
 }
 
-double f_arr[] = {10.55, 5.321, 0.05, 1.0, 9.1111889, 2l, 0.6901385};
+double f_arr[] = {11.55, 5.321, 0.05, 1.0, 9.1111889, 2, 0.6901385};
 yy = 0;
 while (yy < 7)
 {
@@ -493,8 +494,9 @@ while (yy < 7)
 	printf("real one %i and my %i\n", i, ii);
 	yy++;
 }*/
-//printf("%.5p\n", 0);
-//ft_printf("%.5p\n", 0);
+
+printf("%.Lf\n", 10.55l);
+ft_printf("%.Lf\n", 10.55l);
 
 //printf("{% 03d}\n", 0);
 //ft_printf("{% 03d}\n", 0);
@@ -502,8 +504,8 @@ while (yy < 7)
 //printf("{% 010d}\n", 0);
 //ft_printf("{% 010d}\n", 0);
 
-printf("%ld\n", LONG_MIN);
-ft_printf("%ld\n", LONG_MIN);
+//printf("%ld\n", LONG_MIN);
+//ft_printf("%ld\n", LONG_MIN);
 /*
 printf("%.10f\n", 0.87650894255);
 ft_printf("%.10f\n\n", 0.87650894255);

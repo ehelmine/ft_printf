@@ -6,53 +6,28 @@
 /*   By: ehelmine <ehelmine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/26 21:03:30 by ehelmine          #+#    #+#             */
-/*   Updated: 2021/04/26 21:42:47 by ehelmine         ###   ########.fr       */
+/*   Updated: 2021/04/27 14:04:04 by ehelmine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_printf.h"
 
-static void	write_float_8_second(t_val *all)
-{
-	if (all->big_l)
-	{
-		if (all->extra_zero == 1)
-			all->end_i = all->end_i;
-		else
-		{
-			all->am_of_decimals = 1;
-			all->precision = all->org_precision + 1;
-			while (all->precision != 0)
-			{
-				all->am_of_decimals *= 5;
-				all->precision--;
-			}
-			if ((all->end_i * 10 + 5) % (int)all->am_of_decimals == 0)
-			{
-				if ((int)all->end_i % 2 != 0)
-					all->end_i++;
-			}
-		}
-	}
-}
-
-void		write_float_8(t_val *all, int out, int x, int i)
+int			write_float_8(t_val *all, int x, int i)
 {
 	while (x < 18)
 	{
-		all->d_num -= (int)all->d_num;
-		all->d_num *= 10;
+		all->d_num = (all->d_num - (int)all->d_num) * 10;
 		if ((int)all->d_num != 0)
 		{
 			all->end_i++;
-			out = 1;
 			break ;
 		}
 		x++;
 	}
-	if (out != 1)
+	if (x != 18)
 	{
-		all->end_str = ft_itoa(all->end_i);
+		if (!(all->end_str = ft_itoa(all->end_i)))
+			return (-1);
 		i = ft_strlen(all->end_str) - 1;
 		if (all->big_l == 1)
 			write_float_8_second(all);
@@ -63,6 +38,7 @@ void		write_float_8(t_val *all, int out, int x, int i)
 			all->d_num = 0;
 		free(all->end_str);
 	}
+	return (1);
 }
 
 void		write_float_7(t_val *all)
@@ -92,14 +68,11 @@ void		write_float_7(t_val *all)
 	}
 }
 
-int			write_float_6(t_val *all)
+static int	write_float_6(t_val *all)
 {
-	int i;
-	int out;
-
-	i = 0;
-	out = 0;
-	while (i < 7)
+	all->i = 0;
+	all->ii = 0;
+	while (all->i < 7)
 	{
 		all->d_num -= (int)all->d_num;
 		all->d_num *= 10;
@@ -107,16 +80,64 @@ int			write_float_6(t_val *all)
 		{
 			free(all->begin_str);
 			all->begin_str = ft_itoa(all->begin_i + 1);
+			if (all->begin_str == NULL)
+				return (-1);
 			all->end_i = 0;
-			out = 1;
+			all->ii = 1;
 			break ;
 		}
 		else if ((int)all->d_num > 0 && (int)all->d_num < 5)
 		{
-			out = 1;
+			all->ii = 1;
 			break ;
 		}
-		i++;
+		all->i++;
 	}
-	return (out);
+	return (all->ii);
+}
+
+static int	write_float_5_second(t_val *all)
+{
+	int out;
+
+	out = write_float_6(all);
+	if (out == -1)
+		return (-1);
+	if (out != 1 && all->begin_i % 2 != 0)
+	{
+		free(all->begin_str);
+		all->begin_str = ft_itoa(all->begin_i + 1);
+		if (all->begin_str == NULL)
+			return (-1);
+		all->d_num = 0;
+	}
+	return (1);
+}
+
+int			write_float_5(t_val *all, int out)
+{
+	out = 0;
+	if ((int)all->d_num > 5)
+	{
+		free(all->begin_str);
+		all->begin_str = ft_itoa(all->begin_i + 1);
+		if (all->begin_str == NULL)
+			return (-1);
+		all->d_num = 0;
+	}
+	else if ((int)all->d_num == 5)
+	{
+		if (write_float_5_second(all) == -1)
+			return (-1);
+	}
+	else if (all->end_i > 5)
+	{
+		free(all->begin_str);
+		all->begin_str = ft_itoa(all->begin_i + 1);
+		if (all->begin_str == NULL)
+			return (-1);
+		all->end_i = 0;
+		all->d_num = 0;
+	}
+	return (1);
 }
