@@ -6,7 +6,7 @@
 #    By: ehelmine <ehelmine@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/01/19 13:31:46 by ehelmine          #+#    #+#              #
-#    Updated: 2021/04/27 00:55:09 by ehelmine         ###   ########.fr        #
+#    Updated: 2021/04/27 11:13:16 by ehelmine         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,7 +37,7 @@ $(NAME):
 	make -C libft
 	@gcc $(CFLAGS) -c $(SRCS)
 	@echo "Sources to objects done"
-	@ar rc libftprintf.a $(OBJS) $(LIBFT_OBJS)
+	@ar rc libftprintf.a $(OBJS) libft/*.o
 	@ranlib libftprintf.a
 	@echo "Compiling libftprintf.a done"
 
