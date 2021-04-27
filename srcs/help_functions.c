@@ -6,7 +6,7 @@
 /*   By: ehelmine <ehelmine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/16 17:05:32 by ehelmine          #+#    #+#             */
-/*   Updated: 2021/04/26 22:34:21 by ehelmine         ###   ########.fr       */
+/*   Updated: 2021/04/27 12:57:06 by ehelmine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ int	get_arg_s_and_p(t_val *all, va_list args, char x)
 	if (x == 's')
 	{
 		all->str = va_arg(args, char *);
-		write_s(all);
+		return (write_s(all));
 	}
 	else if (x == 'p')
 	{
@@ -97,8 +97,7 @@ int	get_arg_s_and_p(t_val *all, va_list args, char x)
 		all->num = (intmax_t)all->vd_ptr;
 		if (all->num == 0)
 			all->zero_num = 1;
-		if (write_p(all) == -1)
-			return (-1);
+		return (write_p(all));
 	}
 	return (1);
 }

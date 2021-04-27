@@ -6,7 +6,7 @@
 /*   By: ehelmine <ehelmine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/22 17:36:20 by ehelmine          #+#    #+#             */
-/*   Updated: 2021/04/26 21:16:39 by ehelmine         ###   ########.fr       */
+/*   Updated: 2021/04/27 12:55:45 by ehelmine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ static void	write_s_right_ad(t_val *all)
 	}
 }
 
-void		write_s(t_val *all)
+int			write_s(t_val *all)
 {
 	char	*ptr;
 
@@ -86,6 +86,8 @@ void		write_s(t_val *all)
 	if (all->len > all->precision && all->precision >= 0 && all->str != NULL)
 	{
 		all->str_cpy = ft_strndup(all->str, all->precision);
+		if (all->str_cpy == NULL)
+			return (-1);
 		all->minimum_width = all->width - ft_strlen(all->str_cpy);
 	}
 	if (all->new_flags[0] != '-')
@@ -93,4 +95,5 @@ void		write_s(t_val *all)
 	else
 		write_s_left_ad(all);
 	free(all->str_cpy);
+	return (1);
 }

@@ -6,7 +6,7 @@
 /*   By: ehelmine <ehelmine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/21 18:31:32 by ehelmine          #+#    #+#             */
-/*   Updated: 2021/04/26 22:33:59 by ehelmine         ###   ########.fr       */
+/*   Updated: 2021/04/27 12:57:20 by ehelmine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,7 @@ char				*convert_num(t_val *all);
 
 void				write_c(t_val *all);
 
-void				write_s(t_val *all);
+int					write_s(t_val *all);
 
 int					write_d_and_i(t_val *all);
 
