@@ -6,7 +6,7 @@
 /*   By: ehelmine <ehelmine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/26 21:04:23 by ehelmine          #+#    #+#             */
-/*   Updated: 2021/05/03 14:29:11 by ehelmine         ###   ########.fr       */
+/*   Updated: 2021/05/03 16:12:06 by ehelmine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ int	write_float_output(t_val *all)
 	all->end_str = ft_itoa(all->end_i);
 	if (all->end_str == NULL)
 		return (-1);
-	all->str = (char *)malloc(sizeof(char) * 10000);
+	all->str = (char *)ft_memalloc(1000);
 	if (all->str == NULL)
 		return (-1);
 	all->tmp = all->str;
@@ -88,7 +88,6 @@ int	write_float_output(t_val *all)
 	ft_putstr(all->str);
 	free(all->end_str);
 	free(all->begin_str);
-	ft_bzero((void *)all->tmp, 10000);
 	free(all->tmp);
 	return (1);
 }

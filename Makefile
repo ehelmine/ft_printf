@@ -6,7 +6,7 @@
 #    By: ehelmine <ehelmine@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/01/19 13:31:46 by ehelmine          #+#    #+#              #
-#    Updated: 2021/05/03 15:49:51 by ehelmine         ###   ########.fr        #
+#    Updated: 2021/05/03 16:22:44 by ehelmine         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -48,14 +48,12 @@ CFLAGS = -g -Wall -Wextra -Werror
 
 all: $(NAME)
 
-$(NAME): $(OBJS) $(INCLUDES)
+$(NAME):
 	make -C libft
+	@gcc $(CFLAGS) -c $(SRCS) -I libft
 	@echo "Sources to objects done"
 	@ar rcs libftprintf.a $(OBJS) $(LIBFT_OBJS)
 	@echo "Compiling libftprintf.a done"
-
-$(OBJS):
-	@gcc $(CFLAGS) -c $(SRCS) -I libft
 
 clean:
 	make clean -C libft
