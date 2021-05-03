@@ -6,7 +6,7 @@
 #    By: ehelmine <ehelmine@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/01/19 13:31:46 by ehelmine          #+#    #+#              #
-#    Updated: 2021/05/01 17:36:47 by ehelmine         ###   ########.fr        #
+#    Updated: 2021/05/03 15:49:51 by ehelmine         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,7 @@ srcs/write_string.c srcs/write_p.c srcs/write_unsigned_ints.c \
 srcs/write_zero.c srcs/convert_int.c srcs/write_float_1.c \
 srcs/write_float_2.c srcs/write_float_3.c
 
-LIBFT_SRCS = $(addprefix $(LIB), ft_putchar.c ft_putstr.c ft_atoi.c \
+LIBFT_SRCS = $(addprefix libft/, ft_putchar.c ft_putstr.c ft_atoi.c \
 ft_strlen.c ft_strcmp.c ft_putnbr.c ft_strdup.c ft_strcpy.c ft_strncpy.c \
 ft_strclr.c ft_strcat.c ft_strncmp.c ft_putendl.c ft_strlcat.c ft_bzero.c \
 ft_strncat.c ft_strchr.c ft_strrchr.c ft_isalpha.c ft_isdigit.c ft_isascii.c \
@@ -42,19 +42,20 @@ LIB_A = libft/libft.a
 
 LIBFT_OBJS = $(LIBFT_SRCS:%.c=%.o)
 
-INCLUDE = libft/includes/libft.h
+INCLUDES = includes/ft_printf.h
 
 CFLAGS = -g -Wall -Wextra -Werror
 
 all: $(NAME)
 
-$(NAME):
+$(NAME): $(OBJS) $(INCLUDES)
 	make -C libft
-	@gcc $(CFLAGS) -c $(SRCS)
 	@echo "Sources to objects done"
-	@ar rc libftprintf.a $(OBJS) $(LIBFT_OBJS)
-	@ranlib libftprintf.a
+	@ar rcs libftprintf.a $(OBJS) $(LIBFT_OBJS)
 	@echo "Compiling libftprintf.a done"
+
+$(OBJS):
+	@gcc $(CFLAGS) -c $(SRCS) -I libft
 
 clean:
 	make clean -C libft

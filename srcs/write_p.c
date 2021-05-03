@@ -6,7 +6,7 @@
 /*   By: ehelmine <ehelmine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/22 17:58:06 by ehelmine          #+#    #+#             */
-/*   Updated: 2021/05/01 17:53:48 by ehelmine         ###   ########.fr       */
+/*   Updated: 2021/05/03 14:21:33 by ehelmine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,6 @@ int	write_p(t_val *all)
 	char	*output;
 	char	*number;
 	int		a;
-	int		i;
 
 	abc = "0123456789abcdef";
 	number = (char *)malloc(sizeof(char) * 1000);
@@ -76,15 +75,17 @@ int	write_p(t_val *all)
 	a = write_p_2(all, number, abc);
 	output = (char *)malloc(sizeof(char) * (all->real_len + 1));
 	if (output == NULL)
+	{
+		free(number);
 		return (-1);
-	i = 0;
+	}
 	if (!all->minus_flag)
 	{
-		while (i < all->real_len - all->len)
+		while (all->y < all->real_len - all->len)
 		{
-			output[i++] = ' ';
+			output[all->y++] = ' ';
 			all->output_len++;
 		}
 	}
-	return (write_p_3(all, output, number, i));
+	return (write_p_3(all, output, number, all->y));
 }

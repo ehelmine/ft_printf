@@ -6,7 +6,7 @@
 /*   By: ehelmine <ehelmine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/22 18:22:11 by ehelmine          #+#    #+#             */
-/*   Updated: 2021/05/01 17:52:43 by ehelmine         ###   ########.fr       */
+/*   Updated: 2021/05/03 13:50:33 by ehelmine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,17 +16,17 @@ static char	*convert_num_3(t_val *all, char *number, int a)
 {
 	int	x;
 
-	if (all->hash_flag && !all->zero_num && (all->conv == 'x'
+	if (all->hash_flag && all->zero_num && (all->conv == 'x'
 			|| all->conv == 'X'))
 	{
 		number[a++] = all->conv;
 		number[a++] = '0';
 		all->zero_x = 1;
 	}
-	if (all->conv == 'o' && all->hash_flag)
+	if (all->conv == 'o' && all->hash_flag == 1)
 		number[a++] = '0';
 	number[a] = '\0';
-	if (all->precision && (all->conv == 'o' || all->conv == 'u'))
+	if (all->precision > 0 && (all->conv == 'o' || all->conv == 'u'))
 	{
 		x = all->precision;
 		while ((int)ft_strlen(number) < x)
@@ -42,7 +42,7 @@ static char	*convert_num_3(t_val *all, char *number, int a)
 static char	*convert_num_2(t_val *all, char *number, int a)
 {
 	number[a] = '\0';
-	if (all->precision && (all->conv == 'u' || all->conv == 'x'
+	if (all->precision > 0 && (all->conv == 'u' || all->conv == 'x'
 			|| all->conv == 'X'))
 	{
 		while ((int)ft_strlen(number) < all->precision)
@@ -51,8 +51,8 @@ static char	*convert_num_2(t_val *all, char *number, int a)
 			number[a] = '\0';
 		}
 	}
-	if (all->hash_flag && (all->conv == 'x' || all->conv == 'X')
-		&& !all->minus_flag && all->zero_flag)
+	if (all->hash_flag == 1 && (all->conv == 'x' || all->conv == 'X')
+		&& all->minus_flag < 1 && all->zero_flag == 1)
 	{
 		while ((int)ft_strlen(number) < all->width - 2)
 		{

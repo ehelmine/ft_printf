@@ -6,7 +6,7 @@
 /*   By: ehelmine <ehelmine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/22 18:18:17 by ehelmine          #+#    #+#             */
-/*   Updated: 2021/05/03 03:42:15 by ehelmine         ###   ########.fr       */
+/*   Updated: 2021/05/03 12:32:58 by ehelmine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,7 @@ static int	write_unsigned_2(t_val *all, char *number)
 	if (all->zero_num && all->precision == 0)
 	{
 		write_zero(all);
+		free(number);
 		return (1);
 	}
 	output = (char *)malloc(sizeof(char) * (all->real_len + 1));

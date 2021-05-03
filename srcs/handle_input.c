@@ -6,15 +6,11 @@
 /*   By: ehelmine <ehelmine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/21 17:36:02 by ehelmine          #+#    #+#             */
-/*   Updated: 2021/05/03 03:38:54 by ehelmine         ###   ########.fr       */
+/*   Updated: 2021/05/03 15:41:32 by ehelmine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_printf.h"
-
-/*
-**	Conversion spesifier %u doesn't recognise space or plus flags.
-*/
 
 int	check_correct_flags(char *flags, va_list args, t_val *all)
 {
@@ -23,6 +19,8 @@ int	check_correct_flags(char *flags, va_list args, t_val *all)
 
 	ii = 0;
 	i = ft_strlen(flags) - 1;
+	all->conv = flags[i];
+	all->zero_x = 0;
 	set_values(all, flags, flags[i]);
 	if (flags[i] == 's' || flags[i] == 'p')
 		check_flags_p_and_s(all, flags, ii);
@@ -109,6 +107,5 @@ int	ft_printf(const char *begin, ...)
 	va_end(args);
 	len = all.output_len;
 	free(flags);
-//	system("leaks testi");
 	return (len);
 }

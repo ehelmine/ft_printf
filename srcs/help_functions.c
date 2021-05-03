@@ -6,7 +6,7 @@
 /*   By: ehelmine <ehelmine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/16 17:05:32 by ehelmine          #+#    #+#             */
-/*   Updated: 2021/04/27 12:57:06 by ehelmine         ###   ########.fr       */
+/*   Updated: 2021/05/03 13:52:45 by ehelmine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,14 @@
 
 int	check_num_type(t_val *all)
 {
-	if (all->h)
+	if (all->h == 1)
 	{
 		if (all->num < -32768)
 			all->num = 0;
 		else if (all->num > 32767)
 			all->num = -32768;
 	}
-	else if (all->hh)
+	else if (all->hh == 1)
 	{
 		if (all->num < -128)
 			all->num = 127;
@@ -44,13 +44,13 @@ int	get_arg_unsigned_int(t_val *all, va_list args, char x)
 		if (all->conv == 'X')
 			all->big_x = 1;
 	}
-	if (all->h)
+	if (all->h == 1)
 		all->unum = (unsigned short)va_arg(args, unsigned int);
-	else if (all->l)
+	else if (all->l == 1)
 		all->unum = (unsigned long)va_arg(args, unsigned long);
-	else if (all->ll)
+	else if (all->ll == 1)
 		all->unum = (unsigned long long)va_arg(args, unsigned long long);
-	else if (all->hh)
+	else if (all->hh == 1)
 		all->unum = (unsigned char)va_arg(args, unsigned int);
 	else
 		all->unum = va_arg(args, unsigned int);
@@ -61,9 +61,9 @@ int	get_arg_unsigned_int(t_val *all, va_list args, char x)
 
 int	get_arg_signed_int(t_val *all, va_list args)
 {
-	if (all->h)
+	if (all->h == 1)
 		all->num = (short int)va_arg(args, int);
-	else if (all->ll || all->l)
+	else if (all->ll == 1 || all->l == 1)
 	{
 		all->num = (long long int)va_arg(args, long long int);
 		if ((long long int)all->num == -9223372036854775807 - 1)
@@ -73,7 +73,7 @@ int	get_arg_signed_int(t_val *all, va_list args)
 			return (1);
 		}
 	}
-	else if (all->hh)
+	else if (all->hh == 1)
 		all->num = (signed char)va_arg(args, int);
 	else
 		all->num = va_arg(args, signed int);
@@ -97,6 +97,7 @@ int	get_arg_s_and_p(t_val *all, va_list args, char x)
 		all->num = (intmax_t)all->vd_ptr;
 		if (all->num == 0)
 			all->zero_num = 1;
+		all->y = 0;
 		return (write_p(all));
 	}
 	return (1);
@@ -115,8 +116,11 @@ int	get_arg(t_val *all, va_list args, char x)
 	else if (x == 'f')
 	{
 		all->d_num = va_arg(args, double);
-		if (all->big_l)
+		if (all->big_l == 1)
 			all->d_num = va_arg(args, long double);
+		all->begin_str = NULL;
+		all->end_str = NULL;
+		all->str = NULL;
 		return (write_float(all, 0, 0, 0));
 	}
 	else if (x == 'i' || x == 'd')

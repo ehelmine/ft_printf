@@ -6,7 +6,7 @@
 /*   By: ehelmine <ehelmine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/26 21:04:23 by ehelmine          #+#    #+#             */
-/*   Updated: 2021/05/03 03:34:21 by ehelmine         ###   ########.fr       */
+/*   Updated: 2021/05/03 14:29:11 by ehelmine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,11 @@ static void	write_float_output_3(t_val *all, int i)
 {
 	while (all->len < all->width)
 	{
-		if (all->minus_flag)
+		if (all->minus_flag == 1)
 			all->str[i++] = ' ';
 		else
 		{
-			if (all->zero_flag)
+			if (all->zero_flag == 1)
 			{
 				if (all->str[0] == '+' || all->str[0] == '-'
 					|| all->str[0] == ' ')
@@ -46,7 +46,7 @@ static int	write_float_output_2(t_val *all, int i)
 	while (all->begin_str[ii] != '\0')
 		all->str[i++] = all->begin_str[ii++];
 	all->str[i] = '\0';
-	if (all->org_precision != 0 || all->hash_flag)
+	if (all->org_precision != 0 || all->hash_flag == 1)
 		all->str[i++] = '.';
 	if (all->org_precision != 0)
 	{
@@ -66,8 +66,6 @@ static int	write_float_output_2(t_val *all, int i)
 
 int	write_float_output(t_val *all)
 {
-	int	i;
-
 	all->end_str = ft_itoa(all->end_i);
 	if (all->end_str == NULL)
 		return (-1);
@@ -75,61 +73,47 @@ int	write_float_output(t_val *all)
 	if (all->str == NULL)
 		return (-1);
 	all->tmp = all->str;
-	i = 0;
-	if (all->space_flag && !all->negative_val)
-		all->str[i++] = ' ';
-	if (all->negative_val)
-		all->str[i++] = '-';
-	if (!all->negative_val && all->plus_flag && !all->space_flag)
-		all->str[i++] = '+';
-	i = write_float_output_2(all, i);
+	all->y = 0;
+	if (all->space_flag == 1 && all->negative_val < 1)
+		all->str[all->y++] = ' ';
+	if (all->negative_val == 1)
+		all->str[all->y++] = '-';
+	if (all->negative_val < 1 && all->plus_flag == 1 && all->space_flag < 1)
+		all->str[all->y++] = '+';
+	all->y = write_float_output_2(all, all->y);
 	all->len = ft_strlen(all->str);
 	if (all->len < all->width)
-		write_float_output_3(all, i);
+		write_float_output_3(all, all->y);
 	all->output_len += all->len;
 	ft_putstr(all->str);
 	free(all->end_str);
 	free(all->begin_str);
-	free(all->tmp);
 	ft_bzero((void *)all->tmp, 10000);
+	free(all->tmp);
 	return (1);
 }
 
 int	write_float_9(t_val *all)
 {
-	int	i;
-
 	free(all->end_str);
 	all->end_str = ft_itoa(all->end_i);
 	if (all->end_str == NULL)
 		return (-1);
-	i = ft_strlen(all->end_str) - 1;
-	while (i >= 0 && all->end_str[i] == '9')
-		i--;
-	if (i >= 0)
-	{
-		all->end_str[i] = all->end_str[i] + 1;
-		i++;
-		while (all->end_str[i] != '\0')
-			all->end_str[i++] = '0';
-		all->end_i = ft_atoi(all->end_str);
-	}
-	else
-	{
-		free(all->begin_str);
-		all->begin_str = ft_itoa(all->begin_i + 1);
-		if (all->begin_str == NULL)
-			return (-1);
-		all->end_i = 0;
-		all->d_num = 0;
-	}
+	all->y = ft_strlen(all->end_str) - 1;
+	while (all->y >= 0 && all->end_str[all->y] == '9')
+		all->y--;
+	all->end_str[all->y] = all->end_str[all->y] + 1;
+	all->y++;
+	while (all->end_str[all->y] != '\0')
+		all->end_str[all->y++] = '0';
+	all->end_i = ft_atoi(all->end_str);
 	free(all->end_str);
 	return (1);
 }
 
 void	write_float_8_second(t_val *all)
 {
-	if (all->big_l)
+	if (all->big_l == 1)
 	{
 		if (all->extra_zero == 1)
 			all->end_i = all->end_i;

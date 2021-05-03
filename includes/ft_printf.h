@@ -6,7 +6,7 @@
 /*   By: ehelmine <ehelmine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/21 18:31:32 by ehelmine          #+#    #+#             */
-/*   Updated: 2021/04/27 16:32:36 by ehelmine         ###   ########.fr       */
+/*   Updated: 2021/05/03 14:20:48 by ehelmine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 # include <stdlib.h>
 # include "../libft/includes/libft.h"
 
-typedef struct		s_val
+typedef struct s_val
 {
 	char			*type;
 	const char		*output;
@@ -67,6 +67,7 @@ typedef struct		s_val
 	double			yy;
 	int				org_precision;
 	int				ii;
+	int				y;
 }					t_val;
 
 int					ft_printf(const char *begin, ...);

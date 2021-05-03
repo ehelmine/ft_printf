@@ -6,7 +6,7 @@
 /*   By: ehelmine <ehelmine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/26 21:02:38 by ehelmine          #+#    #+#             */
-/*   Updated: 2021/05/03 03:24:24 by ehelmine         ###   ########.fr       */
+/*   Updated: 2021/05/03 13:37:05 by ehelmine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static void	write_float_4(t_val *all)
 {
-	if ((int)all->d_num == 9 && all->org_precision > 1 && all->big_l)
+	if ((int)all->d_num == 9 && all->org_precision > 1 && all->big_l == 1)
 	{
 		all->d_num -= (int)all->d_num;
 		all->d_num *= 10;
@@ -38,7 +38,7 @@ static void	write_float_4(t_val *all)
 
 static void	write_float_3(t_val *all)
 {
-	if (all->big_l && all->org_precision == 1 && all->end_i != 0
+	if (all->big_l == 1 && all->org_precision == 1 && all->end_i != 0
 		&& all->end_i < 10)
 	{
 		all->i = 1;
@@ -64,7 +64,7 @@ static void	write_float_3(t_val *all)
 
 static int	write_float_2(t_val *all)
 {
-	if (all->space_flag && all->plus_flag)
+	if (all->space_flag == 1 && all->plus_flag == 1)
 		all->space_flag = 0;
 	all->negative_val = 0;
 	if (all->d_num < 0 || (all->d_num == 0 && 1.0 / all->d_num < 0))
@@ -106,9 +106,6 @@ int	write_float_second(t_val *all, int out)
 
 int	write_float(t_val *all, int i, int x, int out)
 {
-	all->begin_str = NULL;
-	all->end_str = NULL;
-	all->str = NULL;
 	if (write_float_2(all) == -1)
 		return (-1);
 	write_float_3(all);
