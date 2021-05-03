@@ -6,20 +6,18 @@
 /*   By: ehelmine <ehelmine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/15 16:02:24 by ehelmine          #+#    #+#             */
-/*   Updated: 2020/07/07 11:23:06 by ehelmine         ###   ########.fr       */
+/*   Updated: 2021/05/01 16:02:04 by ehelmine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int		ft_isalpha(int c)
+#include "libft.h"
+
+int	ft_isalpha(int c)
 {
 	if (c >= 65 && c <= 90)
-	{
 		return (1);
-	}
 	if (c >= 97 && c <= 122)
-	{
 		return (1);
-	}
 	else
 		return (0);
 }

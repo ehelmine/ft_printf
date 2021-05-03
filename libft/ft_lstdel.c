@@ -6,7 +6,7 @@
 /*   By: ehelmine <ehelmine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/08 14:52:19 by ehelmine          #+#    #+#             */
-/*   Updated: 2020/07/08 15:13:48 by ehelmine         ###   ########.fr       */
+/*   Updated: 2021/05/01 16:03:41 by ehelmine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@
 */
 
 #include "libft.h"
-#include <stdlib.h>
 
 void	ft_lstdel(t_list **alst, void (*del)(void *, size_t))
 {

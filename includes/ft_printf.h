@@ -6,7 +6,7 @@
 /*   By: ehelmine <ehelmine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/21 18:31:32 by ehelmine          #+#    #+#             */
-/*   Updated: 2021/04/27 14:03:35 by ehelmine         ###   ########.fr       */
+/*   Updated: 2021/04/27 16:32:36 by ehelmine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,8 +70,6 @@ typedef struct		s_val
 }					t_val;
 
 int					ft_printf(const char *begin, ...);
-
-char				*trim_string(char *flags);
 
 void				set_values(t_val *all, char *flags, char c);
 

@@ -6,18 +6,16 @@
 /*   By: ehelmine <ehelmine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/16 15:11:08 by ehelmine          #+#    #+#             */
-/*   Updated: 2020/06/18 10:52:03 by ehelmine         ###   ########.fr       */
+/*   Updated: 2021/05/01 16:46:59 by ehelmine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int		ft_tolower(int c)
+int	ft_tolower(int c)
 {
 	if (c >= 65 && c <= 90)
-	{
 		return (c + 32);
-	}
 	else
 		return (c);
 }

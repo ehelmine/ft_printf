@@ -6,7 +6,7 @@
 /*   By: ehelmine <ehelmine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/17 14:12:55 by ehelmine          #+#    #+#             */
-/*   Updated: 2020/07/06 13:22:41 by ehelmine         ###   ########.fr       */
+/*   Updated: 2021/05/01 16:52:16 by ehelmine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@
 */
 
 #include "libft.h"
-#include <string.h>
 
 void	*ft_memccpy(void *dst, const void *src, int c, size_t n)
 {
@@ -40,9 +39,7 @@ void	*ft_memccpy(void *dst, const void *src, int c, size_t n)
 	{
 		dsst[i] = srrc[i];
 		if (dsst[i] == x)
-		{
-			return ((unsigned char*)dst + i + 1);
-		}
+			return ((unsigned char *)dst + i + 1);
 		i++;
 	}
 	return (0);

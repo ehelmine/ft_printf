@@ -6,7 +6,7 @@
 /*   By: ehelmine <ehelmine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/22 18:20:13 by ehelmine          #+#    #+#             */
-/*   Updated: 2021/04/26 21:16:51 by ehelmine         ###   ########.fr       */
+/*   Updated: 2021/05/01 17:55:08 by ehelmine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ static void	write_zero_2(t_val *all)
 	}
 }
 
-void		write_zero(t_val *all)
+void	write_zero(t_val *all)
 {
 	int	x;
 

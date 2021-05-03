@@ -6,7 +6,7 @@
 /*   By: ehelmine <ehelmine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/21 17:36:02 by ehelmine          #+#    #+#             */
-/*   Updated: 2021/04/26 22:18:25 by ehelmine         ###   ########.fr       */
+/*   Updated: 2021/05/03 03:38:54 by ehelmine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@
 int	check_correct_flags(char *flags, va_list args, t_val *all)
 {
 	int	i;
-	int	x;
 	int	ii;
 
 	ii = 0;
@@ -34,10 +33,7 @@ int	check_correct_flags(char *flags, va_list args, t_val *all)
 		check_flags_int(all, flags, ii, flags[i]);
 	else if (flags[i] == 'f')
 		check_flags_float(all, flags, ii);
-	x = all->check;
-	if (x == 1)
-		return (get_arg(all, args, flags[i]));
-	return (1);
+	return (get_arg(all, args, flags[i]));
 }
 
 int	loop_flags(const char *ptr, t_val *all, char *flags)
@@ -78,11 +74,8 @@ int	loop_parameters(const char *ptr, va_list args, t_val *all, char *flags)
 	{
 		while (*ptr != '%' && *ptr != '\0')
 		{
-			if (all->check)
-			{
-				write(1, (const void *)ptr, 1);
-				all->output_len++;
-			}
+			write(1, (const void *)ptr, 1);
+			all->output_len++;
 			ptr++;
 		}
 		if (*ptr == '\0')
@@ -113,11 +106,9 @@ int	ft_printf(const char *begin, ...)
 	all.output_len = 0;
 	if (loop_parameters(begin, args, &all, flags) == -1)
 		return (-1);
-	all.check = 1;
-	if (loop_parameters(begin, args, &all, flags) == -1)
-		return (-1);
 	va_end(args);
 	len = all.output_len;
 	free(flags);
+//	system("leaks testi");
 	return (len);
 }

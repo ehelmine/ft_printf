@@ -6,7 +6,7 @@
 /*   By: ehelmine <ehelmine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/22 17:36:20 by ehelmine          #+#    #+#             */
-/*   Updated: 2021/04/27 14:02:39 by ehelmine         ###   ########.fr       */
+/*   Updated: 2021/05/01 20:11:51 by ehelmine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ static void	write_s_left_ad(t_val *all)
 	{
 		ft_putstr(all->str_cpy);
 		all->output_len += ft_strlen(all->str_cpy);
+		free(all->str_cpy);
 	}
 	while (all->minimum_width > 0)
 	{
@@ -65,10 +66,11 @@ static void	write_s_right_ad(t_val *all)
 	{
 		ft_putstr(all->str_cpy);
 		all->output_len += ft_strlen(all->str_cpy);
+		free(all->str_cpy);
 	}
 }
 
-int			write_s(t_val *all)
+int	write_s(t_val *all)
 {
 	char	*ptr;
 
@@ -85,7 +87,8 @@ int			write_s(t_val *all)
 	all->minimum_width = all->width - all->len;
 	if (all->len > all->precision && all->precision >= 0 && all->str != NULL)
 	{
-		if (!(all->str_cpy = ft_strndup(all->str, all->precision)))
+		all->str_cpy = ft_strndup(all->str, all->precision);
+		if (all->str_cpy == NULL)
 			return (-1);
 		all->minimum_width = all->width - ft_strlen(all->str_cpy);
 	}
@@ -93,6 +96,5 @@ int			write_s(t_val *all)
 		write_s_right_ad(all);
 	else
 		write_s_left_ad(all);
-	free(all->str_cpy);
 	return (1);
 }

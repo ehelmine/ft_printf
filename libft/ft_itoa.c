@@ -6,12 +6,11 @@
 /*   By: ehelmine <ehelmine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/10 23:11:35 by ehelmine          #+#    #+#             */
-/*   Updated: 2021/02/11 00:10:29 by ehelmine         ###   ########.fr       */
+/*   Updated: 2021/05/01 16:48:06 by ehelmine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include <stdlib.h>
 
 char	*ft_itoa(long n)
 {
@@ -26,7 +25,8 @@ char	*ft_itoa(long n)
 		n = n * -1;
 	}
 	len = ft_check_int_len(n) + minus;
-	if (!(number = (char*)malloc(sizeof(char) * (len + 1))))
+	number = (char *)malloc(sizeof(char) * (len + 1));
+	if (number == NULL)
 		return (NULL);
 	number[len--] = '\0';
 	while (n > 9)

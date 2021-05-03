@@ -6,7 +6,7 @@
 /*   By: ehelmine <ehelmine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/18 12:17:00 by ehelmine          #+#    #+#             */
-/*   Updated: 2020/07/04 16:01:06 by ehelmine         ###   ########.fr       */
+/*   Updated: 2021/05/01 16:55:13 by ehelmine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,10 @@
 ** Param. #1 The size of the memory that needs to be allocated.
 */
 #include "libft.h"
-#include <stdlib.h>
 
 void	*ft_memalloc(size_t size)
 {
-	void *str;
+	void	*str;
 
 	str = (void *)malloc(sizeof(*str) * size);
 	if (str != NULL)

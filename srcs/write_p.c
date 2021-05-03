@@ -6,7 +6,7 @@
 /*   By: ehelmine <ehelmine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/22 17:58:06 by ehelmine          #+#    #+#             */
-/*   Updated: 2021/04/26 22:02:20 by ehelmine         ###   ########.fr       */
+/*   Updated: 2021/05/01 17:53:48 by ehelmine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ static int	write_p_2(t_val *all, char *number, char *abc)
 	return (a);
 }
 
-int			write_p(t_val *all)
+int	write_p(t_val *all)
 {
 	char	*abc;
 	char	*output;

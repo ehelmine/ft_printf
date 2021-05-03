@@ -6,7 +6,7 @@
 /*   By: ehelmine <ehelmine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/12 11:24:48 by ehelmine          #+#    #+#             */
-/*   Updated: 2020/07/06 11:16:01 by ehelmine         ###   ########.fr       */
+/*   Updated: 2021/05/01 16:48:37 by ehelmine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,9 +40,8 @@
 */
 
 #include "libft.h"
-#include <string.h>
 
-size_t		ft_strlcat(char *dest, const char *src, size_t n)
+size_t	ft_strlcat(char *dest, const char *src, size_t n)
 {
 	size_t	srclen;
 	size_t	destlen;

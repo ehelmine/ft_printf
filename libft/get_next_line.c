@@ -6,17 +6,15 @@
 /*   By: ehelmine <ehelmine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/22 10:56:07 by ehelmine          #+#    #+#             */
-/*   Updated: 2020/10/12 12:12:32 by ehelmine         ###   ########.fr       */
+/*   Updated: 2021/05/01 17:49:47 by ehelmine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include <unistd.h>
-#include <stdlib.h>
 
 static int	check_line_break(char *buf)
 {
-	size_t i;
+	size_t	i;
 
 	i = 0;
 	while (buf[i] != '\0')
@@ -77,14 +75,25 @@ static char	*ft_check_newline(char **line, char *end)
 	return (end);
 }
 
-int			get_next_line(const int fd, char **line)
+int	call_check_newline(const int fd, char **line, char **end)
+{
+	while (end[fd] != NULL)
+	{
+		end[fd] = ft_check_newline(line, end[fd]);
+		return (1);
+	}
+	return (0);
+}
+
+int	get_next_line(const int fd, char **line)
 {
 	char		buf[BUFF_SIZE + 1];
-	static char *end[MAX_FD];
+	static char	*end[MAX_FD];
 	char		*temp;
 	int			x;
 
-	while ((x = read(fd, buf, BUFF_SIZE)) > 0 && line != NULL && fd > -1)
+	x = read(fd, buf, BUFF_SIZE);
+	while (x > 0 && line != NULL && fd > -1)
 	{
 		buf[x] = '\0';
 		if (end[fd] != NULL)
@@ -98,10 +107,5 @@ int			get_next_line(const int fd, char **line)
 	}
 	if (x == -1 || line == NULL || fd < 0 || fd >= MAX_FD)
 		return (-1);
-	while (end[fd] != NULL)
-	{
-		end[fd] = ft_check_newline(line, end[fd]);
-		return (1);
-	}
-	return (0);
+	return (call_check_newline(fd, line, end));
 }

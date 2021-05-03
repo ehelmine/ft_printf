@@ -6,7 +6,7 @@
 /*   By: ehelmine <ehelmine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/07 12:52:57 by ehelmine          #+#    #+#             */
-/*   Updated: 2020/07/09 10:51:45 by ehelmine         ###   ########.fr       */
+/*   Updated: 2021/05/01 17:01:56 by ehelmine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,13 +25,13 @@
 */
 
 #include "libft.h"
-#include <stdlib.h>
 
 t_list	*ft_lstnew(void const *content, size_t content_size)
 {
-	t_list *new;
+	t_list	*new;
 
-	if (!(new = (t_list *)malloc(sizeof(t_list))))
+	new = (t_list *)malloc(sizeof(t_list));
+	if (new == NULL)
 		return (NULL);
 	if (content == 0)
 	{
@@ -40,10 +40,14 @@ t_list	*ft_lstnew(void const *content, size_t content_size)
 	}
 	else
 	{
-		if (!(new->content = (void *)malloc(content_size)))
+		new->content = (void *)malloc(content_size);
+		if (new->content == NULL)
 			return (NULL);
-		new->content = (void *)content;
-		new->content_size = content_size;
+		if (new->content == NULL)
+		{
+			new->content = (void *)content;
+			new->content_size = content_size;
+		}
 	}
 	new->next = NULL;
 	return (new);

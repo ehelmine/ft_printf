@@ -6,7 +6,7 @@
 /*   By: ehelmine <ehelmine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/22 17:20:52 by ehelmine          #+#    #+#             */
-/*   Updated: 2021/04/27 13:27:41 by ehelmine         ###   ########.fr       */
+/*   Updated: 2021/05/01 17:53:59 by ehelmine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	write_d_and_i_right_ad_4(t_val *all, char *output, int x)
 	}
 }
 
-int		write_d_and_i_right_ad_3(t_val *all, char *num_str, char *output, int x)
+int	write_d_and_i_right_ad_3(t_val *all, char *num_str, char *output, int x)
 {
 	while (all->precision > all->len)
 	{
@@ -59,7 +59,7 @@ int		write_d_and_i_right_ad_3(t_val *all, char *num_str, char *output, int x)
 	return (1);
 }
 
-int		write_d_and_i_right_ad_2(t_val *all, char *output, int x)
+int	write_d_and_i_right_ad_2(t_val *all, char *output, int x)
 {
 	if (all->num >= 0)
 	{
@@ -82,7 +82,7 @@ int		write_d_and_i_right_ad_2(t_val *all, char *output, int x)
 	return (x);
 }
 
-int		write_d_and_i_right_ad(t_val *all)
+int	write_d_and_i_right_ad(t_val *all)
 {
 	char	*output;
 	char	*num_str;

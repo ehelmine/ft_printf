@@ -6,7 +6,7 @@
 /*   By: ehelmine <ehelmine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/26 21:04:23 by ehelmine          #+#    #+#             */
-/*   Updated: 2021/04/27 14:04:16 by ehelmine         ###   ########.fr       */
+/*   Updated: 2021/05/03 03:34:21 by ehelmine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,8 @@ static void	write_float_output_3(t_val *all, int i)
 
 static int	write_float_output_2(t_val *all, int i)
 {
-	int ii;
-	int x;
+	int	ii;
+	int	x;
 
 	ii = 0;
 	while (all->begin_str[ii] != '\0')
@@ -64,14 +64,15 @@ static int	write_float_output_2(t_val *all, int i)
 	return (i);
 }
 
-int			write_float_output(t_val *all)
+int	write_float_output(t_val *all)
 {
-	int i;
+	int	i;
 
 	all->end_str = ft_itoa(all->end_i);
 	if (all->end_str == NULL)
 		return (-1);
-	if (!(all->str = (char*)malloc(sizeof(char) * 10000)))
+	all->str = (char *)malloc(sizeof(char) * 10000);
+	if (all->str == NULL)
 		return (-1);
 	all->tmp = all->str;
 	i = 0;
@@ -89,13 +90,16 @@ int			write_float_output(t_val *all)
 	ft_putstr(all->str);
 	free(all->end_str);
 	free(all->begin_str);
+	free(all->tmp);
+	ft_bzero((void *)all->tmp, 10000);
 	return (1);
 }
 
-int			write_float_9(t_val *all)
+int	write_float_9(t_val *all)
 {
-	int i;
+	int	i;
 
+	free(all->end_str);
 	all->end_str = ft_itoa(all->end_i);
 	if (all->end_str == NULL)
 		return (-1);
@@ -113,15 +117,17 @@ int			write_float_9(t_val *all)
 	else
 	{
 		free(all->begin_str);
-		if (!(all->begin_str = ft_itoa(all->begin_i + 1)))
+		all->begin_str = ft_itoa(all->begin_i + 1);
+		if (all->begin_str == NULL)
 			return (-1);
 		all->end_i = 0;
 		all->d_num = 0;
 	}
+	free(all->end_str);
 	return (1);
 }
 
-void		write_float_8_second(t_val *all)
+void	write_float_8_second(t_val *all)
 {
 	if (all->big_l)
 	{

@@ -6,7 +6,7 @@
 /*   By: ehelmine <ehelmine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/24 12:41:22 by ehelmine          #+#    #+#             */
-/*   Updated: 2020/07/06 11:51:36 by ehelmine         ###   ########.fr       */
+/*   Updated: 2021/05/01 16:47:57 by ehelmine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 
 void	ft_striter(char *s, void (*f)(char *))
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (s[i] != '\0')

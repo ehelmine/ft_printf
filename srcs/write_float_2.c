@@ -6,13 +6,13 @@
 /*   By: ehelmine <ehelmine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/26 21:03:30 by ehelmine          #+#    #+#             */
-/*   Updated: 2021/04/27 14:04:04 by ehelmine         ###   ########.fr       */
+/*   Updated: 2021/05/03 03:31:50 by ehelmine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_printf.h"
 
-int			write_float_8(t_val *all, int x, int i)
+int	write_float_8(t_val *all, int x, int i)
 {
 	while (x < 18)
 	{
@@ -20,28 +20,27 @@ int			write_float_8(t_val *all, int x, int i)
 		if ((int)all->d_num != 0)
 		{
 			all->end_i++;
+			free(all->end_str);
+			all->end_str = ft_itoa(all->end_i);
+			if (all->end_str == NULL)
+				return (-1);
+			i = ft_strlen(all->end_str) - 1;
+			if (all->big_l == 1)
+				write_float_8_second(all);
+			else if ((all->begin_i == 0 && all->end_i == 0)
+				|| (int)all->end_str[i] % 2 != 0)
+				all->end_i++;
+			if ((int)all->end_str[i] % 2 != 0)
+				all->d_num = 0;
+			free(all->end_str);
 			break ;
 		}
 		x++;
 	}
-	if (x != 18)
-	{
-		if (!(all->end_str = ft_itoa(all->end_i)))
-			return (-1);
-		i = ft_strlen(all->end_str) - 1;
-		if (all->big_l == 1)
-			write_float_8_second(all);
-		else if ((all->begin_i == 0 && all->end_i == 0)
-				|| (int)all->end_str[i] % 2 != 0)
-			all->end_i++;
-		if ((int)all->end_str[i] % 2 != 0)
-			all->d_num = 0;
-		free(all->end_str);
-	}
 	return (1);
 }
 
-void		write_float_7(t_val *all)
+void	write_float_7(t_val *all)
 {
 	if (all->big_l == 1 && all->org_precision == 1 && (int)all->d_num == 5)
 	{
@@ -98,7 +97,7 @@ static int	write_float_6(t_val *all)
 
 static int	write_float_5_second(t_val *all)
 {
-	int out;
+	int	out;
 
 	out = write_float_6(all);
 	if (out == -1)
@@ -114,7 +113,7 @@ static int	write_float_5_second(t_val *all)
 	return (1);
 }
 
-int			write_float_5(t_val *all, int out)
+int	write_float_5(t_val *all, int out)
 {
 	out = 0;
 	if ((int)all->d_num > 5)

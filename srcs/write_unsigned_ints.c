@@ -6,7 +6,7 @@
 /*   By: ehelmine <ehelmine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/22 18:18:17 by ehelmine          #+#    #+#             */
-/*   Updated: 2021/04/26 22:15:58 by ehelmine         ###   ########.fr       */
+/*   Updated: 2021/05/03 03:42:15 by ehelmine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ static int	write_unsigned_2(t_val *all, char *number)
 	return (write_unsigned_3(all, output, number, i));
 }
 
-int			write_unsigned(t_val *all)
+int	write_unsigned(t_val *all)
 {
 	char	*abc;
 	char	*number;

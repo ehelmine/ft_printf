@@ -6,7 +6,7 @@
 /*   By: ehelmine <ehelmine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/22 16:49:30 by ehelmine          #+#    #+#             */
-/*   Updated: 2020/07/04 17:39:11 by ehelmine         ###   ########.fr       */
+/*   Updated: 2021/05/01 16:48:49 by ehelmine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,13 +20,13 @@
 */
 
 #include "libft.h"
-#include <stdlib.h>
 
 char	*ft_strnew(size_t size)
 {
-	char *newstr;
+	char	*newstr;
 
-	if (!(newstr = (char *)malloc(sizeof(*newstr) * size + 1)))
+	newstr = (char *)malloc(sizeof(*newstr) * (size + 1));
+	if (newstr == NULL)
 		return (NULL);
 	else
 	{

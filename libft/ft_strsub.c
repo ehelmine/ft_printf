@@ -6,7 +6,7 @@
 /*   By: ehelmine <ehelmine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/29 09:42:02 by ehelmine          #+#    #+#             */
-/*   Updated: 2020/06/30 15:03:13 by ehelmine         ###   ########.fr       */
+/*   Updated: 2021/05/01 16:46:20 by ehelmine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,15 +19,14 @@
 */
 
 #include "libft.h"
-#include <string.h>
-#include <stdlib.h>
 
 char	*ft_strsub(char const *s, unsigned int start, size_t len)
 {
 	char			*nwstr;
 	unsigned int	i;
 
-	if (!(nwstr = (char *)malloc(sizeof(*nwstr) * len + 1)))
+	nwstr = (char *)malloc(sizeof(*nwstr) * (len + 1));
+	if (nwstr == NULL)
 		return (NULL);
 	i = 0;
 	while (i < len)

@@ -6,18 +6,17 @@
 /*   By: ehelmine <ehelmine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/10 11:34:55 by ehelmine          #+#    #+#             */
-/*   Updated: 2020/06/10 12:34:21 by ehelmine         ###   ########.fr       */
+/*   Updated: 2021/05/01 16:30:02 by ehelmine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <string.h>
 #include "libft.h"
 
 char	*ft_strcat(char *dest, const char *src)
 {
-	int ed;
-	int len;
-	int i;
+	int	ed;
+	int	len;
+	int	i;
 
 	len = 0;
 	while (src[len] != '\0')

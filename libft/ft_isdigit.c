@@ -6,16 +6,16 @@
 /*   By: ehelmine <ehelmine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/15 16:36:03 by ehelmine          #+#    #+#             */
-/*   Updated: 2020/07/08 16:59:22 by ehelmine         ###   ########.fr       */
+/*   Updated: 2021/05/01 16:02:44 by ehelmine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int		ft_isdigit(int c)
+#include "libft.h"
+
+int	ft_isdigit(int c)
 {
 	if (c >= 48 && c <= 57)
-	{
 		return (1);
-	}
 	else
 		return (0);
 }

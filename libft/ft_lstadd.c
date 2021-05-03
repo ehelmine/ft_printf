@@ -6,7 +6,7 @@
 /*   By: ehelmine <ehelmine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/07 12:23:22 by ehelmine          #+#    #+#             */
-/*   Updated: 2020/07/08 11:51:34 by ehelmine         ###   ########.fr       */
+/*   Updated: 2021/05/01 16:03:35 by ehelmine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@
 */
 
 #include "libft.h"
-#include <stdlib.h>
 
 void	ft_lstadd(t_list **alst, t_list *new)
 {

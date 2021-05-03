@@ -6,7 +6,7 @@
 /*   By: ehelmine <ehelmine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/09 10:13:02 by ehelmine          #+#    #+#             */
-/*   Updated: 2021/04/22 18:48:50 by ehelmine         ###   ########.fr       */
+/*   Updated: 2021/05/01 17:18:05 by ehelmine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,10 @@
 # define BUFF_SIZE 2000
 # define MAX_FD 4500
 # include <string.h>
+# include <unistd.h>
+# include <stdlib.h>
 
-typedef	struct		s_list
+typedef struct s_list
 {
 	void			*content;
 	size_t			content_size;
@@ -70,7 +72,7 @@ int					ft_toupper(int c);
 char				*ft_strstr(const char *haystack, const char *needle);
 
 char				*ft_strnstr(const char *haystack, const char *needle,
-					size_t n);
+						size_t n);
 
 int					ft_isalnum(int c);
 

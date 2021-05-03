@@ -6,15 +6,15 @@
 /*   By: ehelmine <ehelmine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/22 12:58:24 by ehelmine          #+#    #+#             */
-/*   Updated: 2020/07/06 12:12:57 by ehelmine         ###   ########.fr       */
+/*   Updated: 2021/05/01 17:02:17 by ehelmine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int		ft_strequ(char const *s1, char const *s2)
+int	ft_strequ(char const *s1, char const *s2)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (s1[i] != '\0' || s2[i] != '\0')

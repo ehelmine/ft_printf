@@ -6,7 +6,7 @@
 /*   By: ehelmine <ehelmine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/17 15:57:18 by ehelmine          #+#    #+#             */
-/*   Updated: 2020/07/06 12:25:36 by ehelmine         ###   ########.fr       */
+/*   Updated: 2021/05/01 16:27:52 by ehelmine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@
 */
 
 #include "libft.h"
-#include <string.h>
 
 void	*ft_memchr(const void *s, int c, size_t n)
 {
@@ -35,9 +34,7 @@ void	*ft_memchr(const void *s, int c, size_t n)
 	while (i < n)
 	{
 		if (tem[i] == y)
-		{
 			return ((unsigned char *)s + i);
-		}
 		i++;
 	}
 	return (0);

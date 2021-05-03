@@ -6,16 +6,15 @@
 /*   By: ehelmine <ehelmine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/10 15:50:41 by ehelmine          #+#    #+#             */
-/*   Updated: 2020/06/18 10:55:54 by ehelmine         ###   ########.fr       */
+/*   Updated: 2021/05/01 16:52:24 by ehelmine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include <unistd.h>
 
 void	ft_putendl(char const *s)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (s[i] != '\0')

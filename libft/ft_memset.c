@@ -6,7 +6,7 @@
 /*   By: ehelmine <ehelmine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/17 11:50:28 by ehelmine          #+#    #+#             */
-/*   Updated: 2020/07/31 12:50:29 by ehelmine         ###   ########.fr       */
+/*   Updated: 2021/05/01 16:28:26 by ehelmine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@
 */
 
 #include "libft.h"
-#include <string.h>
 
 void	*ft_memset(void *b, int c, size_t len)
 {

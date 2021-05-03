@@ -6,16 +6,16 @@
 /*   By: ehelmine <ehelmine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/10 17:53:58 by ehelmine          #+#    #+#             */
-/*   Updated: 2021/04/26 22:10:54 by ehelmine         ###   ########.fr       */
+/*   Updated: 2021/05/01 17:54:19 by ehelmine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_printf.h"
 
-int		real_width(int num_len, int input_width, int precision)
+int	real_width(int num_len, int input_width, int precision)
 {
 	if ((num_len == input_width && input_width == precision) || (num_len
-		>= input_width && num_len >= precision))
+			>= input_width && num_len >= precision))
 		return (num_len);
 	else if (num_len <= input_width && input_width >= precision)
 		return (input_width);
@@ -47,7 +47,7 @@ void	write_d_and_i_left_ad(t_val *all)
 	write_d_and_i_left_ad_2(all);
 }
 
-int		write_d_and_i(t_val *all)
+int	write_d_and_i(t_val *all)
 {
 	all->fill_char = '0';
 	if (all->space_flag && all->plus_flag)

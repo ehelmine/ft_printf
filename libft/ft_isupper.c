@@ -6,13 +6,13 @@
 /*   By: ehelmine <ehelmine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/09 10:10:12 by ehelmine          #+#    #+#             */
-/*   Updated: 2020/07/09 10:11:38 by ehelmine         ###   ########.fr       */
+/*   Updated: 2021/05/01 16:03:22 by ehelmine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int		ft_isupper(int c)
+int	ft_isupper(int c)
 {
 	if (c >= 65 && c <= 90)
 		return (1);

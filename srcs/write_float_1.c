@@ -6,7 +6,7 @@
 /*   By: ehelmine <ehelmine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/26 21:02:38 by ehelmine          #+#    #+#             */
-/*   Updated: 2021/04/27 13:52:58 by ehelmine         ###   ########.fr       */
+/*   Updated: 2021/05/03 03:24:24 by ehelmine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ static int	write_float_2(t_val *all)
 	return (1);
 }
 
-int			write_float_second(t_val *all, int out)
+int	write_float_second(t_val *all, int out)
 {
 	out = 0;
 	if ((int)all->end_i % 10 == 9)
@@ -104,8 +104,11 @@ int			write_float_second(t_val *all, int out)
 	return (1);
 }
 
-int			write_float(t_val *all, int i, int x, int out)
+int	write_float(t_val *all, int i, int x, int out)
 {
+	all->begin_str = NULL;
+	all->end_str = NULL;
+	all->str = NULL;
 	if (write_float_2(all) == -1)
 		return (-1);
 	write_float_3(all);

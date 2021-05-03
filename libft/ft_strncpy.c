@@ -6,7 +6,7 @@
 /*   By: ehelmine <ehelmine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/10 11:14:11 by ehelmine          #+#    #+#             */
-/*   Updated: 2020/06/30 15:32:17 by ehelmine         ###   ########.fr       */
+/*   Updated: 2021/05/01 15:58:51 by ehelmine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@
 
 char	*ft_strncpy(char *dest, const char *src, size_t len)
 {
-	unsigned int i;
+	unsigned int	i;
 
 	if (len == 0)
 		return (dest);

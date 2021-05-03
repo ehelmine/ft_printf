@@ -6,16 +6,15 @@
 /*   By: ehelmine <ehelmine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/03 15:10:50 by ehelmine          #+#    #+#             */
-/*   Updated: 2020/07/03 15:24:46 by ehelmine         ###   ########.fr       */
+/*   Updated: 2021/05/01 16:29:26 by ehelmine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include <unistd.h>
 
 void	ft_putnbr_fd(int n, int fd)
 {
-	int x;
+	int	x;
 
 	if (n == -2147483648)
 	{

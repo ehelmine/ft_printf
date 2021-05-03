@@ -6,15 +6,15 @@
 /*   By: ehelmine <ehelmine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/07 11:25:56 by ehelmine          #+#    #+#             */
-/*   Updated: 2021/02/24 22:16:30 by ehelmine         ###   ########.fr       */
+/*   Updated: 2021/05/01 16:57:16 by ehelmine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int		ft_check_int_len(long n)
+int	ft_check_int_len(long n)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	if (n == 0)

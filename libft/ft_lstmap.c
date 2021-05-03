@@ -6,7 +6,7 @@
 /*   By: ehelmine <ehelmine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/08 15:24:09 by ehelmine          #+#    #+#             */
-/*   Updated: 2020/07/08 16:36:46 by ehelmine         ###   ########.fr       */
+/*   Updated: 2021/05/01 16:51:41 by ehelmine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,10 +26,11 @@
 
 t_list	*ft_lstmap(t_list *lst, t_list *(*f)(t_list *elem))
 {
-	t_list *newlst;
-	t_list *temp;
+	t_list	*newlst;
+	t_list	*temp;
 
-	if (!(newlst = f(lst)))
+	newlst = f(lst);
+	if (newlst == NULL)
 		return (NULL);
 	temp = newlst;
 	lst = lst->next;
