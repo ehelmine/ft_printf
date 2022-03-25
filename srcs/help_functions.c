@@ -6,7 +6,7 @@
 /*   By: ehelmine <ehelmine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/16 17:05:32 by ehelmine          #+#    #+#             */
-/*   Updated: 2021/05/03 13:52:45 by ehelmine         ###   ########.fr       */
+/*   Updated: 2022/03/24 11:21:53 by ehelmine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,9 +31,10 @@ int	check_num_type(t_val *all)
 	return (1);
 }
 
-int	get_arg_unsigned_int(t_val *all, va_list args, char x)
+int	get_arg_unsigned_int(t_val *all, va_list args)
 {
-	all->conv = x;
+	if (all->asterisk_flag)
+		return (write_asterisk(all, args));
 	if (all->conv == 'u')
 		all->base = 10;
 	if (all->conv == 'o')
@@ -61,6 +62,8 @@ int	get_arg_unsigned_int(t_val *all, va_list args, char x)
 
 int	get_arg_signed_int(t_val *all, va_list args)
 {
+	if (all->asterisk_flag)
+		return (write_asterisk(all, args));
 	if (all->h == 1)
 		all->num = (short int)va_arg(args, int);
 	else if (all->ll == 1 || all->l == 1)
@@ -79,6 +82,8 @@ int	get_arg_signed_int(t_val *all, va_list args)
 		all->num = va_arg(args, signed int);
 	if (all->num == 0)
 		all->zero_num = 1;
+	if (all->no_flags == 1)
+		return (write_no_flags(all));
 	if (check_num_type(all))
 		return (write_d_and_i(all));
 	return (1);
@@ -89,6 +94,8 @@ int	get_arg_s_and_p(t_val *all, va_list args, char x)
 	if (x == 's')
 	{
 		all->str = va_arg(args, char *);
+		if (all->no_flags == 1)
+			return (write_no_flags(all));
 		return (write_s(all));
 	}
 	else if (x == 'p')
@@ -121,13 +128,13 @@ int	get_arg(t_val *all, va_list args, char x)
 		all->begin_str = NULL;
 		all->end_str = NULL;
 		all->str = NULL;
-		return (write_float(all, 0, 0, 0));
+		return (write_float(all, 0, 0));
 	}
 	else if (x == 'i' || x == 'd')
 		return (get_arg_signed_int(all, args));
 	else if (x == 's' || x == 'p')
 		return (get_arg_s_and_p(all, args, x));
 	else if (x == 'o' || x == 'x' || x == 'X' || x == 'u')
-		return (get_arg_unsigned_int(all, args, x));
+		return (get_arg_unsigned_int(all, args));
 	return (1);
 }

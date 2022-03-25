@@ -6,13 +6,13 @@
 /*   By: ehelmine <ehelmine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/22 17:20:52 by ehelmine          #+#    #+#             */
-/*   Updated: 2021/05/01 17:53:59 by ehelmine         ###   ########.fr       */
+/*   Updated: 2022/03/26 01:46:08 by ehelmine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_printf.h"
 
-void	write_d_and_i_right_ad_4(t_val *all, char *output, int x)
+void	write_d_and_i_right_ad_4(t_val *all, char *output, int *x)
 {
 	while (all->real_len > 0)
 	{
@@ -20,8 +20,8 @@ void	write_d_and_i_right_ad_4(t_val *all, char *output, int x)
 		{
 			if (all->num == 0 && all->zero_flag)
 			{
-				output[x++] = '0';
-				output[x] = '\0';
+				output[*x++] = '0';
+				output[*x] = '\0';
 			}
 			else
 				write(1, "0", 1);
@@ -35,6 +35,8 @@ void	write_d_and_i_right_ad_4(t_val *all, char *output, int x)
 
 int	write_d_and_i_right_ad_3(t_val *all, char *num_str, char *output, int x)
 {
+	int	i;
+
 	while (all->precision > all->len)
 	{
 		output[x++] = all->fill_char;
@@ -49,11 +51,12 @@ int	write_d_and_i_right_ad_3(t_val *all, char *num_str, char *output, int x)
 	all->tmp = num_str;
 	all->output_len += all->len;
 	all->real_len -= all->len;
-	write_d_and_i_right_ad_4(all, output, x);
-	ft_putstr(output);
+	write_d_and_i_right_ad_4(all, output, &x);
+	write(1, output, x);
 	if (all->num < 0)
 		num_str++;
-	ft_putstr(num_str);
+	i = ft_strlen(num_str);
+	write(1, num_str, i);
 	free(all->tmp);
 	free(output);
 	return (1);
@@ -87,10 +90,8 @@ int	write_d_and_i_right_ad(t_val *all)
 	char	*output;
 	char	*num_str;
 	int		x;
-	int		i;
 
 	x = 0;
-	i = 0;
 	output = (char *)malloc(sizeof(char) * 10000);
 	if (output == NULL)
 		return (-1);

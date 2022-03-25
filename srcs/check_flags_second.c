@@ -6,7 +6,7 @@
 /*   By: ehelmine <ehelmine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/22 15:20:12 by ehelmine          #+#    #+#             */
-/*   Updated: 2021/05/01 17:52:31 by ehelmine         ###   ########.fr       */
+/*   Updated: 2021/06/02 13:40:35 by ehelmine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,10 @@ int	check_flags_c(t_val *all, char *flags, char c, int i)
 int	check_flags_p_and_s(t_val *all, char *flags, int i)
 {
 	if (flags[i + 1] == '\0')
+	{
+		all->no_flags = 1;
 		return (1);
+	}
 	while (flags[i] == '-' || flags[i] == '+'
 		|| flags[i] == ' ' || flags[i] == '#' || flags[i] == '0')
 	{
@@ -83,6 +86,7 @@ void	set_values(t_val *all, char *flags, char c)
 	all->hash_flag = 0;
 	all->plus_flag = 0;
 	all->space_flag = 0;
+	all->asterisk_flag = 0;
 	all->l = 0;
 	all->ll = 0;
 	all->big_l = 0;
@@ -101,5 +105,4 @@ void	set_values(t_val *all, char *flags, char c)
 		all->width = -1;
 	if (c == 'f')
 		all->precision = 6;
-	return ;
 }

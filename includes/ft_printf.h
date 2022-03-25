@@ -6,17 +6,14 @@
 /*   By: ehelmine <ehelmine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/21 18:31:32 by ehelmine          #+#    #+#             */
-/*   Updated: 2021/05/03 14:20:48 by ehelmine         ###   ########.fr       */
+/*   Updated: 2022/03/26 01:28:15 by ehelmine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FT_PRINTF_H
 # define FT_PRINTF_H
 
-# include <unistd.h>
 # include <stdarg.h>
-# include <string.h>
-# include <stdlib.h>
 # include "../libft/includes/libft.h"
 
 typedef struct s_val
@@ -28,6 +25,8 @@ typedef struct s_val
 	int				space_flag;
 	int				hash_flag;
 	int				zero_flag;
+	int				no_flags;
+	int				asterisk_flag;
 	int				width;
 	int				minimum_width;
 	int				precision;
@@ -94,6 +93,10 @@ int					real_width(int num_len, int input_width, int precision);
 
 char				*convert_num(t_val *all);
 
+int					write_no_flags(t_val *all);
+
+int					write_asterisk(t_val *all, va_list args);
+
 void				write_c(t_val *all);
 
 int					write_s(t_val *all);
@@ -112,9 +115,9 @@ int					write_unsigned(t_val *all);
 
 void				write_zero(t_val *all);
 
-int					write_float(t_val *all, int i, int x, int out);
+int					write_float(t_val *all, int i, int x);
 
-int					write_float_5(t_val *all, int out);
+int					write_float_5(t_val *all);
 
 void				write_float_7(t_val *all);
 

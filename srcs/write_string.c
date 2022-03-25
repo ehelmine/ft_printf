@@ -6,7 +6,7 @@
 /*   By: ehelmine <ehelmine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/22 17:36:20 by ehelmine          #+#    #+#             */
-/*   Updated: 2021/05/01 20:11:51 by ehelmine         ###   ########.fr       */
+/*   Updated: 2022/03/26 01:33:04 by ehelmine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,23 +14,19 @@
 
 static void	write_s_left_ad(t_val *all)
 {
+	int	i;
+
+	i = 0;
 	if (all->str_cpy == NULL)
 	{
-		if (all->str != NULL)
-		{
-			ft_putstr(all->str);
-			all->output_len += ft_strlen(all->str);
-		}
-		else
-		{
-			ft_putstr("(null)");
-			all->output_len += 6;
-		}
+		write(1, all->str, 6);
+		all->output_len += 6;
 	}
 	else if (all->str_cpy != NULL)
 	{
-		ft_putstr(all->str_cpy);
-		all->output_len += ft_strlen(all->str_cpy);
+		i = ft_strlen(all->str_cpy);
+		write(1, all->str_cpy, i);
+		all->output_len += i;
 		free(all->str_cpy);
 	}
 	while (all->minimum_width > 0)
@@ -43,6 +39,9 @@ static void	write_s_left_ad(t_val *all)
 
 static void	write_s_right_ad(t_val *all)
 {
+	int	i;
+
+	i = 0;
 	while (all->minimum_width > 0)
 	{
 		write(1, " ", 1);
@@ -51,21 +50,14 @@ static void	write_s_right_ad(t_val *all)
 	}
 	if (all->str_cpy == NULL)
 	{
-		if (all->str != NULL)
-		{
-			ft_putstr(all->str);
-			all->output_len += ft_strlen(all->str);
-		}
-		else
-		{
-			ft_putstr("(null)");
-			all->output_len += 6;
-		}
+		write(1, all->str, 6);
+		all->output_len += 6;
 	}
 	else
 	{
-		ft_putstr(all->str_cpy);
-		all->output_len += ft_strlen(all->str_cpy);
+		i = ft_strlen(all->str_cpy);
+		write(1, all->str_cpy, i);
+		all->output_len += i;
 		free(all->str_cpy);
 	}
 }
@@ -85,7 +77,7 @@ int	write_s(t_val *all)
 		all->str = ptr;
 	}
 	all->minimum_width = all->width - all->len;
-	if (all->len > all->precision && all->precision >= 0 && all->str != NULL)
+	if (all->len > all->precision && all->precision >= 0)
 	{
 		all->str_cpy = ft_strndup(all->str, all->precision);
 		if (all->str_cpy == NULL)
