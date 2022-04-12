@@ -6,7 +6,7 @@
 /*   By: ehelmine <ehelmine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/22 17:36:20 by ehelmine          #+#    #+#             */
-/*   Updated: 2022/04/12 23:35:18 by ehelmine         ###   ########.fr       */
+/*   Updated: 2022/04/12 23:53:16 by ehelmine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,23 +14,19 @@
 
 static void	write_s_left_ad(t_val *all)
 {
+	int	len;
+	
 	if (all->str_cpy == NULL)
 	{
-		if (all->str != NULL)
-		{
-			ft_putstr(all->str);
-			all->output_len += ft_strlen(all->str);
-		}
-		else
-		{
-			ft_putstr("(null)");
-			all->output_len += 6;
-		}
+		len = ft_strlen(all->str);
+		write(1, all->str, len);
+		all->output_len += len;
 	}
 	else if (all->str_cpy != NULL)
 	{
-		ft_putstr(all->str_cpy);
-		all->output_len += ft_strlen(all->str_cpy);
+		len = ft_strlen(all->str_cpy);
+		write(1, all->str_cpy, len);
+		all->output_len += len;
 		free(all->str_cpy);
 	}
 	while (all->minimum_width > 0)
@@ -43,6 +39,8 @@ static void	write_s_left_ad(t_val *all)
 
 static void	write_s_right_ad(t_val *all)
 {
+	int	len;
+	
 	while (all->minimum_width > 0)
 	{
 		write(1, " ", 1);
@@ -51,21 +49,15 @@ static void	write_s_right_ad(t_val *all)
 	}
 	if (all->str_cpy == NULL)
 	{
-		if (all->str != NULL)
-		{
-			ft_putstr(all->str);
-			all->output_len += ft_strlen(all->str);
-		}
-		else
-		{
-			ft_putstr("(null)");
-			all->output_len += 6;
-		}
+		len = ft_strlen(all->str);
+		write(1, all->str, len);
+		all->output_len += len;
 	}
 	else
 	{
-		ft_putstr(all->str_cpy);
-		all->output_len += ft_strlen(all->str_cpy);
+		len = ft_strlen(all->str_cpy);
+		write(1, all->str_cpy, len);
+		all->output_len += len;
 		free(all->str_cpy);
 	}
 }
