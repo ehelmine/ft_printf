@@ -6,7 +6,7 @@
 /*   By: ehelmine <ehelmine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/21 18:31:32 by ehelmine          #+#    #+#             */
-/*   Updated: 2022/03/26 01:28:15 by ehelmine         ###   ########.fr       */
+/*   Updated: 2022/04/12 23:03:43 by ehelmine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,5 +128,9 @@ void				write_float_8_second(t_val *all);
 int					write_float_9(t_val *all);
 
 int					write_float_output(t_val *all);
+
+int					write_no_flags(t_val *all);
+
+int					write_asterisk(t_val *all, va_list args);
 
 #endif

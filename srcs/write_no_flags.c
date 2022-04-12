@@ -6,7 +6,7 @@
 /*   By: ehelmine <ehelmine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/19 14:22:07 by ehelmine          #+#    #+#             */
-/*   Updated: 2021/06/07 18:01:49 by ehelmine         ###   ########.fr       */
+/*   Updated: 2022/04/12 23:26:45 by ehelmine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ int	write_asterisk(t_val *all, va_list args)
 	{
 		all->num = va_arg(args, long long int);
 		len = (int)ft_check_int_len(all->num);
+		all->output_len += len;
 		while (--i > len)
 			write(1, " ", 1);
 		ft_putnbr(all->num);
@@ -32,6 +33,7 @@ int	write_asterisk(t_val *all, va_list args)
 	{
 		all->unum = va_arg(args, unsigned long long);
 		len = (int)ft_check_int_len(all->unum);
+		all->output_len += len;
 		while (--i > len)
 			write(1, " ", 1);
 		ft_putnbr((long long)all->unum);
@@ -47,17 +49,22 @@ int	write_no_flags(t_val *all)
 	if (all->conv == 's')
 	{
 		if (all->str == NULL)
-			write(1, "(null)", 7);
+		{
+			write(1, "(null)", 6);
+			all->output_len += 6;
+		}
 		else
 		{
 			while (all->str[i] != '\0')
 				i++;
 			write(1, all->str, i);
+			all->output_len += i;
 		}
 	}
 	else if (all->conv == 'i' || all->conv == 'd')
 	{
 		ft_putnbr(all->num);
+		all->output_len += ft_check_int_len(all->num);
 	}
 	return (1);
 }
